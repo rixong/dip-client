@@ -1,26 +1,38 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import User from './compnents/User';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+  constructor () {
+    super()
+    this.state = {
+      users: []
+    }
+  }
+  
+  componentDidMount() {
+    const baseURL = 'https://fast-peak-03793.herokuapp.com/api/v1'
+    fetch(`${baseURL}/users`)
+    .then(res => res.json())
+    // .then(json => console.log(json))
+    .then(json => {
+      this.setState({users: json})
+    })
+  }
+
+  renderUsers = () => {
+    return this.state.users.map(user => <User key={user.id} user={user}/>)
+  }
+
+
+  render() {
+    return (
+      <div className="App">
+        {this.renderUsers()}
+      </div>
+    )
+  }
 }
 
 export default App;
