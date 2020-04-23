@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class CreateUser extends Component {
+class NewUser extends Component {
 
   constructor() {
     super()
@@ -42,10 +42,10 @@ class CreateUser extends Component {
       })
     })
       .then(res => res.json())
-      .then(json => console.log(json.jwt))
-      // .then(json => {
-      //   this.props.sendToken(json.jwt)
-      // })
+      // .then(json => console.log(json.jwt))
+      .then(json => {
+        this.props.addToken(json.jwt)
+      })
   }
 
   render() {
@@ -120,4 +120,4 @@ class CreateUser extends Component {
     </div>
   }
 }
-export default CreateUser;
+export default NewUser;

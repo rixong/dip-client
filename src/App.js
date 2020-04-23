@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Login from './components/Login';
-import CreateUser from './components/CreateUser'
+import NewUser from './components/NewUser'
 // import User from './components/User';
 
 class App extends Component {
@@ -43,8 +43,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* < Login addToken={this.addToken}/> */}
-        <CreateUser />
+        < Login addToken={this.addToken}/>
+        <NewUser addToken={this.addToken}/>
       </div>
     )
   }
