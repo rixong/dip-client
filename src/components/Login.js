@@ -40,9 +40,12 @@ class Login extends Component {
 
 
   render() {
-    return <div id="login-container">
-      <h2>Existing User?</h2>
-      <form className="ui form inverted" onSubmit={this.handleLoginSubmit}>
+    return (
+
+    <div className="form-window" id="login">
+
+      <div className="form-header"><h2>Log in</h2></div>
+      <form className="ui form" id="login-form" onSubmit={this.handleLoginSubmit}>
         <div className="field">
           <label htmlFor='email'>Email</label>
           <input
@@ -63,16 +66,17 @@ class Login extends Component {
           />
         </div>
         <br></br>
-        <button type="submit">Login</button>
+        <button className="ui primary button" type="submit">Login</button>
       </form>
       <br></br>
       <br></br>
 
       <div>
-        <h2>New User?</h2>
+        <button onClick={this.props.isNewUser}>New User?</button>
       </div>
 
     </div>
+    )
   }
 
 

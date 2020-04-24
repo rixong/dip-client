@@ -1,0 +1,78 @@
+* {
+  background-color: rgb(222, 225, 228);
+}
+
+.app{
+  height: 100%;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.nav-bar {
+  align-content: center;
+  height: 60px;
+  /* border-style: solid; */
+}
+
+/* .logo {
+  background-image: url(./assets/lobster-icon.png);
+  background-repeat: no-repeat;
+  alt: 'lobster';
+  height: 5px;
+} */
+
+#left-menu {
+}
+#right-menu {
+  padding-top: 30px;
+}
+
+#center-menu {
+  text-align: center;
+  font-size: 3rem;
+  margin-top: 20px;
+}
+
+
+.main {
+  height: 900px;
+  position: relative;
+  background-image: url(./assets/waterscape\ 1.jpg);
+  /* height: 500px; You must set a specified height */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+}
+
+.form-window {
+  border: solid;
+  border-width: 4px;
+  border-radius: 10px;
+  border-color:  rgb(222, 225, 228);
+  display: inline-block;
+  position: relative;
+  margin: 0 auto;
+  top: 160px;
+  width: 40%;
+}
+
+.form-window #login {
+
+}
+
+.form-window #new-user {
+
+}
+
+
+
+.form-header {
+  background-color: darkgray;
+}
+
+#login-form {
+  margin-left: 50px;
+  text-align: left;
+  width: 80%;
+}

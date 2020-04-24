@@ -49,75 +49,77 @@ class NewUser extends Component {
   }
 
   render() {
-    return <div id="new-user-container">
+    return (
+      <div className="form-window" id="new-user">
 
-      <h2>New User Signup</h2>
-      <form className="ui inverted form" onSubmit={this.handleSubmit}>
+        <div className="form-header"><h2>Log in</h2></div>
+        <form className="ui inverted form" onSubmit={this.handleSubmit}>
 
-        <div className='field'>
-          <label htmlFor='email'>Email</label>
-          <input
-            type="text"
-            name="email"
-            onChange={event => this.handleChange(event)}
-            value={this.state.email}
-          />
-        </div>
-
-        <div className='two fields'>
           <div className='field'>
-            <label htmlFor='password'>Password</label>
+            <label htmlFor='email'>Email</label>
             <input
-              type="password"
-              name="password"
+              type="text"
+              name="email"
               onChange={event => this.handleChange(event)}
-              value={this.state.password}
+              value={this.state.email}
             />
           </div>
+
+          <div className='two fields'>
+            <div className='field'>
+              <label htmlFor='password'>Password</label>
+              <input
+                type="password"
+                name="password"
+                onChange={event => this.handleChange(event)}
+                value={this.state.password}
+              />
+            </div>
+            <div className='field'>
+              <label htmlFor='password_confirmation'>Confirm Password</label>
+              <input
+                type="password"
+                name="password_confirmation"
+                onChange={event => this.handleChange(event)}
+                value={this.state.password_confirmation}
+              />
+            </div>
+          </div>
+
           <div className='field'>
-            <label htmlFor='password_confirmation'>Confirm Password</label>
+            <label htmlFor='firstname'> First Name</label>
             <input
-              type="password"
-              name="password_confirmation"
+              type="text"
+              name="firstname"
               onChange={event => this.handleChange(event)}
-              value={this.state.password_confirmation}
+              value={this.state.firstname}
             />
           </div>
-        </div>
 
-        <div className='field'>
-          <label htmlFor='firstname'> First Name</label>
-          <input
-            type="text"
-            name="firstname"
-            onChange={event => this.handleChange(event)}
-            value={this.state.firstname}
-          />
-        </div>
+          <div className='field'>
+            <label htmlFor='lastname'>Last Name</label>
+            <input
+              type="text"
+              name="lastname"
+              onChange={event => this.handleChange(event)}
+              value={this.state.lastname}
+            />
+          </div>
 
-        <div className='field'>
-          <label htmlFor='lastname'>Last Name</label>
-          <input
-            type="text"
-            name="lastname"
-            onChange={event => this.handleChange(event)}
-            value={this.state.lastname}
-          />
-        </div>
+          <div className='field'>
+            <label htmlFor='bday'>Birthday</label>
+            <input
+              type="date"
+              name="bday"
+              onChange={event => this.handleChange(event)}
+              value={this.state.bday}
+            />
+          </div>
 
-        <div className='field'>
-          <label htmlFor='bday'>Birthday</label>
-          <input
-            type="date"
-            name="bday"
-            onChange={event => this.handleChange(event)}
-            value={this.state.bday}
-          />
-        </div>
-
-        <button type="submit">Submit</button>
-      </form>
-    </div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    )
   }
 }
 export default NewUser;

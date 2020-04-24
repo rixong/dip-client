@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import './App.css';
+import './custom.css'
+import 'semantic-ui-css/semantic.min.css'
 import Login from './components/Login';
+import Navbar from './components/Navbar';
 import NewUser from './components/NewUser'
 // import User from './components/User';
 
 class App extends Component {
 
-  constructor () {
+  constructor() {
     super()
     this.state = {
-      curUser: ''
+      curUser: [],
+      isLoggedIn: false,
+      isNewUser: false
     }
   }
 
@@ -20,8 +25,16 @@ class App extends Component {
   }
 
   onLogoutClick = () => {
+    console.log('logout');
+
     localStorage.removeItem('accessToken')
-    this.setState({ curUser: undefined })
+    this.setState(
+      {
+        curUser: [],
+        isLoggedIn: false,
+        isNewUser: false
+      }
+    )
   }
 
   addToken = (token) => {
@@ -37,14 +50,31 @@ class App extends Component {
       }
     })
       .then(res => res.json())
-      .then(json => this.setState({ curUser: json.user }))
+      .then(json => this.setState({
+        curUser: json.user,
+        isLoggedIn: true,
+        isNewUser: false
+      }))
   }
-  
+
+  isNewUser = () => {
+    console.log('new user click');
+    
+    this.setState({isNewUser:true})
+  }
+
   render() {
     return (
-      <div className="App">
-        < Login addToken={this.addToken}/>
-        <NewUser addToken={this.addToken}/>
+      <div className="container app">
+        <Navbar curUser={this.state.curUser} onLogout={this.onLogoutClick} isLoggedIn={this.state.isLoggedIn}/>
+
+        <div className='main'>
+          {!this.state.isLoggedIn  && !this.state.isNewUser 
+            ? < Login addToken={this.addToken} isNewUser={this.isNewUser}/> 
+            : null}
+          { this.state.isNewUser ? < NewUser addToken={this.addToken} /> : null }
+        </div>
+
       </div>
     )
   }
