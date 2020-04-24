@@ -66,7 +66,7 @@ class App extends Component {
   render() {
     return (
       <div className="container app">
-        <Navbar curUser={this.state.curUser} onLogout={this.onLogoutClick} isLoggedIn={this.state.isLoggedIn}/>
+        <Navbar curUser={this.state.curUser} onLogoutClick={this.onLogoutClick} isLoggedIn={this.state.isLoggedIn}/>
 
         <div className='main'>
           {!this.state.isLoggedIn  && !this.state.isNewUser 

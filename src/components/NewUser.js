@@ -52,8 +52,9 @@ class NewUser extends Component {
     return (
       <div className="form-window" id="new-user">
 
-        <div className="form-header"><h2>Log in</h2></div>
-        <form className="ui inverted form" onSubmit={this.handleSubmit}>
+        <div className="form-header"><h2>Sign up</h2></div>
+
+        <form className="ui form main-form" onSubmit={this.handleSubmit}>
 
           <div className='field'>
             <label htmlFor='email'>Email</label>
@@ -115,8 +116,9 @@ class NewUser extends Component {
               value={this.state.bday}
             />
           </div>
+          <br></br>
 
-          <button type="submit">Submit</button>
+          <button type="submit" className="ui primary button">Sign up</button>
         </form>
       </div>
     )

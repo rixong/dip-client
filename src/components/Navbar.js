@@ -17,7 +17,7 @@ class Navbar extends Component {
           <div className="four wide column" id="right-menu">
             {this.props.isLoggedIn ?
               <div>{this.props.curUser.firstname} {this.props.curUser.lastname}
-                <button onClick={this.props.logout}>Logout</button></div>
+                <button onClick={this.props.onLogoutClick}>Logout</button></div>
               :
               <div><button>Log In</button></div>
             }

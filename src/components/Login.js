@@ -45,7 +45,7 @@ class Login extends Component {
     <div className="form-window" id="login">
 
       <div className="form-header"><h2>Log in</h2></div>
-      <form className="ui form" id="login-form" onSubmit={this.handleLoginSubmit}>
+      <form className="ui form main-form" onSubmit={this.handleLoginSubmit}>
         <div className="field">
           <label htmlFor='email'>Email</label>
           <input
