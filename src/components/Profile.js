@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-class User extends Component {
+class Profile extends Component {
   
   render() {
     const {firstname,lastname,email, bday} = this.props.user;
@@ -13,4 +13,4 @@ class User extends Component {
     </div>
   }
 }
-export default User;
+export default Profile;

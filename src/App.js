@@ -5,7 +5,10 @@ import 'semantic-ui-css/semantic.min.css'
 import Login from './components/Login';
 import Navbar from './components/Navbar';
 import NewUser from './components/NewUser'
+import ScheduleContainer from './components/ScheduleContainer'
 // import User from './components/User';
+
+const baseURL = 'http://localhost:3000/api/v1'
 
 class App extends Component {
 
@@ -43,7 +46,7 @@ class App extends Component {
   }
 
   setCurUser = () => {
-    fetch('http://localhost:3000/api/v1/profile', {
+    fetch("http://localhost:3000/api/v1/profile", {
       method: 'GET',
       headers: {
         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
@@ -73,6 +76,7 @@ class App extends Component {
             ? < Login addToken={this.addToken} isNewUser={this.isNewUser}/> 
             : null}
           { this.state.isNewUser ? < NewUser addToken={this.addToken} /> : null }
+          { this.state.isLoggedIn ? <ScheduleContainer /> : null }
         </div>
 
       </div>
