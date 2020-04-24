@@ -66,9 +66,21 @@
 
 }
 
+/* Weekly scheduling format */
+
 #schedule {
-  width: 70%;
+  width: 80%;
 }
+
+#schedule-grid {
+  font-size: small;
+  border: solid;
+}
+
+/* .pink {
+  background-color: rgb(248, 207, 214);
+} */
+
 
 
 
