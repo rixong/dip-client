@@ -20,9 +20,9 @@ class ScheduleContainer extends Component {
   }
 
   render() {
-    return <div className="form-window" id="schedule">
+    return (
       <ScheduleWeekly reservations={this.state.reservations}/>
-      </div>
+    )
   }
 }
 export default ScheduleContainer;

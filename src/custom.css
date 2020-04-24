@@ -58,12 +58,16 @@
   width: 40%;
 }
 
-.form-window #login {
+#login {
 
 }
 
-.form-window #new-user {
+#new-user {
 
+}
+
+#schedule {
+  width: 70%;
 }
 
 
