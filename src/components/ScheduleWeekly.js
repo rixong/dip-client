@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DaySquare from './DaySquare';
 var moment = require('moment')
 
-const colors = ['pink', 'blue', 'green', 'yellow'];
+const colors = ['teal', 'blue', 'green', 'violet', 'olive'];
 const numCabins = 7;
 
 class ScheduleWeekly extends Component {
@@ -10,97 +10,99 @@ class ScheduleWeekly extends Component {
   state = {
     startDate: new Date('2020-05-30T00:00:00'),
     week: 1,
-    curColor: 2
+    curColor: 0
   }
 
-  // renderSchedules = () => {
+  makeSchedule = () => {
+    // Create rows for each cabin calling MakeRow() with each cabin
 
-  //   var arr = moment(this.state.arrival);
-  //   var dep = moment(this.state.departure);
-  //   var start = moment(this.state.startDate);
-  //   let stayLength = dep.diff(arr, 'days')
+    let result = [];
+    for (let i = 0; i <= numCabins; i++) {
+      console.log('here');
+      
+       <div className="row cabin-head" id="cabin-1">
+        <div className="two wide column">Big House</div>
+        <div className="fourteen wide column">
+          <div className="ui internally celled eight column grid">
+            {this.makeRow(i)}
+          </div>
+        </div>
+      </div>
 
-  //   console.log('length of stay', stayLength);
+    }
+  }
 
-  //   for (let i=0; i<stayLength; i++){
-  //     let dif = arr.diff(start, 'days')
-  //     if (dif >= 0 && dif < 8) {
-  //       console.log('good', dif);
-  //       // document.getElementById(`cabin${cabin}-day${dif}`).classList.add('pink')
-  //       // console.log(dayDiv);
-  //       // dayDiv.style.backgroundColor="pink"
 
-  //     } else {
-  //       console.log('bad', dif);
-  //     }
-  //     arr.add(1, 'day')
-  //   }
-  // }
 
+
+  makeRow = (cabinId) => {
+    let array = this.combineSingleCabinRes(cabinId);
+    // console.log(array);
+
+    let squares = [];
+    let curDaysRes = undefined;
+    let curColor = this.state.curColor;
+    let curUser = undefined;
+
+    for (let i = 0; i < 8; i++) {
+      if (array) {
+        curDaysRes = array.find(curDay => curDay.dif === i)
+      }
+      if (curDaysRes) {
+        if (!curUser || curDaysRes.user !== curUser) {
+          curColor += 1;
+          curUser = curDaysRes.user
+          console.log(curUser);
+        }
+        squares.push(<DaySquare key={i} color={colors[curColor]} userId={curDaysRes.user} />)
+      } else {
+        squares.push(<DaySquare key={i} color='grey' />)
+      }
+    }
+    // console.log('squares', squares);
+    // this.setState({curColor})
+    return squares
+  }
+
+  // Combine reservations for one cabin in array.
   combineSingleCabinRes = (curCabinId) => {
     let result = [];
-  if (this.props.reservations.length > 0) {
-    console.log(this.props.reservations[0].cabin.cabinId);
-    result = this.props.reservations.filter(res => res.cabin.cabinId === curCabinId)
+    if (this.props.reservations.length > 0) {
+      result = this.props.reservations.filter(res => res.cabin.cabinId === curCabinId)
+      let finalArray = result.map(res => this.makeArray(res)).flat()
+
+      // console.log('finalArray', finalArray);
+      return (finalArray);
+    }
   }
-console.log(result);
-
-
-    
-  }
-
-
-
-
 
 
   numDays = (end, start) => {
     return end.diff(start, 'days')
   }
 
-  makeArray = () => {
+  //Make 
+  makeArray = (res) => {
 
-    let arrival = new Date('2020-05-28T00:00:00');
-    let departure = new Date('2020-06-04T00:00:00');
+    let arrival = new Date(`${res.arrival}T00:00:00`);
+    let departure = new Date(`${res.departure}T00:00:00`);
     let arr = moment(arrival);
     let dep = moment(departure);
+    // console.log(arr, dep);
+
     let start = moment(this.state.startDate);
-    let end = start.clone().add(7, 'days');
-    let lengthOfStay = this.numDays(dep, arr);
-
+    let lengthOfStay = this.numDays(dep, arr) + 1;
+    // console.log('lengthOfStay', lengthOfStay);
     let reservedDaysArray = [];
-
     // Take a reservation for specific cabin and make array of objects {dif: days from start of week}
-    for (let i = 0; i < 8; i++) {
-      reservedDaysArray.push({ user: 1, dif: this.numDays(arr, start) });
+    for (let i = 0; i < lengthOfStay; i++) {
+      reservedDaysArray.push({ user: res.reserver.firstname, dif: this.numDays(arr, start) });
       arr.add(1, 'day')
     }
 
+    // console.log('reservedDaysArray',  reservedDaysArray);
     return reservedDaysArray;
 
-    // console.log(dep.isBetween(start, end, 'day'));
-  }
-
-  makeRow = () => {
-    let array = this.makeArray();
-    // console.log(array);
-
-    let squares = [];
-    let curDaysRes = undefined;
-    for (let i = 0; i < 8; i++) {
-      if (array) {
-        curDaysRes = array.find(curDay => curDay.dif === i)
-      }
-        // console.log('i=', i, curDaysRes);
-        if (curDaysRes) {
-          let color = `pink`;          
-          squares.push(<DaySquare key={i} color={color} userId={curDaysRes.user} />)
-        } else {
-          squares.push(<DaySquare key={i} />)
-        }
-      }
-      // console.log(squares);
-      return squares
 
   }
 
@@ -114,6 +116,7 @@ console.log(result);
           to {moment(this.state.startDate).add(7, 'd').format("MMM D")} </h2></div>
 
         <div className="ui internally celled grid" id="schedule-grid">
+
           <div className="row">
             <div className="two wide column"></div>
             <div className="fourteen wide column">
@@ -129,33 +132,9 @@ console.log(result);
               </div>
             </div>
           </div>
-          {/* First Row */}
-          <div className="row cabin-head" id="cabin-1">
-            <div className="two wide column">Big House</div>
-            <div className="fourteen wide column">
-              <div className="ui internally celled eight column grid">
-                {this.combineSingleCabinRes(1)}
-              </div>
-            </div>
-          </div>
+          {this.makeSchedule()}
 
-          <div className="row cabin-head" id="cabin-2">
-            <div className="two wide column">Gray House</div>
-            <div className="fourteen wide column">
-              <div className="ui internally celled eight column grid">
-                {/* {this.makeRow()} */}
-              </div>
-            </div>
-          </div>
 
-          <div className="row cabin-head" id="cabin-3">
-            <div className="two wide column">Winterhaven</div>
-            <div className="fourteen wide column">
-              <div className="ui internally celled eight column grid">
-                {/* {this.makeRow()} */}
-              </div>
-            </div>
-          </div>
         </div>
         {/* {this.makeArray()} */}
       </div>
