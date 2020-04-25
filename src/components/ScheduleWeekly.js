@@ -50,16 +50,16 @@ class ScheduleWeekly extends Component {
   // }
 
 
-  
-  
-  
-  
+
+
+
+
   numDays = (end, start) => {
     return end.diff(start, 'days')
   }
-  
+
   makeArray = () => {
-    
+
     let arrival = new Date('2020-05-28T00:00:00');
     let departure = new Date('2020-06-04T00:00:00');
     let arr = moment(arrival);
@@ -67,46 +67,48 @@ class ScheduleWeekly extends Component {
     let start = moment(this.state.startDate);
     let end = start.clone().add(7, 'days');
     let lengthOfStay = this.numDays(dep, arr);
-    
+
     let reservedDaysArray = [];
-    
+
     // Take a reservation for specific cabin and make array of objects {dif: days from start of week}
     for (let i = 0; i < 8; i++) {
-      reservedDaysArray.push({ user: 1, diff: this.numDays(arr, start) });
+      reservedDaysArray.push({ user: 1, dif: this.numDays(arr, start) });
       arr.add(1, 'day')
     }
-    
-    return reservedDaysArray
-    
+
+    return reservedDaysArray;
+    // this.makeRow(reservedDaysArray);
+
     // times.forEach(day => console.log(day.calendar()))
     // console.log(reservedDaysArray);
     // console.log(dep.isBetween(start, end, 'day'));
   }
-  
-  makeRow = (array) => {
- let squares = [];
+
+  makeRow = () => {
+    let array = this.makeArray();
+    // console.log(array);
+
+    let squares = [];
+    let curDaysRes = undefined;
     for (let i = 0; i < 8; i++) {
-      let curDaysRes = array.find(curDay => curDay.dif === i)
-      log('i'=i, curDaysRes)
-      // squares.push(<DaySquare />)
-    }
-    return arr;
+      if (array) {
+        curDaysRes = array.find(curDay => curDay.dif === i)
+      }
+        // console.log('i=', i, curDaysRes);
+        if (curDaysRes) {
+          let color = `pink`;          
+          squares.push(<DaySquare key={i} color={color} userId={curDaysRes.user} />)
+        } else {
+          squares.push(<DaySquare key={i} />)
+        }
+      }
+      // console.log(squares);
+      return squares
+
   }
-
-  // moment('2010-10-20').isBetween('2010-01-01', '2012-01-01', 'year');
-
-
-
-
-
-
-
 
 
   render() {
-    // console.log(moment(new Date()).format("d"));
-
-
 
     return (
 
@@ -135,7 +137,7 @@ class ScheduleWeekly extends Component {
             <div className="two wide column">Big House</div>
             <div className="fourteen wide column">
               <div className="ui internally celled eight column grid">
-                {/* {this.makeRow()} */}
+                {this.makeRow()}
               </div>
             </div>
           </div>
@@ -158,7 +160,7 @@ class ScheduleWeekly extends Component {
             </div>
           </div>
         </div>
-        {this.makeArray()}
+        {/* {this.makeArray()} */}
       </div>
 
     )
