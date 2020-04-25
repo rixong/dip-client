@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 import WeekRow from './WeekRow'
-// import DaySquare from './DaySquare';
 var moment = require('moment')
 
-const cabins = ['Big House', 'Pineaway', 'Winter Haven']
-const numCabins = cabins.length;
-
 class ScheduleWeekly extends Component {
+  
+    state = {
+      cabins: [],
+      startDate: new Date('2020-05-30T00:00:00'),
+      week: 1,
+      curColor: 0
+    }
 
-  state = {
-    startDate: new Date('2020-05-30T00:00:00'),
-    week: 1,
-    curColor: 0
+  componentDidMount() {
+      fetch('http://localhost:3000/api/v1/cabins', {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+        }
+      })
+      .then(res => res.json())
+      // .then(json => console.log(json))
+      .then(json => this.setState({cabins: json}))
   }
   
   
@@ -24,12 +33,12 @@ class ScheduleWeekly extends Component {
     // Create rows for each cabin calling MakeRow() with each cabin
 
     let weekRowArray = [];
-    for (let i = 0; i < numCabins; i++) {
+    for (let i = 0; i < this.state.cabins.length; i++) {
       let reservations = this.combineSingleCabinRes(i + 1)
       // console.log('reservations',reservations);
       weekRowArray.push(<WeekRow key={i} 
         reservations={reservations} 
-        cabinName={cabins[i]} 
+        cabinName={this.state.cabins[1].name} 
         cycleColor={this.cycleColor}/>);
     }
     // console.log('weekRowArray', weekRowArray);

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import DaySquare from './DaySquare';
-// var moment = require('moment')
 
 const colors = ['teal', 'blue', 'green', 'violet', 'olive'];
 
