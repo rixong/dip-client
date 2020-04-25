@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import DaySquare from './DaySquare';
+import WeekRow from './WeekRow'
+// import DaySquare from './DaySquare';
 var moment = require('moment')
 
-const colors = ['teal', 'blue', 'green', 'violet', 'olive'];
-const numCabins = 7;
+const cabins = ['Big House', 'Pineaway', 'Winter Haven']
+const numCabins = cabins.length;
 
 class ScheduleWeekly extends Component {
 
@@ -12,56 +13,28 @@ class ScheduleWeekly extends Component {
     week: 1,
     curColor: 0
   }
+  
+  
+  cycleColor = (num) => {
+    this.setState({curColor: this.state.curColor + num})
+  }
+
 
   makeSchedule = () => {
     // Create rows for each cabin calling MakeRow() with each cabin
 
-    let result = [];
-    for (let i = 0; i <= numCabins; i++) {
-      console.log('here');
-      
-       <div className="row cabin-head" id="cabin-1">
-        <div className="two wide column">Big House</div>
-        <div className="fourteen wide column">
-          <div className="ui internally celled eight column grid">
-            {this.makeRow(i)}
-          </div>
-        </div>
-      </div>
-
+    let weekRowArray = [];
+    for (let i = 0; i < numCabins; i++) {
+      let reservations = this.combineSingleCabinRes(i + 1)
+      // console.log('reservations',reservations);
+      weekRowArray.push(<WeekRow key={i} 
+        reservations={reservations} 
+        cabinName={cabins[i]} 
+        cycleColor={this.cycleColor}/>);
     }
-  }
+    // console.log('weekRowArray', weekRowArray);
 
-
-
-
-  makeRow = (cabinId) => {
-    let array = this.combineSingleCabinRes(cabinId);
-    // console.log(array);
-
-    let squares = [];
-    let curDaysRes = undefined;
-    let curColor = this.state.curColor;
-    let curUser = undefined;
-
-    for (let i = 0; i < 8; i++) {
-      if (array) {
-        curDaysRes = array.find(curDay => curDay.dif === i)
-      }
-      if (curDaysRes) {
-        if (!curUser || curDaysRes.user !== curUser) {
-          curColor += 1;
-          curUser = curDaysRes.user
-          console.log(curUser);
-        }
-        squares.push(<DaySquare key={i} color={colors[curColor]} userId={curDaysRes.user} />)
-      } else {
-        squares.push(<DaySquare key={i} color='grey' />)
-      }
-    }
-    // console.log('squares', squares);
-    // this.setState({curColor})
-    return squares
+    return weekRowArray;
   }
 
   // Combine reservations for one cabin in array.
@@ -76,14 +49,8 @@ class ScheduleWeekly extends Component {
     }
   }
 
-
-  numDays = (end, start) => {
-    return end.diff(start, 'days')
-  }
-
-  //Make 
+  //Make array from single resevation of type {dif: days from start of week}
   makeArray = (res) => {
-
     let arrival = new Date(`${res.arrival}T00:00:00`);
     let departure = new Date(`${res.departure}T00:00:00`);
     let arr = moment(arrival);
@@ -92,18 +59,19 @@ class ScheduleWeekly extends Component {
 
     let start = moment(this.state.startDate);
     let lengthOfStay = this.numDays(dep, arr) + 1;
-    // console.log('lengthOfStay', lengthOfStay);
     let reservedDaysArray = [];
     // Take a reservation for specific cabin and make array of objects {dif: days from start of week}
     for (let i = 0; i < lengthOfStay; i++) {
       reservedDaysArray.push({ user: res.reserver.firstname, dif: this.numDays(arr, start) });
       arr.add(1, 'day')
     }
-
     // console.log('reservedDaysArray',  reservedDaysArray);
     return reservedDaysArray;
+  }
 
-
+  /// Helper Method
+  numDays = (end, start) => {
+    return end.diff(start, 'days')
   }
 
 
@@ -132,11 +100,10 @@ class ScheduleWeekly extends Component {
               </div>
             </div>
           </div>
+
           {this.makeSchedule()}
 
-
         </div>
-        {/* {this.makeArray()} */}
       </div>
 
     )
