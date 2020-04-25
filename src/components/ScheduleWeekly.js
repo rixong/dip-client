@@ -37,17 +37,17 @@ class ScheduleWeekly extends Component {
   //   }
   // }
 
+  combineSingleCabinRes = (curCabinId) => {
+    let result = [];
+  if (this.props.reservations.length > 0) {
+    console.log(this.props.reservations[0].cabin.cabinId);
+    result = this.props.reservations.filter(res => res.cabin.cabinId === curCabinId)
+  }
+console.log(result);
 
-  // makeRows = () => {
-  //   if (this.props.reservations.length > 0) {
-  //     for (let i = 1; i <= numCabins + 1; i++) {
-  //       let reservations = this.props.reservations.filter(res =>
-  //         res.cabin.cabinId === i)
-  //       console.log(reservations)
-  //       this.makeRow(i);
-  //     }
-  //   }
-  // }
+
+    
+  }
 
 
 
@@ -77,10 +77,7 @@ class ScheduleWeekly extends Component {
     }
 
     return reservedDaysArray;
-    // this.makeRow(reservedDaysArray);
 
-    // times.forEach(day => console.log(day.calendar()))
-    // console.log(reservedDaysArray);
     // console.log(dep.isBetween(start, end, 'day'));
   }
 
@@ -137,7 +134,7 @@ class ScheduleWeekly extends Component {
             <div className="two wide column">Big House</div>
             <div className="fourteen wide column">
               <div className="ui internally celled eight column grid">
-                {this.makeRow()}
+                {this.combineSingleCabinRes(1)}
               </div>
             </div>
           </div>
