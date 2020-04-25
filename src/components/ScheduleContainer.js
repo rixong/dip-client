@@ -15,7 +15,7 @@ class ScheduleContainer extends Component {
       }
     })
     .then(res => res.json())
-    // .then(json => console.log(json))
+    // .then(json => console.log(json[0].id))
     .then(json => this.setState({reservations: json}))
   }
 

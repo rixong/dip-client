@@ -2,54 +2,106 @@ import React, { Component } from 'react';
 import DaySquare from './DaySquare';
 var moment = require('moment')
 
-const colors = ['pink', 'blue', 'green', 'yellow']
+const colors = ['pink', 'blue', 'green', 'yellow'];
+const numCabins = 7;
 
 class ScheduleWeekly extends Component {
 
   state = {
     startDate: new Date('2020-05-30T00:00:00'),
     week: 1,
-    arrival: new Date('2020-06-02T00:00:00'),
-    departure: new Date('2020-06-10T00:00:00'),
     curColor: 2
   }
 
-  renderSchedules = () => {
+  // renderSchedules = () => {
 
-    var arr = moment(this.state.arrival);
-    var dep = moment(this.state.departure);
-    var start = moment(this.state.startDate);
-    let stayLength = dep.diff(arr, 'days')
-    let cabin = 1;
-    console.log('length of stay', stayLength);
-    
-    for (let i=0; i<stayLength; i++){
-      let dif = arr.diff(start, 'days')
-      if (dif >= 0 && dif < 8) {
-        console.log('good', dif);
-        // document.getElementById(`cabin${cabin}-day${dif}`).classList.add('pink')
-        // console.log(dayDiv);
-        // dayDiv.style.backgroundColor="pink"
-        
-      } else {
-        console.log('bad', dif);
-      }
-      arr.add(1, 'day')
-    }
+  //   var arr = moment(this.state.arrival);
+  //   var dep = moment(this.state.departure);
+  //   var start = moment(this.state.startDate);
+  //   let stayLength = dep.diff(arr, 'days')
+
+  //   console.log('length of stay', stayLength);
+
+  //   for (let i=0; i<stayLength; i++){
+  //     let dif = arr.diff(start, 'days')
+  //     if (dif >= 0 && dif < 8) {
+  //       console.log('good', dif);
+  //       // document.getElementById(`cabin${cabin}-day${dif}`).classList.add('pink')
+  //       // console.log(dayDiv);
+  //       // dayDiv.style.backgroundColor="pink"
+
+  //     } else {
+  //       console.log('bad', dif);
+  //     }
+  //     arr.add(1, 'day')
+  //   }
+  // }
 
 
-    // return this.props.reservations.map(res => {
-    //   return <p>Name: {res.reserver.firstname} Arrives: {res.arrival} Departs: {res.departure}</p>
-    // })
+  // makeRows = () => {
+  //   if (this.props.reservations.length > 0) {
+  //     for (let i = 1; i <= numCabins + 1; i++) {
+  //       let reservations = this.props.reservations.filter(res =>
+  //         res.cabin.cabinId === i)
+  //       console.log(reservations)
+  //       this.makeRow(i);
+  //     }
+  //   }
+  // }
+
+
+  
+  
+  
+  
+  numDays = (end, start) => {
+    return end.diff(start, 'days')
   }
   
-  makeRow = () => {
-    let arr = [];
+  makeArray = () => {
+    
+    let arrival = new Date('2020-05-28T00:00:00');
+    let departure = new Date('2020-06-04T00:00:00');
+    let arr = moment(arrival);
+    let dep = moment(departure);
+    let start = moment(this.state.startDate);
+    let end = start.clone().add(7, 'days');
+    let lengthOfStay = this.numDays(dep, arr);
+    
+    let reservedDaysArray = [];
+    
+    // Take a reservation for specific cabin and make array of objects {dif: days from start of week}
     for (let i = 0; i < 8; i++) {
-      arr.push(<DaySquare color={colors[this.state.curColor]}/>)
+      reservedDaysArray.push({ user: 1, diff: this.numDays(arr, start) });
+      arr.add(1, 'day')
+    }
+    
+    return reservedDaysArray
+    
+    // times.forEach(day => console.log(day.calendar()))
+    // console.log(reservedDaysArray);
+    // console.log(dep.isBetween(start, end, 'day'));
+  }
+  
+  makeRow = (array) => {
+ let squares = [];
+    for (let i = 0; i < 8; i++) {
+      let curDaysRes = array.find(curDay => curDay.dif === i)
+      log('i'=i, curDaysRes)
+      // squares.push(<DaySquare />)
     }
     return arr;
   }
+
+  // moment('2010-10-20').isBetween('2010-01-01', '2012-01-01', 'year');
+
+
+
+
+
+
+
+
 
   render() {
     // console.log(moment(new Date()).format("d"));
@@ -78,24 +130,12 @@ class ScheduleWeekly extends Component {
               </div>
             </div>
           </div>
-                    {/* First Row */}
+          {/* First Row */}
           <div className="row cabin-head" id="cabin-1">
             <div className="two wide column">Big House</div>
             <div className="fourteen wide column">
               <div className="ui internally celled eight column grid">
-                {this.makeRow()}
-                {/* <DaySquare color={colors[this.state.curColor]}/>
-                <DaySquare color={colors[this.state.curColor]}/>
-                <DaySquare color={colors[this.state.curColor]}/>
-                <DaySquare color={colors[this.state.curColor]}/>
-                <DaySquare color={colors[this.state.curColor]}/>
-                <DaySquare color={colors[this.state.curColor]}/>
-                <DaySquare color={colors[this.state.curColor]}/>
-                <DaySquare color={colors[this.state.curColor]}/> */}
-
-
-
-
+                {/* {this.makeRow()} */}
               </div>
             </div>
           </div>
@@ -104,14 +144,7 @@ class ScheduleWeekly extends Component {
             <div className="two wide column">Gray House</div>
             <div className="fourteen wide column">
               <div className="ui internally celled eight column grid">
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
+                {/* {this.makeRow()} */}
               </div>
             </div>
           </div>
@@ -120,21 +153,12 @@ class ScheduleWeekly extends Component {
             <div className="two wide column">Winterhaven</div>
             <div className="fourteen wide column">
               <div className="ui internally celled eight column grid">
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
-                <div className="two wide column"></div>
+                {/* {this.makeRow()} */}
               </div>
             </div>
           </div>
-
         </div>
-        {this.renderSchedules()}
-
+        {this.makeArray()}
       </div>
 
     )

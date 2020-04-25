@@ -8,7 +8,7 @@ import NewUser from './components/NewUser'
 import ScheduleContainer from './components/ScheduleContainer'
 // import User from './components/User';
 
-const baseURL = 'http://localhost:3000/api/v1'
+// const baseURL = 'http://localhost:3000/api/v1'
 
 class App extends Component {
 
