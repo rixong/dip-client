@@ -133,10 +133,9 @@ class ScheduleWeekly extends Component {
               </div>
             </div>
           </div>
-
           {this.makeSchedule()}
-
         </div>
+        < ScheduleForm />
       </div>
 
     )
