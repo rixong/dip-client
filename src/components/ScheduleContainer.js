@@ -20,9 +20,9 @@ class ScheduleContainer extends Component {
       .then(json => this.setState({ reservations: json }))
   }
 
-  // addNewReservation = (res) => {
-  //   this.setState ({reservations: this.state.reservations.concat(res)})
-  // }
+  addNewReservation = (res) => {
+    this.setState({reservations: this.state.reservations.concat(res)})
+  }
 
   render() {
     return (
