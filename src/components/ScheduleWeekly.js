@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import WeekRow from './WeekRow'
+import uuid from 'react-uuid'
+
 var moment = require('moment')
 
 // const cycleColor = (state, props) => {  return {curColor: state.curColor + 1}}
@@ -55,7 +57,7 @@ class ScheduleWeekly extends Component {
     for (let i = 0; i < this.state.cabins.length; i++) {
       let reservations = this.combineSingleCabinRes(i + 1)
       // console.log('reservations',reservations);
-      weekRowArray.push(<WeekRow key={i} 
+      weekRowArray.push(<WeekRow key={uuid()} 
         reservations={reservations} 
         cabinName={this.state.cabins[i].name} 
         cycleColor={this.handleCycleColor}/>);
@@ -107,13 +109,14 @@ class ScheduleWeekly extends Component {
 
     return (
 
-      <div className="form-window" id="schedule">
+      // <div className="form-window" id="schedule">
+      <Fragment>
         <div className="form-header">Summer 2020 Master Schedule</div>
         <div className="" id="week-switch-div" >
-          <button className="ui icon button huge"><i className="arrow left icon" onClick={this.previousWeek}></i></button>
+          <button className="ui icon button huge"><i className="arrow left icon big" onClick={this.previousWeek}></i></button>
           Week of {moment(this.state.startDate).format("MMM D")}
             - {moment(this.state.startDate).add(7, 'd').format("MMM D")}
-          <button className="ui icon button huge"><i className="arrow right icon" onClick={this.nextWeek}></i></button>
+          <button className="ui icon button huge"><i className="arrow right icon big" onClick={this.nextWeek}></i></button>
         </div>
 
         <div className="ui grid" id="schedule-grid">
@@ -135,8 +138,8 @@ class ScheduleWeekly extends Component {
           </div>
           {this.makeSchedule()}
         </div>
-        < ScheduleForm />
-      </div>
+        </Fragment>
+      // </div>
 
     )
   }

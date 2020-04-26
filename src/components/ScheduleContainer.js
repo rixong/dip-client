@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import ScheduleWeekly from './ScheduleWeekly';
+import ReservationForm from './ReservationForm';
 
 class ScheduleContainer extends Component {
 
@@ -14,14 +15,23 @@ class ScheduleContainer extends Component {
         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
       }
     })
-    .then(res => res.json())
-    // .then(json => console.log(json[0].id))
-    .then(json => this.setState({reservations: json}))
+      .then(res => res.json())
+      // .then(json => console.log(json[0].id))
+      .then(json => this.setState({ reservations: json }))
   }
+
+  // addNewReservation = (res) => {
+  //   this.setState ({reservations: this.state.reservations.concat(res)})
+  // }
 
   render() {
     return (
-      <ScheduleWeekly reservations={this.state.reservations}/>
+      <div className="form-window" id="schedule">
+        <Fragment>
+          < ScheduleWeekly reservations={this.state.reservations} />
+          < ReservationForm curUser={this.props.curUser} addNewReservation={this.addNewReservation}/>
+        </Fragment>
+      </div>
     )
   }
 }

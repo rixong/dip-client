@@ -76,7 +76,7 @@ class App extends Component {
             ? < Login addToken={this.addToken} isNewUser={this.isNewUser}/> 
             : null}
           { this.state.isNewUser ? < NewUser addToken={this.addToken} /> : null }
-          { this.state.isLoggedIn ? <ScheduleContainer /> : null }
+          { this.state.isLoggedIn ? <ScheduleContainer curUser={this.state.curUser}/> : null }
         </div>
 
       </div>

@@ -2,7 +2,7 @@
   background-color: rgb(222, 225, 228);
 }
 
-.app{
+.app {
   height: 100%;
   margin-left: 40px;
   margin-right: 40px;
@@ -21,8 +21,8 @@
   height: 5px;
 } */
 
-#left-menu {
-}
+#left-menu {}
+
 #right-menu {
   padding-top: 30px;
 }
@@ -49,7 +49,7 @@
   border: solid;
   border-width: 4px;
   border-radius: 10px;
-  border-color:  rgb(222, 225, 228);
+  border-color: rgb(222, 225, 228);
   padding-bottom: 20px;
   display: inline-block;
   position: relative;
@@ -58,19 +58,16 @@
   width: 40%;
 }
 
-#login {
+#login {}
 
-}
-
-#new-user {
-
-}
+#new-user {}
 
 /* Weekly scheduling format */
 
 
 #schedule {
   width: 75%;
+  height: 70%;
 }
 
 #schedule-grid {
@@ -81,18 +78,19 @@
 
 #week-switch-div {
   font-size: x-large;
-  margin-top: 20px;;
+  margin-top: 20px;
+  ;
 }
 
 #show-days-row {
   font-size: 14px;
   font-weight: bold;
-  height:40px;
+  height: 40px;
 }
 
 #date-row {
   padding: 0px 25px
-  /* margin: 0px 0px */
+    /* margin: 0px 0px */
 }
 
 #cabin-head {
@@ -107,7 +105,7 @@
 }
 
 #name-row {
-  height:40px;
+  height: 40px;
 }
 
 #day-square {
@@ -116,11 +114,8 @@
 }
 
 .default-square-color {
-background-color: lightslategray;
+  background-color: lightslategray;
 }
-
-
-
 
 .form-header {
   background-color: darkgray;
@@ -132,4 +127,14 @@ background-color: lightslategray;
   margin-left: 50px;
   text-align: left;
   width: 80%;
+}
+
+#reservation-form {
+  margin-top: 30px;
+  margin-left: 10%;
+  width: 80%;
+}
+
+#reserve-button {
+  margin-top: 20px;
 }

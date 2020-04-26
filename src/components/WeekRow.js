@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DaySquare from './DaySquare';
+import uuid from 'react-uuid'
 
 const colors = ['teal', 'blue', 'green', 'violet', 'olive'];
 
@@ -29,9 +30,9 @@ class WeekRow extends Component {
           curUser = curDaysRes.user
           // console.log(curUser);
         }
-        squares.push(<DaySquare key={i} color={colors[curColor]} userId={curDaysRes.user} />)
+        squares.push(<DaySquare key={uuid()} color={colors[curColor]} userId={curDaysRes.user} />)
       } else {
-        squares.push(<DaySquare key={i} color='default-square-color' />)
+        squares.push(<DaySquare key={uuid()} color='default-square-color' />)
       }
     }
 
