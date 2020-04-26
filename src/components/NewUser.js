@@ -52,7 +52,7 @@ class NewUser extends Component {
     return (
       <div className="form-window" id="new-user">
 
-        <div className="form-header"><h2>Sign up</h2></div>
+        <div className="form-header">Sign up</div>
 
         <form className="ui form main-form" onSubmit={this.handleSubmit}>
 

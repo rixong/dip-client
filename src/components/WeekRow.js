@@ -25,27 +25,25 @@ class WeekRow extends Component {
       }
       if (curDaysRes) {
         if (!curUser || curDaysRes.user !== curUser) {
-          curColor += 1;
+          curColor = Math.floor(Math.random() * 5)
           curUser = curDaysRes.user
           // console.log(curUser);
         }
         squares.push(<DaySquare key={i} color={colors[curColor]} userId={curDaysRes.user} />)
       } else {
-        squares.push(<DaySquare key={i} color='grey' />)
+        squares.push(<DaySquare key={i} color='default-square-color' />)
       }
     }
-    // console.log('squares', squares);
-    // this.setState({curColor})
-    // this.props.cycleColor(curColor + 1)
+
     return squares
   }
 
   render() {
     return (
-    <div className="row cabin-head" id="cabin-1">
-    <div className="two wide column">{this.props.cabinName}</div>
+    <div className="row" id="cabin-head">
+    <div className="two wide column" id="cabin-name" >{this.props.cabinName}</div>
     <div className="fourteen wide column">
-      <div className="ui internally celled eight column grid">
+      <div className="ui internally celled eight column grid" id="name-row">
         {this.makeRow(this.props.cabinId)}
       </div>
     </div>

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import WeekRow from './WeekRow'
 var moment = require('moment')
 
+// const cycleColor = (state, props) => {  return {curColor: state.curColor + 1}}
+
 class ScheduleWeekly extends Component {
   
     state = {
@@ -23,10 +25,27 @@ class ScheduleWeekly extends Component {
       .then(json => this.setState({cabins: json}))
   }
   
-  
-  cycleColor = (num) => {
-    this.setState({curColor: this.state.curColor + num})
+  nextWeek = () => {
+    console.log(moment(this.state.startDate).add(1, 'week').format());
+    let nextWeek = moment(this.state.startDate).add(this.state.week, 'week').format()
+    this.setState({startDate: nextWeek})
   }
+
+  previousWeek = () => {
+    // console.log(moment(this.state.startDate).add(1, 'week').format());
+    let nextWeek = moment(this.state.startDate).subtract(this.state.week, 'week').format()
+    this.setState({startDate: nextWeek})
+  }
+
+  nextWeek = () => {
+    console.log(moment(this.state.startDate).add(1, 'week').format());
+    let nextWeek = moment(this.state.startDate).add(this.state.week, 'week').format()
+    this.setState({startDate: nextWeek})
+  }
+
+  // handleCycleColor = () => {
+  //   cycleColor();
+  // }
 
 
   makeSchedule = () => {
@@ -38,8 +57,8 @@ class ScheduleWeekly extends Component {
       // console.log('reservations',reservations);
       weekRowArray.push(<WeekRow key={i} 
         reservations={reservations} 
-        cabinName={this.state.cabins[1].name} 
-        cycleColor={this.cycleColor}/>);
+        cabinName={this.state.cabins[i].name} 
+        cycleColor={this.handleCycleColor}/>);
     }
     // console.log('weekRowArray', weekRowArray);
 
@@ -89,15 +108,20 @@ class ScheduleWeekly extends Component {
     return (
 
       <div className="form-window" id="schedule">
-        <div className="form-header"><h2>Week of {moment(this.state.startDate).format("MMM D")}
-          to {moment(this.state.startDate).add(7, 'd').format("MMM D")} </h2></div>
+        <div className="form-header">Summer 2020 Master Schedule</div>
+        <div className="" id="week-switch-div" >
+          <button className="ui icon button huge"><i className="arrow left icon" onClick={this.previousWeek}></i></button>
+          Week of {moment(this.state.startDate).format("MMM D")}
+            - {moment(this.state.startDate).add(7, 'd').format("MMM D")}
+          <button className="ui icon button huge"><i className="arrow right icon" onClick={this.nextWeek}></i></button>
+        </div>
 
-        <div className="ui internally celled grid" id="schedule-grid">
+        <div className="ui grid" id="schedule-grid">
 
-          <div className="row">
+          <div className="row" id="show-days-row">
             <div className="two wide column"></div>
-            <div className="fourteen wide column">
-              <div className="ui internally celled eight column grid">
+            <div className="fourteen wide column" id="date-row">
+              <div className="ui eight column grid">
                 <div className="two wide column">{moment(this.state.startDate).format("dd D")}</div>
                 <div className="two wide column">{moment(this.state.startDate).add(1, 'd').format("dd D")}</div>
                 <div className="two wide column">{moment(this.state.startDate).add(2, 'd').format("dd D")}</div>

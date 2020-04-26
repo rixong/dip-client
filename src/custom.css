@@ -54,7 +54,7 @@
   display: inline-block;
   position: relative;
   margin: 0 auto;
-  top: 160px;
+  top: 120px;
   width: 40%;
 }
 
@@ -68,24 +68,64 @@
 
 /* Weekly scheduling format */
 
+
 #schedule {
-  width: 80%;
+  width: 75%;
 }
 
 #schedule-grid {
   font-size: small;
-  border: solid;
+  margin: 10px;
+  /* border-style: double; */
 }
 
-/* .pink {
-  background-color: rgb(248, 207, 214);
-} */
+#week-switch-div {
+  font-size: x-large;
+  margin-top: 20px;;
+}
+
+#show-days-row {
+  font-size: 14px;
+  font-weight: bold;
+  height:40px;
+}
+
+#date-row {
+  padding: 0px 25px
+  /* margin: 0px 0px */
+}
+
+#cabin-head {
+  padding-top: 2px;
+  padding-bottom: 0px;
+}
+
+#cabin-name {
+  /* padding-top: 10px; */
+  font-weight: bold;
+  text-align: right;
+}
+
+#name-row {
+  height:40px;
+}
+
+#day-square {
+  font-size: 10px;
+  /* height: 20px; */
+}
+
+.default-square-color {
+background-color: lightslategray;
+}
 
 
 
 
 .form-header {
   background-color: darkgray;
+  font-size: x-large;
+  padding: 10px;
 }
 
 .main-form {
