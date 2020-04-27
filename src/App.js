@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 import './App.css';
 import './custom.css'
 import 'semantic-ui-css/semantic.min.css'
@@ -84,4 +85,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);
