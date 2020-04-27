@@ -4,3 +4,9 @@ export const addCurUser = newUser => {
     payload: newUser
   };
 };
+
+export const deleteCurUser = newUser => {
+  return {
+    type: 'DELETE_CUR_USER'
+  };
+};

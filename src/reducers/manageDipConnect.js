@@ -7,16 +7,14 @@ const rootReducer = combineReducers({
 
 function usersReducer (
   state= []
-  // state = {
-  //   curUser: {
-  //     isLoggedIn: false
-  //   }}
     , action
     ) {
       console.log('from reducer', action);
   switch (action.type) {
     case 'ADD_CUR_USER':
-      return {...state, curUser: {user: action.payload, isLoggedIn: true }}
+      return {...state, curUser: action.payload.user, isLoggedIn: true }
+    case 'DELETE_CUR_USER':
+      return {...state, curUser: '', isLoggedIn: false }
 
     default:
       return state

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { addCurUser } from './actions';
+import { addCurUser, deleteCurUser } from './actions';
 import './App.css';
 import './custom.css'
 import 'semantic-ui-css/semantic.min.css'
@@ -17,8 +17,6 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
-      curUser: [],
-      isLoggedIn: false,
       isNewUser: false
     }
   }
@@ -35,11 +33,10 @@ class App extends Component {
     localStorage.removeItem('accessToken')
     this.setState(
       {
-        curUser: [],
-        isLoggedIn: false,
         isNewUser: false
       }
     )
+    this.props.deleteCurUser();
   }
 
   addToken = (token) => {
@@ -55,32 +52,26 @@ class App extends Component {
       }
     })
       .then(res => res.json())
-      // .then(json => this.setState({
-      //   curUser: json.user,
-      //   isLoggedIn: true,
-      //   isNewUser: false
-      // }))
-      // .then (json => console.log(json))
       .then(json => this.props.addCurUser(json))
   }
 
   isNewUser = () => {
     console.log('new user click');
-
     this.setState({ isNewUser: true })
   }
 
   render() {
+    console.log('From App render',this.props.user.curUser.isLoggedIn);
     return (
       <div className="container app">
         <Navbar curUser={this.state.curUser} onLogoutClick={this.onLogoutClick} isLoggedIn={this.state.isLoggedIn} />
 
         <div className='main'>
-          {!this.state.isLoggedIn && !this.state.isNewUser
+          {!this.props.isLoggedIn && !this.state.isNewUser
             ? < Login addToken={this.addToken} isNewUser={this.isNewUser} />
             : null}
           {this.state.isNewUser ? < NewUser addToken={this.addToken} /> : null}
-          {this.state.isLoggedIn ? <ScheduleContainer curUser={this.state.curUser} /> : null}
+          {this.props.isLoggedIn ? <ScheduleContainer curUser={this.state.curUser} /> : null}
         </div>
 
       </div>
@@ -88,10 +79,10 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapStateToProps = (state) => {
   return {
-    addCurUser: newUser => dispatch({type: 'ADD_CUR_USER', payload: 'Hello'})
-  };
-};
+    isLoggedIn: state.users.curUser.isLoggedIn
+  }
+}
 
-export default connect(null,mapDispatchToProps)(App);
+export default connect( mapStateToProps, {addCurUser, deleteCurUser})(App);
