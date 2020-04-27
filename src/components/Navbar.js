@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 class Navbar extends Component {
   render() {
 
     return (
+      
       <div className='ui celled grid nav-bar'>
         <div className="three column row">
           <div className="four wide column" id="left-menu">
@@ -16,7 +18,9 @@ class Navbar extends Component {
 
           <div className="four wide column" id="right-menu">
             {this.props.isLoggedIn ?
-              <div>{this.props.curUser.firstname} {this.props.curUser.lastname}
+              <div>
+                In the navbar
+                {this.props.curUser.firstname} {this.props.curUser.lastname}
                 <button onClick={this.props.onLogoutClick}>Logout</button></div>
               :
               <div><button>Log In</button></div>
@@ -28,4 +32,12 @@ class Navbar extends Component {
     )
   }
 }
-export default Navbar;
+
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.users.isLoggedIn,
+    curUser: state.users.curUser
+  }
+}
+
+export default connect(mapStateToProps)(Navbar);

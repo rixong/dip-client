@@ -61,10 +61,10 @@ class App extends Component {
   }
 
   render() {
-    console.log('From App render',this.props.user.curUser.isLoggedIn);
+    console.log('From App render',this.props.curUser);
     return (
       <div className="container app">
-        <Navbar curUser={this.state.curUser} onLogoutClick={this.onLogoutClick} isLoggedIn={this.state.isLoggedIn} />
+        <Navbar onLogoutClick={this.onLogoutClick} />
 
         <div className='main'>
           {!this.props.isLoggedIn && !this.state.isNewUser
@@ -81,7 +81,8 @@ class App extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    isLoggedIn: state.users.curUser.isLoggedIn
+    isLoggedIn: state.users.isLoggedIn,
+    curUser: state.users.curUser
   }
 }
 

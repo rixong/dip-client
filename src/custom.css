@@ -2,6 +2,10 @@
   background-color: rgb(222, 225, 228);
 }
 
+.hide {
+  display: none
+}
+
 .app {
   height: 100%;
   margin-left: 40px;
