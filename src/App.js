@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+// import { addCurUser } from './actions';
 import './App.css';
 import './custom.css'
 import 'semantic-ui-css/semantic.min.css'
@@ -54,30 +55,32 @@ class App extends Component {
       }
     })
       .then(res => res.json())
-      .then(json => this.setState({
-        curUser: json.user,
-        isLoggedIn: true,
-        isNewUser: false
-      }))
+      // .then(json => this.setState({
+      //   curUser: json.user,
+      //   isLoggedIn: true,
+      //   isNewUser: false
+      // }))
+      // .then (json => console.log(json))
+      .then(json => this.props.addCurUser(json))
   }
 
   isNewUser = () => {
     console.log('new user click');
-    
-    this.setState({isNewUser:true})
+
+    this.setState({ isNewUser: true })
   }
 
   render() {
     return (
       <div className="container app">
-        <Navbar curUser={this.state.curUser} onLogoutClick={this.onLogoutClick} isLoggedIn={this.state.isLoggedIn}/>
+        <Navbar curUser={this.state.curUser} onLogoutClick={this.onLogoutClick} isLoggedIn={this.state.isLoggedIn} />
 
         <div className='main'>
-          {!this.state.isLoggedIn  && !this.state.isNewUser 
-            ? < Login addToken={this.addToken} isNewUser={this.isNewUser}/> 
+          {!this.state.isLoggedIn && !this.state.isNewUser
+            ? < Login addToken={this.addToken} isNewUser={this.isNewUser} />
             : null}
-          { this.state.isNewUser ? < NewUser addToken={this.addToken} /> : null }
-          { this.state.isLoggedIn ? <ScheduleContainer curUser={this.state.curUser}/> : null }
+          {this.state.isNewUser ? < NewUser addToken={this.addToken} /> : null}
+          {this.state.isLoggedIn ? <ScheduleContainer curUser={this.state.curUser} /> : null}
         </div>
 
       </div>
@@ -85,4 +88,10 @@ class App extends Component {
   }
 }
 
-export default connect()(App);
+const mapDispatchToProps = dispatch => {
+  return {
+    addCurUser: newUser => dispatch({type: 'ADD_CUR_USER', payload: 'Hello'})
+  };
+};
+
+export default connect(null,mapDispatchToProps)(App);

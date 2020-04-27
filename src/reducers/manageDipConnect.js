@@ -6,11 +6,14 @@ const rootReducer = combineReducers({
 })
 
 function usersReducer (
-  state = {
-    curUser: {}}
-  , action
-  ) {
-
+  state= []
+  // state = {
+  //   curUser: {
+  //     isLoggedIn: false
+  //   }}
+    , action
+    ) {
+      console.log('from reducer', action);
   switch (action.type) {
     case 'ADD_CUR_USER':
       return {...state, curUser: {user: action.payload, isLoggedIn: true }}
