@@ -1,3 +1,5 @@
+///users reducer
+
 export const addCurUser = newUser => {
   return {
     type: 'ADD_CUR_USER',
@@ -5,8 +7,21 @@ export const addCurUser = newUser => {
   };
 };
 
-export const deleteCurUser = newUser => {
+export const deleteCurUser = () => {
   return {
     type: 'DELETE_CUR_USER'
   };
 };
+
+
+
+/// reservation reducer
+
+export const getReservations = (reservations) => {
+  return {
+    type: 'GET_RESERVATIONS',
+    payload: reservations
+  }
+}
+
+

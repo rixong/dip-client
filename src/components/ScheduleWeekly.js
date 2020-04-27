@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react';
+import {connect} from 'react-redux';
+
 import WeekRow from './WeekRow'
 import uuid from 'react-uuid'
 
@@ -39,17 +41,6 @@ class ScheduleWeekly extends Component {
     this.setState({startDate: nextWeek})
   }
 
-  nextWeek = () => {
-    console.log(moment(this.state.startDate).add(1, 'week').format());
-    let nextWeek = moment(this.state.startDate).add(this.state.week, 'week').format()
-    this.setState({startDate: nextWeek})
-  }
-
-  // handleCycleColor = () => {
-  //   cycleColor();
-  // }
-
-
   makeSchedule = () => {
     // Create rows for each cabin calling MakeRow() with each cabin
 
@@ -69,9 +60,9 @@ class ScheduleWeekly extends Component {
 
   // Combine reservations for one cabin in array.
   combineSingleCabinRes = (curCabinId) => {
-    let result = [];
-    if (this.props.reservations.length > 0) {
-      result = this.props.reservations.filter(res => res.cabin.cabinId === curCabinId)
+    let result = [];    
+    if (this.props.curReservations) {
+      result = this.props.curReservations.filter(res => res.cabin.cabinId === curCabinId)
       let finalArray = result.map(res => this.makeArray(res)).flat()
 
       // console.log('finalArray', finalArray);
@@ -144,4 +135,11 @@ class ScheduleWeekly extends Component {
     )
   }
 }
-export default ScheduleWeekly;
+
+const mapStateToProps = state => {
+  return {
+    curReservations: state.reservations.curReservations
+  }
+}
+
+export default connect(mapStateToProps)(ScheduleWeekly);

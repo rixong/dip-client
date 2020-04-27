@@ -61,7 +61,7 @@ class App extends Component {
   }
 
   render() {
-    console.log('From App render',this.props.curUser);
+    // console.log('From App render',this.props.curUser);
     return (
       <div className="container app">
         <Navbar onLogoutClick={this.onLogoutClick} />

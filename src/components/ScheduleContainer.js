@@ -1,6 +1,10 @@
 import React, { Component, Fragment } from 'react';
+import {connect} from 'react-redux';
+
 import ScheduleWeekly from './ScheduleWeekly';
 import ReservationForm from './ReservationForm';
+
+import {getReservations} from '../actions/index'
 
 class ScheduleContainer extends Component {
 
@@ -16,8 +20,8 @@ class ScheduleContainer extends Component {
       }
     })
       .then(res => res.json())
-      // .then(json => console.log(json[0].id))
-      .then(json => this.setState({ reservations: json }))
+      // .then(json => console.log(json))
+      .then(json => this.props.getReservations(json))
   }
 
   addNewReservation = (res) => {
@@ -28,11 +32,11 @@ class ScheduleContainer extends Component {
     return (
       <div className="form-window" id="schedule">
         <Fragment>
-          < ScheduleWeekly reservations={this.state.reservations} />
+          < ScheduleWeekly />
           < ReservationForm curUser={this.props.curUser} addNewReservation={this.addNewReservation}/>
         </Fragment>
       </div>
     )
   }
 }
-export default ScheduleContainer;
+export default connect(null, {getReservations})(ScheduleContainer);
