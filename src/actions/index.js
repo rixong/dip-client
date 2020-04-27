@@ -24,4 +24,11 @@ export const getReservations = (reservations) => {
   }
 }
 
+export const getCabins = (cabins) => {
+  return {
+    type: 'GET_CABINS',
+    payload: cabins
+  }
+}
+
 

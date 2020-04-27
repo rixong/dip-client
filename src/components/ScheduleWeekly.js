@@ -11,46 +11,41 @@ var moment = require('moment')
 class ScheduleWeekly extends Component {
   
     state = {
-      cabins: [],
       startDate: new Date('2020-05-30T00:00:00'),
       week: 1,
       curColor: 0
     }
-
-  componentDidMount() {
-      fetch('http://localhost:3000/api/v1/cabins', {
-        method: 'GET',
-        headers: {
-          Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-        }
-      })
-      .then(res => res.json())
-      // .then(json => console.log(json))
-      .then(json => this.setState({cabins: json}))
-  }
   
-  nextWeek = () => {
-    console.log(moment(this.state.startDate).add(1, 'week').format());
-    let nextWeek = moment(this.state.startDate).add(this.state.week, 'week').format()
-    this.setState({startDate: nextWeek})
-  }
+  // nextWeek = () => {
+  //   // console.log(moment(this.state.startDate).add(1, 'week').format());
+  //   let nextWeek = moment(this.state.startDate).add(this.state.week, 'week').format()
+  //   this.setState({startDate: nextWeek})
+  // }
+  
+  // previousWeek = () => {
+  //   // console.log(moment(this.state.startDate).add(1, 'week').format());
+  //   let nextWeek = moment(this.state.startDate).subtract(this.state.week, 'week').format()
+  //   this.setState({startDate: nextWeek})
+  // }
+  
+  switchWeek = (choice) => {
+    console.log(choice);
+    
+    let newWeek = moment(this.state.startDate).add(this.state.week, 'week').format()
+    this.setState({startDate: newWeek})
 
-  previousWeek = () => {
-    // console.log(moment(this.state.startDate).add(1, 'week').format());
-    let nextWeek = moment(this.state.startDate).subtract(this.state.week, 'week').format()
-    this.setState({startDate: nextWeek})
   }
 
   makeSchedule = () => {
     // Create rows for each cabin calling MakeRow() with each cabin
 
     let weekRowArray = [];
-    for (let i = 0; i < this.state.cabins.length; i++) {
+    // console.log('cabins',this.props.cabins);
+    for (let i = 0; i < this.props.cabins.length; i++) {
       let reservations = this.combineSingleCabinRes(i + 1)
-      // console.log('reservations',reservations);
       weekRowArray.push(<WeekRow key={uuid()} 
         reservations={reservations} 
-        cabinName={this.state.cabins[i].name} 
+        cabinName={this.props.cabins[i].name} 
         cycleColor={this.handleCycleColor}/>);
     }
     // console.log('weekRowArray', weekRowArray);
@@ -90,7 +85,7 @@ class ScheduleWeekly extends Component {
     return reservedDaysArray;
   }
 
-  /// Helper Method
+  /// Helper method
   numDays = (end, start) => {
     return end.diff(start, 'days')
   }
@@ -104,10 +99,12 @@ class ScheduleWeekly extends Component {
       <Fragment>
         <div className="form-header">Summer 2020 Master Schedule</div>
         <div className="" id="week-switch-div" >
-          <button className="ui icon button huge"><i className="arrow left icon big" onClick={this.previousWeek}></i></button>
+          <button className="ui icon button huge"><i className="arrow left icon big" 
+            onClick={() => this.switchWeek()}></i></button>
           Week of {moment(this.state.startDate).format("MMM D")}
             - {moment(this.state.startDate).add(7, 'd').format("MMM D")}
-          <button className="ui icon button huge"><i className="arrow right icon big" onClick={this.nextWeek}></i></button>
+          <button className="ui icon button huge"><i className="arrow right icon big" 
+            onClick={() => this.switchWeek()}></i></button>
         </div>
 
         <div className="ui grid" id="schedule-grid">
@@ -138,7 +135,8 @@ class ScheduleWeekly extends Component {
 
 const mapStateToProps = state => {
   return {
-    curReservations: state.reservations.curReservations
+    curReservations: state.reservations.curReservations,
+    cabins: state.reservations.cabins
   }
 }
 

@@ -2,7 +2,7 @@ import {combineReducers} from 'redux'
 
 const rootReducer = combineReducers({
   users: usersReducer,
-  reservations: resevationsReducer
+  reservations: reservationsReducer
 })
 
 function usersReducer (
@@ -20,17 +20,18 @@ function usersReducer (
   }
 }
 
-
-function resevationsReducer (
-  state = [],
+function reservationsReducer (
+  state = {cabins: []},
   action
 ) {
 
-  console.log(action);
+  // console.log(action);
   
   switch (action.type) {
     case 'GET_RESERVATIONS':
-      return {curReservations: action.payload}
+      return {...state, curReservations: action.payload}
+    case 'GET_CABINS':
+      return {...state, cabins: action.payload}
     default:
       return state
   }
