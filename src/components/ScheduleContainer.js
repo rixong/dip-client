@@ -8,13 +8,9 @@ import { getReservations, getCabins } from '../actions/index'
 
 class ScheduleContainer extends Component {
 
-  // state = {
-  //   reservations: []
-  // }
-
-  /// fetch current reservations
   componentDidMount() {
-
+    
+    /// fetch current reservations
     fetch('http://localhost:3000/api/v1/reservations', {
       method: 'GET',
       headers: {
@@ -26,7 +22,7 @@ class ScheduleContainer extends Component {
       .then(json => this.props.getReservations(json))
       .then(() => {
 
-        /// fetch cabin info
+    /// fetch cabin info
         fetch('http://localhost:3000/api/v1/cabins', {
           method: 'GET',
           headers: {

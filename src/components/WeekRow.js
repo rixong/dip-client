@@ -2,13 +2,9 @@ import React, { Component } from 'react';
 import DaySquare from './DaySquare';
 import uuid from 'react-uuid'
 
-const colors = ['teal', 'blue', 'green', 'violet', 'olive'];
+const colors = ['teal', 'blue', 'green', 'violet', 'olive', 'orange'];
 
 class WeekRow extends Component {
-
-  state = {
-    curColor: 0
-  }
   
   makeRow = () => {
     // let array = this.combineSingleCabinRes();
@@ -16,7 +12,6 @@ class WeekRow extends Component {
 
     let squares = [];
     let curDaysRes = undefined;
-    let curColor = 0;
     let curUser = undefined;
 
     for (let i = 0; i < 8; i++) {
@@ -26,11 +21,10 @@ class WeekRow extends Component {
       }
       if (curDaysRes) {
         if (!curUser || curDaysRes.user !== curUser) {
-          curColor = Math.floor(Math.random() * 5)
-          curUser = curDaysRes.user
+          curUser = curDaysRes.userName
           // console.log(curUser);
         }
-        squares.push(<DaySquare key={uuid()} color={colors[curColor]} userId={curDaysRes.user} />)
+        squares.push(<DaySquare key={uuid()} color={colors[curDaysRes.userId%6]} userName={curDaysRes.userName} />)
       } else {
         squares.push(<DaySquare key={uuid()} color='default-square-color' />)
       }

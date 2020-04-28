@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-
+import {connect} from 'react-redux';
+import {addReservation} from '../actions/index'
 
 class ReservationForm extends Component {
 
@@ -12,7 +12,7 @@ class ReservationForm extends Component {
 
   onHandleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.state.arrival);
+    console.log(this.props.curUser.id);
     fetch('http://localhost:3000/api/v1/reservations', {
       method: 'POST',
       headers: {
@@ -49,10 +49,6 @@ class ReservationForm extends Component {
           <div className="four wide column">
             <div className="field">
               <label>House</label>
-              {/* <div className="ui selection dropdown"> */}
-              {/* <input type="hidden" name="cabin"></input> */}
-              {/* <i className="dropdown icon"></i> */}
-              {/* <div className="default text">House</div> */}
               <select className="menu" name="cabin" onChange={this.handleChange}>
                 <option className="item" value="1">Big House</option>
                 <option className="item" value="2">Gray House</option>
@@ -62,7 +58,6 @@ class ReservationForm extends Component {
                 <option className="item" value="6">Brownie Cottage</option>
                 <option className="item" value="7">Guest House</option>
               </select>
-              {/* </div> */}
             </div>
           </div>
 
@@ -102,4 +97,10 @@ class ReservationForm extends Component {
   }
 }
 
-export default ReservationForm;
+const mapsStateToProps = state => {
+  return {
+    curUser: state.users.curUser
+  }
+}
+
+export default connect(mapsStateToProps, {addReservation})(ReservationForm);

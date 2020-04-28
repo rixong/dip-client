@@ -6,35 +6,12 @@ import uuid from 'react-uuid'
 
 var moment = require('moment')
 
-// const cycleColor = (state, props) => {  return {curColor: state.curColor + 1}}
-
 class ScheduleWeekly extends Component {
   
     state = {
       startDate: new Date('2020-05-30T00:00:00'),
       week: 1,
-      curColor: 0
     }
-  
-  // nextWeek = () => {
-  //   // console.log(moment(this.state.startDate).add(1, 'week').format());
-  //   let nextWeek = moment(this.state.startDate).add(this.state.week, 'week').format()
-  //   this.setState({startDate: nextWeek})
-  // }
-  
-  // previousWeek = () => {
-  //   // console.log(moment(this.state.startDate).add(1, 'week').format());
-  //   let nextWeek = moment(this.state.startDate).subtract(this.state.week, 'week').format()
-  //   this.setState({startDate: nextWeek})
-  // }
-  
-  switchWeek = (choice) => {
-    console.log(choice);
-    
-    let newWeek = moment(this.state.startDate).add(this.state.week, 'week').format()
-    this.setState({startDate: newWeek})
-
-  }
 
   makeSchedule = () => {
     // Create rows for each cabin calling MakeRow() with each cabin
@@ -46,7 +23,7 @@ class ScheduleWeekly extends Component {
       weekRowArray.push(<WeekRow key={uuid()} 
         reservations={reservations} 
         cabinName={this.props.cabins[i].name} 
-        cycleColor={this.handleCycleColor}/>);
+        />);
     }
     // console.log('weekRowArray', weekRowArray);
 
@@ -78,16 +55,35 @@ class ScheduleWeekly extends Component {
     let reservedDaysArray = [];
     // Take a reservation for specific cabin and make array of objects {dif: days from start of week}
     for (let i = 0; i < lengthOfStay; i++) {
-      reservedDaysArray.push({ user: res.reserver.firstname, dif: this.numDays(arr, start) });
+      reservedDaysArray.push(
+        { userName: this.fullName(res), 
+          userId: res.reserver.userId, 
+          dif: this.numDays(arr, start) 
+        });
       arr.add(1, 'day')
     }
     // console.log('reservedDaysArray',  reservedDaysArray);
     return reservedDaysArray;
   }
 
-  /// Helper method
+  /// Helper methods
+
+  fullName = (reservation) => {
+    return `${reservation.reserver.firstName} ${reservation.reserver.lastName}`
+  }
+
   numDays = (end, start) => {
     return end.diff(start, 'days')
+  }
+
+  switchWeek = (e) => {
+    let newWeek = '';
+    let direction = e.target.closest('button').name;
+    direction === 'left' ? 
+    newWeek = moment(this.state.startDate).subtract(this.state.week, 'week').format() :
+    newWeek = moment(this.state.startDate).add(this.state.week, 'week').format();
+
+    this.setState({startDate: newWeek})
   }
 
 
@@ -99,12 +95,12 @@ class ScheduleWeekly extends Component {
       <Fragment>
         <div className="form-header">Summer 2020 Master Schedule</div>
         <div className="" id="week-switch-div" >
-          <button className="ui icon button huge"><i className="arrow left icon big" 
-            onClick={() => this.switchWeek()}></i></button>
+          <button className="ui icon button" name="left" onClick={(e) => this.switchWeek(e)}>
+            <i className="arrow left icon big" ></i></button>
           Week of {moment(this.state.startDate).format("MMM D")}
             - {moment(this.state.startDate).add(7, 'd').format("MMM D")}
-          <button className="ui icon button huge"><i className="arrow right icon big" 
-            onClick={() => this.switchWeek()}></i></button>
+          <button className="ui icon button" name="right" onClick={(e) => this.switchWeek(e)}>
+            <i className="arrow right icon big" ></i></button>
         </div>
 
         <div className="ui grid" id="schedule-grid">

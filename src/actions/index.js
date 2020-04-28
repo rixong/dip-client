@@ -31,4 +31,11 @@ export const getCabins = (cabins) => {
   }
 }
 
+export const addReservation = (reservation) => {
+  return {
+    type: 'ADD_RESERVATION',
+    payload: reservation
+  }
+}
+
 
