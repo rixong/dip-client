@@ -11,6 +11,8 @@ import Home from './components/Home'
 import Login from './components/Login';
 import NewUser from './components/NewUser'
 import ScheduleContainer from './components/ScheduleContainer'
+import MaintenanceContainer from './components/MaintenanceContainer'
+
 // import User from './components/User';
 
 // const baseURL = 'http://localhost:3000/api/v1'
@@ -64,15 +66,17 @@ class App extends Component {
     // console.log('From App render',this.props.curUser);
     return (
       <div className="container app">
-        <div className='main'>
+        <div>
           <Router>
-            <div>
               <Navbar onLogoutClick={this.onLogoutClick}/>
+            <div className='main'>
               <Switch>
                 <Route exact path='/' component={Home} />
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/newuser' component={NewUser} />
-              </Switch>
+                <Route exact path='/schedule' component={ScheduleContainer} />              
+                <Route exact path='/maintenance' component={MaintenanceContainer} />              
+                </Switch>
             </div>
           </Router>
 
@@ -80,7 +84,6 @@ class App extends Component {
           {/* // ? < Login /> */}
           {/* // : null} */}
           {this.state.isNewUser ? < NewUser addToken={this.addToken} /> : null}
-          {this.props.isLoggedIn ? <ScheduleContainer curUser={this.state.curUser} /> : null}
         </div>
 
       </div>

@@ -17,6 +17,8 @@ code {
   background-color: rgb(222, 225, 228);
 }
 
+
+
 .hide {
   display: none
 }
@@ -32,6 +34,7 @@ code {
 .nav-bar {
   align-content: center;
   height: 60px;
+  padding-top: 120px;
   /* border-style: solid; */
 }
 
@@ -42,7 +45,8 @@ code {
   height: 5px;
 } */
 
-#left-menu {}
+#left-menu {
+}
 
 #right-menu {
   padding-top: 30px;
@@ -167,5 +171,16 @@ code {
 }
 
 #reserve-button {
+  margin-top: 20px;
+}
+
+
+/* Maintenance */
+
+#maintenance {
+  height: 60%;
+}
+
+#ticket {
   margin-top: 20px;
 }
