@@ -8,10 +8,8 @@ class MaintenanceTicket extends Component {
     this.state = {
       category: '',
       description: '',
-      submission_date: '',
       priority: ''
     }
-
   }
 
   onHandleChange = (e) => {
@@ -30,26 +28,31 @@ class MaintenanceTicket extends Component {
 
   onHandleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
-    //   fetch('http://localhost:3000/api/v1/repairs', {
-    //     method: 'POST',
-    //     headers: {
-    //       Authorization: `Bearer: ${localStorage.getItem('accessToken')}`,
-    //       "Content-Type": "application/json",
-    //       "Accept": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //       user_id: this.props.curUser.id,
-    //       cabin_id: this.state.cabin,
-    //       submission_date: ,
-    //       category: this.state.category,
-    //       description: this.state.description,
-    //       priority: true
-    //     })
-    //   })
-    //     .then(res => res.json())
-    //     .then(json => console.log(json))
-    //   // .then(json => this.props.addReservation(json.res))
+    // console.log(Date.now());
+      fetch('http://localhost:3000/api/v1/repairs', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer: ${localStorage.getItem('accessToken')}`,
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          user_id: this.props.curUser.id,
+          cabin_id: parseInt(this.state.cabin, 10),
+          category: this.state.category,
+          description: this.state.description,
+          priority: this.state.priority
+        })
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw Error(res.statusText);
+        }
+        return res;
+      })
+      .then(res => res.json())
+      .then(json => console.log(json))
+      .catch(error => console.log('This is the error', error))
   }
 
 
