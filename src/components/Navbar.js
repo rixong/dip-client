@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom'
 
 class Navbar extends Component {
   render() {
@@ -22,7 +23,8 @@ class Navbar extends Component {
                 {this.props.curUser.firstname} {this.props.curUser.lastname}
                 <button onClick={this.props.onLogoutClick}>Logout</button></div>
               :
-              <div><button>Log In</button></div>
+              // <div><button onClick={() => this.props.history.push('/login')}>Log In</button></div>
+              <Link className="Nav__link" to="/login">Login</Link>
             }
           </div>
 

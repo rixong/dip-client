@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addCurUser, deleteCurUser } from './actions';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
 import './App.css';
 import './custom.css'
 import 'semantic-ui-css/semantic.min.css'
-import Login from './components/Login';
 import Navbar from './components/Navbar';
+import Home from './components/Home'
+import Login from './components/Login';
 import NewUser from './components/NewUser'
 import ScheduleContainer from './components/ScheduleContainer'
 // import User from './components/User';
@@ -24,6 +27,8 @@ class App extends Component {
   componentDidMount() {
     if (localStorage.getItem('accessToken')) {
       this.setCurUser();
+    } else {
+      // this.props.history.push('./login')
     }
   }
 
@@ -37,11 +42,6 @@ class App extends Component {
       }
     )
     this.props.deleteCurUser();
-  }
-
-  addToken = (token) => {
-    localStorage.setItem('accessToken', token);
-    this.setCurUser();
   }
 
   setCurUser = () => {
@@ -64,12 +64,21 @@ class App extends Component {
     // console.log('From App render',this.props.curUser);
     return (
       <div className="container app">
-        <Navbar onLogoutClick={this.onLogoutClick} />
-
         <div className='main'>
-          {!this.props.isLoggedIn && !this.state.isNewUser
-            ? < Login addToken={this.addToken} isNewUser={this.isNewUser} />
-            : null}
+          <Router>
+            <div>
+              <Navbar onLogoutClick={this.onLogoutClick}/>
+              <Switch>
+                <Route exact path='/' component={Home} />
+                <Route exact path='/login' component={Login} />
+                <Route exact path='/newuser' component={NewUser} />
+              </Switch>
+            </div>
+          </Router>
+
+          {/* {!this.props.isLoggedIn && !this.state.isNewUser */}
+          {/* // ? < Login /> */}
+          {/* // : null} */}
           {this.state.isNewUser ? < NewUser addToken={this.addToken} /> : null}
           {this.props.isLoggedIn ? <ScheduleContainer curUser={this.state.curUser} /> : null}
         </div>
@@ -86,4 +95,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect( mapStateToProps, {addCurUser, deleteCurUser})(App);
+export default connect(mapStateToProps, { addCurUser, deleteCurUser })(App);

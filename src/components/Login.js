@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {addCurUser} from '../actions/index'
 
 class Login extends Component {
 
@@ -35,7 +37,12 @@ class Login extends Component {
     })
       .then(res => res.json())
       // .then(json => console.log(json))
-      .then(json => this.props.addToken(json.jwt))
+      .then(json => {
+        localStorage.setItem('accessToken', json.jwt);
+        this.props.addCurUser(json);
+        this.props.history.push('/home');
+      })
+
   }
 
 
@@ -72,13 +79,17 @@ class Login extends Component {
       <br></br>
 
       <div>
-        <button onClick={this.props.isNewUser}>New User?</button>
+        <button onClick={() => this.props.history.push('/newuser')}>New User?</button>
       </div>
 
     </div>
     )
   }
-
-
 }
-export default Login;
+    
+// const mapStateToProps = state => {
+// return {
+//   state.users.curUser
+// }
+// }
+export default connect(null, {addCurUser})(Login);
