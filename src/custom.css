@@ -8,8 +8,8 @@
 
 .app {
   height: 100%;
-  margin-left: 40px;
-  margin-right: 40px;
+  /* margin-left: 40px; */
+  /* margin-right: 40px; */
 }
 
 .nav-bar {
@@ -70,8 +70,9 @@
 
 
 #schedule {
+  top:50px;
   width: 75%;
-  height: 70%;
+  height: 80%;
 }
 
 #schedule-grid {

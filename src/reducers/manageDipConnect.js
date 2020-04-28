@@ -33,7 +33,7 @@ function reservationsReducer (
     case 'GET_CABINS':
       return {...state, cabins: action.payload}
       case 'ADD_RESERVATION':
-        return {...state }
+        return {...state, curReservations: state.curReservations.concat(action.payload)}
     default:
       return state
   }

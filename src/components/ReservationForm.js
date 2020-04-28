@@ -31,7 +31,7 @@ class ReservationForm extends Component {
     })
       .then(res => res.json())
       // .then(json => console.log(json))
-    .then(json => this.props.addNewReservation(json.res))
+    .then(json => this.props.addReservation(json.res))
   }
 
   handleChange = (e) => {
@@ -68,7 +68,7 @@ class ReservationForm extends Component {
                 type="date"
                 name="arrival"
                 onChange={event => this.handleChange(event)}
-                value={this.state.arrival}
+                value='2020-06-01'
               />
             </div>
           </div>
@@ -80,7 +80,7 @@ class ReservationForm extends Component {
                 type="date"
                 name="departure"
                 onChange={event => this.handleChange(event)}
-                value={this.state.departure}
+                value='2020-06-01'
               />
             </div>
           </div>
