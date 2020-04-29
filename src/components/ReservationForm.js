@@ -12,7 +12,7 @@ class ReservationForm extends Component {
 
   onHandleSubmit = (e) => {
     e.preventDefault();
-    console.log(this.props.curUser.id);
+    console.log('Submit resrvation');
     fetch('http://localhost:3000/api/v1/reservations', {
       method: 'POST',
       headers: {
@@ -31,7 +31,7 @@ class ReservationForm extends Component {
     })
       .then(res => res.json())
       // .then(json => console.log(json))
-    .then(json => this.props.addReservation(json.res))
+      .then(json => this.props.addReservation(json.res))
   }
 
   handleChange = (e) => {
@@ -49,7 +49,8 @@ class ReservationForm extends Component {
           <div className="four wide column">
             <div className="field">
               <label>House</label>
-              <select className="menu" name="cabin" onChange={this.handleChange}>
+              <select className="menu" name="cabin" onChange={this.handleChange} required>
+                <option value="">Please select</option>
                 <option className="item" value="1">Big House</option>
                 <option className="item" value="2">Gray House</option>
                 <option className="item" value="3">Winter Haven</option>
@@ -68,7 +69,7 @@ class ReservationForm extends Component {
                 type="date"
                 name="arrival"
                 onChange={event => this.handleChange(event)}
-                value='2020-06-01'
+                // value='2020-06-01'
               />
             </div>
           </div>
@@ -80,7 +81,7 @@ class ReservationForm extends Component {
                 type="date"
                 name="departure"
                 onChange={event => this.handleChange(event)}
-                value='2020-06-01'
+                // value='2020-06-01'
               />
             </div>
           </div>
