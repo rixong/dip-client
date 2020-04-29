@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {addCurUser} from '../actions/index'
 
 class NewUser extends Component {
 
@@ -42,9 +44,11 @@ class NewUser extends Component {
       })
     })
       .then(res => res.json())
-      // .then(json => console.log(json.jwt))
+      // .then(json => console.log(json))
       .then(json => {
-        this.props.addToken(json.jwt)
+        localStorage.setItem('accessToken', json.jwt);
+        this.props.addCurUser(json);
+        this.props.history.push('/home');
       })
   }
 
@@ -94,6 +98,7 @@ class NewUser extends Component {
               name="firstname"
               onChange={event => this.handleChange(event)}
               value={this.state.firstname}
+              required
             />
           </div>
 
@@ -104,6 +109,7 @@ class NewUser extends Component {
               name="lastname"
               onChange={event => this.handleChange(event)}
               value={this.state.lastname}
+              required
             />
           </div>
 
@@ -124,4 +130,5 @@ class NewUser extends Component {
     )
   }
 }
-export default NewUser;
+export default connect(null, {addCurUser})(NewUser);
+// export default NewUser;

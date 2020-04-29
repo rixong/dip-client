@@ -8,7 +8,7 @@ const rootReducer = combineReducers({
 function usersReducer (
   state= [], action
     ) {
-      // console.log('from reducer', action);
+      console.log('from reducer', action);
   switch (action.type) {
     case 'ADD_CUR_USER':
       return {...state, curUser: action.payload.user, isLoggedIn: true }
