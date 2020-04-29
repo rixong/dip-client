@@ -7,7 +7,7 @@ const rootReducer = combineReducers({
 })
 
 function usersReducer (
-  state= [], action
+  state= [{isLoggedIn: false}], action
     ) {
       // console.log('from users reducer', action);
   switch (action.type) {

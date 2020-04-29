@@ -12,6 +12,7 @@ import Login from './components/Login';
 import NewUser from './components/NewUser'
 import ScheduleContainer from './components/ScheduleContainer'
 import MaintenanceContainer from './components/MaintenanceContainer'
+import AdminContainer from './components/AdminContainer'
 
 // import User from './components/User';
 
@@ -76,6 +77,7 @@ class App extends Component {
                 <Route exact path='/newuser' component={NewUser} />
                 <Route exact path='/schedule' component={ScheduleContainer} />              
                 <Route exact path='/maintenance' component={MaintenanceContainer} />              
+                <Route exact path='/admin' component={AdminContainer} />              
                 </Switch>
             </div>
           </Router>

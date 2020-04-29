@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 const link = {
   width: '100px',
@@ -14,11 +14,18 @@ const link = {
 class Navbar extends Component {
   render() {
 
+    // this.props.isLoggedIn
+    if (this.props.isLoggedIn) {
+      console.log('admin', this.props.curUser.admin)
+    }
+
+
     return (
 
       <div className='ui celled grid nav-bar'>
         <div className="three column row">
-          <div className="four wide column" id="left-menu">
+          <div className="five wide column" id="left-menu">
+
             <NavLink
               to="/"
               /* set exact so it knows to only set activeStyle when route is deeply equal to link */
@@ -55,20 +62,51 @@ class Navbar extends Component {
               }}
             >Maintenance</NavLink>
 
+            {this.props.isLoggedIn && this.props.curUser.admin ?
+              <NavLink
+                to="/admin"
+                /* set exact so it knows to only set activeStyle when route is deeply equal to link */
+                exact
+                /* add styling to Navlink */
+                style={link}
+                /* add prop for activeStyle */
+                activeStyle={{
+                  background: 'black'
+                }}
+              >Admin</NavLink>
+              : null}
+
           </div>
           <div className="eight wide column" id="center-menu">
             <div className='logo'></div>
             <div className="title">Dog Island Point Connect</div>
           </div>
 
-          <div className="four wide column" id="right-menu">
+          <div className="three wide column" id="right-menu">
             {this.props.isLoggedIn ?
               <div>
-                {this.props.curUser.firstname} {this.props.curUser.lastname}
-                <button onClick={this.props.onLogoutClick}>Logout</button></div>
+                Hello {this.props.curUser.firstname} {this.props.curUser.lastname}
+                {/* <button onClick={this.props.onLogoutClick}>Logout</button> */}
+
+                <NavLink
+                  to="/login"
+                  exact
+                  onClick={this.props.onLogoutClick}
+                  style={link}
+                  activeStyle={{background: 'black'}}
+                >Logout</NavLink>
+
+
+              </div>
               :
-              // <div><button onClick={() => this.props.history.push('/login')}>Log In</button></div>
-              <Link className="Nav-link" to="/login">Login</Link>
+              <NavLink
+              to="/login"
+              exact
+              onClick={this.props.onLogoutClick}
+              style={link}
+              activeStyle={{background: 'black'}}
+            >Login</NavLink>
+              // <Link className="Nav-link" to="/login">Login</Link>
             }
           </div>
 
