@@ -51,7 +51,7 @@ class MaintenanceTicket extends Component {
         return res;
       })
       .then(res => res.json())
-      .then(json => console.log(json))
+      .then(json => this.props.changeDisplay(json.repair))
       .catch(error => console.log('This is the error', error))
   }
 

@@ -184,3 +184,8 @@ code {
 #ticket {
   margin-top: 20px;
 }
+
+#ticket-details {
+  text-align: left;
+  font-size: large;
+}

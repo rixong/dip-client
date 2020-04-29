@@ -39,3 +39,13 @@ export const addReservation = (reservation) => {
 }
 
 
+
+// REPAIR ACTIONS
+export const addRepairTickets = (repairs) => {
+  return {
+    type: 'ADD_REPAIR_TICKETS',
+    payload: repairs
+  }
+}
+
+
