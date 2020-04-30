@@ -8,7 +8,7 @@ const PublicRoute = ({component: Component, restricted, ...rest}) => {
         // restricted = true meaning restricted route
         <Route {...rest} render={props => (
           localStorage.getItem('accessToken') && restricted ?
-                <Redirect to="/dashboard" />
+                <Redirect to="/" />
             : <Component {...props} />
         )} />
     );

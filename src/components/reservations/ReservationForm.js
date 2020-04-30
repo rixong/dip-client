@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {addReservation} from '../actions/index'
+import {addReservation} from '../../actions/index'
 
 class ReservationForm extends Component {
 

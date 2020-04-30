@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addCurUser, deleteCurUser } from './actions';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import './App.css';
 import './custom.css'
 import 'semantic-ui-css/semantic.min.css'
+
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
+
 import Navbar from './components/Navbar';
 import Home from './components/Home'
 import Login from './components/Login';
 import NewUser from './components/NewUser'
-import ScheduleContainer from './components/ScheduleContainer'
-import MaintenanceContainer from './components/MaintenanceContainer'
-import AdminContainer from './components/AdminContainer'
+import ScheduleContainer from './components/reservations/ScheduleContainer'
+import MaintenanceContainer from './components/repairs/MaintenanceContainer'
+import AdminContainer from './components/administration/AdminContainer'
 
 // import User from './components/User';
 
@@ -69,23 +73,18 @@ class App extends Component {
       <div className="container app">
         <div>
           <Router>
-              <Navbar onLogoutClick={this.onLogoutClick}/>
+            <Navbar onLogoutClick={this.onLogoutClick} />
             <div className='main'>
               <Switch>
-                <Route exact path='/' component={Home} />
-                <Route exact path='/login' component={Login} />
-                <Route exact path='/newuser' component={NewUser} />
-                <Route exact path='/schedule' component={ScheduleContainer} />              
-                <Route exact path='/maintenance' component={MaintenanceContainer} />              
-                <Route exact path='/admin' component={AdminContainer} />              
-                </Switch>
+                <PublicRoute restricted={false} exact path='/' component={Home} />
+                <PublicRoute restricted={true} exact path='/login' component={Login} />
+                <PublicRoute restricted={true} exact path='/newuser' component={NewUser} />
+                <PrivateRoute exact path='/schedule' component={ScheduleContainer} />
+                <PrivateRoute exact path='/maintenance' component={MaintenanceContainer} />
+                <PrivateRoute exact path='/admin' component={AdminContainer} />
+              </Switch>
             </div>
           </Router>
-
-          {/* {!this.props.isLoggedIn && !this.state.isNewUser */}
-          {/* // ? < Login /> */}
-          {/* // : null} */}
-          {this.state.isNewUser ? < NewUser addToken={this.addToken} /> : null}
         </div>
 
       </div>

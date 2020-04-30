@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ScheduleWeekly from './ScheduleWeekly';
 import ReservationForm from './ReservationForm';
 
-import { getReservations, getCabins } from '../actions/index'
+import { getReservations, getCabins } from '../../actions/index'
 
 class ScheduleContainer extends Component {
 

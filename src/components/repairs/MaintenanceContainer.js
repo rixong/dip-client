@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import MaintenanceTicket from './MaintenanceTicket'
 import MaintenanceConfirmation from './MaintenanceConfirmation'
 import {connect} from 'react-redux'
-import {addRepairTickets} from '../actions/index'
+import {addRepairTickets} from '../../actions/index'
 
 class MaintenanceContainer extends Component {
 
