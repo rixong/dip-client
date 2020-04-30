@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addCurUser, deleteCurUser, addCurrentAnnualReport } from './actions';
+import { 
+  addCurUser, 
+  deleteCurUser, 
+  addCurrentAnnualReport, 
+  addCabins,
+  addUsers } from './actions';
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import './App.css';
@@ -24,17 +29,44 @@ import AdminContainer from './components/administration/AdminContainer'
 
 class App extends Component {
 
-  constructor() {
-    super()
-    this.state = {
-      isNewUser: false
-    }
-  }
+  // constructor() {
+  //   super()
+  //   this.state = {
+  //     isNewUser: false
+  //   }
+  // }
 
   componentDidMount() {
     if (localStorage.getItem('accessToken')) {
-      this.setCurUser();
-      this.fetchAnnualReport();
+      Promise.all([
+        fetch("http://localhost:3000/api/v1/annual_report/current", {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+          }
+        }),
+
+        fetch("http://localhost:3000/api/v1/users", {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+          }
+        }),
+
+        fetch("http://localhost:3000/api/v1/cabins", {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+          }
+        }),
+
+      ]).then(([res1, res2, res3]) => {
+        return Promise.all([res1.json(), res2.json(), res3.json()])
+      }).then(([res1, res2, res3]) => {
+        this.props.addCurrentAnnualReport(res1);
+        this.props.addUsers(res2)
+        this.props.addCabins(res3);
+      }).then(() => this.setCurUser)
     }
   }
 
@@ -50,18 +82,6 @@ class App extends Component {
     this.props.deleteCurUser();
   }
 
-  fetchAnnualReport = () => {
-    fetch("http://localhost:3000/api/v1/annual_report/current", {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-      }
-    })
-      .then(res => res.json())
-      // .then(json => console.log(json))
-      .then(json => this.props.addCurrentAnnualReport(json))
-  }
-
   setCurUser = () => {
     fetch("http://localhost:3000/api/v1/profile", {
       method: 'GET',
@@ -71,11 +91,6 @@ class App extends Component {
     })
       .then(res => res.json())
       .then(json => this.props.addCurUser(json))
-  }
-
-  isNewUser = () => {
-    console.log('new user click');
-    this.setState({ isNewUser: true })
   }
 
   render() {
@@ -110,4 +125,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { addCurUser, deleteCurUser, addCurrentAnnualReport })(App);
+export default connect(mapStateToProps, { addCurUser, deleteCurUser, addCurrentAnnualReport, addCabins, addUsers })(App);

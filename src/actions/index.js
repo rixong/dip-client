@@ -24,13 +24,6 @@ export const getReservations = (reservations) => {
   }
 }
 
-export const addCabins = (cabins) => {
-  return {
-    type: 'ADD_CABINS',
-    payload: cabins
-  }
-}
-
 export const addReservation = (reservation) => {
   return {
     type: 'ADD_RESERVATION',
@@ -62,4 +55,17 @@ export const addCurrentAnnualReport = (report) => {
   }
 }
 
+export const addUsers = (users) => {
+  return {
+    type: "ADD_USERS",
+    payload: users
+  }
+}
+
+export const addCabins = (cabins) => {
+  return {
+    type: 'ADD_CABINS',
+    payload: cabins
+  }
+}
 

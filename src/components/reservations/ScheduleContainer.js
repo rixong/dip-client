@@ -20,19 +20,19 @@ class ScheduleContainer extends Component {
       .then(res => res.json())
       // .then(json => console.log(json))
       .then(json => this.props.getReservations(json))
-      .then(() => {
+    //   .then(() => {
 
-    /// fetch cabin info
-        fetch('http://localhost:3000/api/v1/cabins', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-          }
-        })
-          .then(res => res.json())
-          // .then(json => console.log(json))
-          .then(json => this.props.addCabins(json))
-      })
+    // /// fetch cabin info
+    //     fetch('http://localhost:3000/api/v1/cabins', {
+    //       method: 'GET',
+    //       headers: {
+    //         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    //       }
+    //     })
+    //       .then(res => res.json())
+    //       // .then(json => console.log(json))
+    //       .then(json => this.props.addCabins(json))
+    //   })
   }
 
   addNewReservation = (res) => {
@@ -50,4 +50,5 @@ class ScheduleContainer extends Component {
     )
   }
 }
+
 export default connect(null, { getReservations, addCabins })(ScheduleContainer);

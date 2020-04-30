@@ -22,7 +22,7 @@ function usersReducer (
 }
 
 function reservationsReducer (
-  state = {cabins: []},
+  state = [],
   action
 ) {
 
@@ -30,8 +30,6 @@ function reservationsReducer (
   switch (action.type) {
     case 'GET_RESERVATIONS':
     return {...state, curReservations: action.payload}
-    case 'ADD_CABINS':
-      return {...state, cabins: action.payload}
       // case 'GET_CABIN_NAME':
       //   return 
     case 'ADD_RESERVATION':
@@ -46,16 +44,22 @@ function reservationsReducer (
 }
 
 function adminReducer (
-  state = [],
+  state = 
+    {cabins: []}
+  ,
   action
 ) {
 
     // console.log('from users reducer', action);
   switch (action.type) {
+    case 'ADD_USERS':
+      return {...state, users: action.payload}
+    case 'ADD_CABINS':
+      return {...state, cabins: action.payload}
     case 'ADD_REPAIR_TICKETS':
       return {...state, repairTickets: action.payload}
-      case 'ADD_CUR_REPORT':
-        return {...state, annualReport: action.payload}
+    case 'ADD_CUR_REPORT':
+      return {...state, annualReport: action.payload}
     default:
       return state
   }

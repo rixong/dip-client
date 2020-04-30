@@ -132,7 +132,7 @@ class ScheduleWeekly extends Component {
 const mapStateToProps = state => {
   return {
     curReservations: state.reservations.curReservations,
-    cabins: state.reservations.cabins
+    cabins: state.admin.cabins
   }
 }
 
