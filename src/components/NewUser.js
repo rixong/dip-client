@@ -73,6 +73,7 @@ class NewUser extends Component {
               name="email"
               onChange={event => this.handleChange(event)}
               value={this.state.email}
+              required
             />
           </div>
 
@@ -84,6 +85,7 @@ class NewUser extends Component {
                 name="password"
                 onChange={event => this.handleChange(event)}
                 value={this.state.password}
+                required
               />
             </div>
             <div className='field'>
@@ -93,6 +95,7 @@ class NewUser extends Component {
                 name="password_confirmation"
                 onChange={event => this.handleChange(event)}
                 value={this.state.password_confirmation}
+                required
               />
             </div>
           </div>
