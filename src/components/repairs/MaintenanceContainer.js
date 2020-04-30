@@ -14,8 +14,7 @@ class MaintenanceContainer extends Component {
   }
 
   findCabinName = (id) => {
-    console.log(this.props.cabins.find(cabin => cabin.id === id))
-    // this.setState({cabinName: this.props.cabins.find(cabin => cabin.id === id)})
+    // console.log(this.props.cabins.find(cabin => cabin.id === id))
     return this.props.cabins.find(cabin => cabin.id === id).name
   }
 
@@ -58,7 +57,7 @@ class MaintenanceContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    cabins: state.reservations.cabins
+    cabins: state.admin.cabins
   }
 }
 

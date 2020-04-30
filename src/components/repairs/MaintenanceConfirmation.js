@@ -30,7 +30,7 @@ class MaintenanceConfirmation extends Component {
               <td><strong>{description}</strong></td>
             </tr>
             <tr>
-              <td>Priority?:</td>
+              <td>Priority?</td>
               <td><strong>{priority ? 'Yes' : 'No'}</strong></td>
             </tr>
 

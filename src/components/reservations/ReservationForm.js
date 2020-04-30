@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import {connect} from 'react-redux';
-import {addReservation} from '../../actions/index'
+import { connect } from 'react-redux';
+import { addReservation } from '../../actions/index'
+
 
 class ReservationForm extends Component {
+
 
   state = {
     arrival: '',
@@ -10,6 +12,23 @@ class ReservationForm extends Component {
     cabin: ''
   }
 
+  currentSelectedCabin = (cabinId) => {
+    return this.props.cabins.find(cabin => cabin.id === parseInt(cabinId, 10))
+    // console.log(this.props.cabins.find(cabin => cabin.id === parseInt(cabinId)))
+  }
+
+  calculateDailyPrice = (multiplier) => {
+    const { budget, dues_split } = this.props.annualReport
+    const dailyConstant = (100 - dues_split) / 100 * budget / 40 / 7;
+
+    return dailyConstant * multiplier
+    //(100 - dues_split) * budget / 100 - full housing portion
+    //divide by 40 days
+    // divide by 7 houses
+    //multiply by multiplier
+  }
+
+  ///SUBMIT RESEVATION
   onHandleSubmit = (e) => {
     e.preventDefault();
     console.log('Submit resrvation');
@@ -69,7 +88,8 @@ class ReservationForm extends Component {
                 type="date"
                 name="arrival"
                 onChange={event => this.handleChange(event)}
-                // value='2020-06-01'
+                required
+              // value='2020-06-01'
               />
             </div>
           </div>
@@ -81,7 +101,8 @@ class ReservationForm extends Component {
                 type="date"
                 name="departure"
                 onChange={event => this.handleChange(event)}
-                // value='2020-06-01'
+                required
+              // value='2020-06-01'
               />
             </div>
           </div>
@@ -89,19 +110,28 @@ class ReservationForm extends Component {
           <div className="four wide column">
             <button type="submit" className="ui primary button" id="reserve-button" >Reserve</button>
           </div>
-
         </div>
-
-
       </form>
+
+      {this.state.cabin ? 
+      <div className="ui info message">
+        <div className="header">
+          House: {this.currentSelectedCabin(this.state.cabin).name}
+        </div>
+        <div>Daily Rent: {this.calculateDailyPrice(this.currentSelectedCabin(this.state.cabin).multiplier)}</div>
+      </div>
+      : null}
+
     </div>
   }
 }
 
 const mapsStateToProps = state => {
   return {
-    curUser: state.users.curUser
+    curUser: state.users.curUser,
+    annualReport: state.admin.annualReport,
+    cabins: state.admin.cabins
   }
 }
 
-export default connect(mapsStateToProps, {addReservation})(ReservationForm);
+export default connect(mapsStateToProps, { addReservation })(ReservationForm);
