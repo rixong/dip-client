@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addCurUser, deleteCurUser } from './actions';
+import { addCurUser, deleteCurUser, addCurrentAnnualReport } from './actions';
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import './App.css';
@@ -9,11 +9,11 @@ import 'semantic-ui-css/semantic.min.css'
 
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
+import Login from './components/Login';
+import NewUser from './components/NewUser'
 
 import Navbar from './components/Navbar';
 import Home from './components/Home'
-import Login from './components/Login';
-import NewUser from './components/NewUser'
 import ScheduleContainer from './components/reservations/ScheduleContainer'
 import MaintenanceContainer from './components/repairs/MaintenanceContainer'
 import AdminContainer from './components/administration/AdminContainer'
@@ -34,8 +34,7 @@ class App extends Component {
   componentDidMount() {
     if (localStorage.getItem('accessToken')) {
       this.setCurUser();
-    } else {
-      // this.props.history.push('./login')
+      this.fetchAnnualReport();
     }
   }
 
@@ -49,6 +48,18 @@ class App extends Component {
       }
     )
     this.props.deleteCurUser();
+  }
+
+  fetchAnnualReport = () => {
+    fetch("http://localhost:3000/api/v1/annual_report/current", {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then(res => res.json())
+      // .then(json => console.log(json))
+      .then(json => this.props.addCurrentAnnualReport(json))
   }
 
   setCurUser = () => {
@@ -99,4 +110,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { addCurUser, deleteCurUser })(App);
+export default connect(mapStateToProps, { addCurUser, deleteCurUser, addCurrentAnnualReport })(App);

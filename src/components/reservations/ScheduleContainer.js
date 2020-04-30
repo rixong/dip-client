@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import ScheduleWeekly from './ScheduleWeekly';
 import ReservationForm from './ReservationForm';
 
-import { getReservations, getCabins } from '../../actions/index'
+import { getReservations, addCabins } from '../../actions/index'
 
 class ScheduleContainer extends Component {
 
@@ -31,10 +31,9 @@ class ScheduleContainer extends Component {
         })
           .then(res => res.json())
           // .then(json => console.log(json))
-          .then(json => this.props.getCabins(json))
+          .then(json => this.props.addCabins(json))
       })
   }
-
 
   addNewReservation = (res) => {
     this.setState({ reservations: this.state.reservations.concat(res) })
@@ -51,4 +50,4 @@ class ScheduleContainer extends Component {
     )
   }
 }
-export default connect(null, { getReservations, getCabins })(ScheduleContainer);
+export default connect(null, { getReservations, addCabins })(ScheduleContainer);

@@ -15,9 +15,9 @@ class Navbar extends Component {
   render() {
 
     // this.props.isLoggedIn
-    if (this.props.isLoggedIn) {
-      console.log('admin', this.props.curUser.admin)
-    }
+    // if (this.props.isLoggedIn) {
+    //   console.log('admin', this.props.curUser.admin)
+    // }
 
 
     return (
@@ -28,9 +28,7 @@ class Navbar extends Component {
 
             <NavLink
               to="/"
-              /* set exact so it knows to only set activeStyle when route is deeply equal to link */
               exact
-              /* add styling to Navlink */
               style={link}
               /* add prop for activeStyle */
               activeStyle={{
@@ -40,11 +38,8 @@ class Navbar extends Component {
 
             <NavLink
               to="/schedule"
-              /* set exact so it knows to only set activeStyle when route is deeply equal to link */
               exact
-              /* add styling to Navlink */
               style={link}
-              /* add prop for activeStyle */
               activeStyle={{
                 background: 'black'
               }}
@@ -52,11 +47,8 @@ class Navbar extends Component {
 
             <NavLink
               to="/maintenance"
-              /* set exact so it knows to only set activeStyle when route is deeply equal to link */
               exact
-              /* add styling to Navlink */
               style={link}
-              /* add prop for activeStyle */
               activeStyle={{
                 background: 'black'
               }}
@@ -65,11 +57,8 @@ class Navbar extends Component {
             {this.props.isLoggedIn && this.props.curUser.admin ?
               <NavLink
                 to="/admin"
-                /* set exact so it knows to only set activeStyle when route is deeply equal to link */
                 exact
-                /* add styling to Navlink */
                 style={link}
-                /* add prop for activeStyle */
                 activeStyle={{
                   background: 'black'
                 }}

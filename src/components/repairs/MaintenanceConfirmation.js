@@ -5,7 +5,7 @@ class MaintenanceConfirmation extends Component {
 
   render() {
 
-    const { cabin_id, category, description, submission_date, priority } = this.props.repair
+    const { category, description, submission_date, priority } = this.props.repair
 
     return (
       <div>
@@ -15,7 +15,7 @@ class MaintenanceConfirmation extends Component {
             <tbody>
             <tr>
               <td>House:</td>
-              <td><strong>{cabin_id}</strong></td>
+              <td><strong>{this.props.cabinName}</strong></td>
             </tr>
             <tr>
               <td>Date Submitted:</td>

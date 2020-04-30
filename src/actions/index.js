@@ -15,7 +15,7 @@ export const deleteCurUser = () => {
 
 
 
-/// reservation reducer
+/// RESERVATION ACTIONS
 
 export const getReservations = (reservations) => {
   return {
@@ -24,9 +24,9 @@ export const getReservations = (reservations) => {
   }
 }
 
-export const getCabins = (cabins) => {
+export const addCabins = (cabins) => {
   return {
-    type: 'GET_CABINS',
+    type: 'ADD_CABINS',
     payload: cabins
   }
 }
@@ -38,13 +38,27 @@ export const addReservation = (reservation) => {
   }
 }
 
+// export const getCabinName = (cabinId) => {
+//   return {
+//     type: 'GET_CABIN_NAME',
+//     action: cabinId
+//   }
+// }
 
 
-// REPAIR ACTIONS
+
+// ADMIN ACTIONS
 export const addRepairTickets = (repairs) => {
   return {
     type: 'ADD_REPAIR_TICKETS',
     payload: repairs
+  }
+}
+
+export const addCurrentAnnualReport = (report) => {
+  return {
+    type: "ADD_CUR_REPORT",
+    payload: report
   }
 }
 

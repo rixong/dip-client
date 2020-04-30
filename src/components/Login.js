@@ -20,7 +20,7 @@ class Login extends Component {
 
   handleLoginSubmit = (e) => {
     e.preventDefault();
-    console.log('login here');
+    // console.log('login here');
 
     fetch('http://localhost:3000/api/v1/login', {
       method: "POST",

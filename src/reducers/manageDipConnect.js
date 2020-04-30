@@ -3,11 +3,11 @@ import {combineReducers} from 'redux'
 const rootReducer = combineReducers({
   users: usersReducer,
   reservations: reservationsReducer,
-  repairs: repairsReducer
+  admin: adminReducer
 })
 
 function usersReducer (
-  state= [{isLoggedIn: false}], action
+  state= {isLoggedIn: false}, action
     ) {
       // console.log('from users reducer', action);
   switch (action.type) {
@@ -30,8 +30,10 @@ function reservationsReducer (
   switch (action.type) {
     case 'GET_RESERVATIONS':
     return {...state, curReservations: action.payload}
-    case 'GET_CABINS':
+    case 'ADD_CABINS':
       return {...state, cabins: action.payload}
+      // case 'GET_CABIN_NAME':
+      //   return 
     case 'ADD_RESERVATION':
       return {...state, curReservations: state.curReservations.concat(action.payload)}
     case 'ADD_REPAIR_TICKETS':
@@ -43,8 +45,7 @@ function reservationsReducer (
 
 }
 
-
-function repairsReducer (
+function adminReducer (
   state = [],
   action
 ) {
@@ -53,6 +54,8 @@ function repairsReducer (
   switch (action.type) {
     case 'ADD_REPAIR_TICKETS':
       return {...state, repairTickets: action.payload}
+      case 'ADD_CUR_REPORT':
+        return {...state, annualReport: action.payload}
     default:
       return state
   }
