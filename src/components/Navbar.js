@@ -54,6 +54,7 @@ class Navbar extends Component {
               }}
             >Maintenance</NavLink>
 
+            {/* {this.props.isLoggedIn && this.props.curUser.admin ? */}
             {this.props.isLoggedIn && this.props.curUser.admin ?
               <NavLink
                 to="/admin"
@@ -82,19 +83,19 @@ class Navbar extends Component {
                   exact
                   onClick={this.props.onLogoutClick}
                   style={link}
-                  activeStyle={{background: 'black'}}
+                  activeStyle={{ background: 'black' }}
                 >Logout</NavLink>
 
 
               </div>
               :
               <NavLink
-              to="/login"
-              exact
-              onClick={this.props.onLogoutClick}
-              style={link}
-              activeStyle={{background: 'black'}}
-            >Login</NavLink>
+                to="/login"
+                exact
+                onClick={this.props.onLogoutClick}
+                style={link}
+                activeStyle={{ background: 'black' }}
+              >Login</NavLink>
               // <Link className="Nav-link" to="/login">Login</Link>
             }
           </div>

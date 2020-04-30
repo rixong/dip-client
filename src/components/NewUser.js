@@ -12,7 +12,8 @@ class NewUser extends Component {
       password_confirmation: '',
       firstname: '',
       lastname: '',
-      bday: ''
+      bday: '',
+      error: null
     }
   }
 
@@ -46,15 +47,20 @@ class NewUser extends Component {
       .then(res => res.json())
       // .then(json => console.log(json))
       .then(json => {
-        localStorage.setItem('accessToken', json.jwt);
-        this.props.addCurUser(json);
-        this.props.history.push('/home');
+        if (json.jwt) {
+          localStorage.setItem('accessToken', json.jwt);
+          this.props.addCurUser(json);
+          this.props.history.push('/home');
+        } else {
+          this.setState({ error: json.message })
+          // console.log(json.message);
+        }
       })
   }
 
   render() {
     return (
-      <div className="form-window" id="new-user">
+      <div className="form-window" id="new-user-window">
 
         <div className="form-header">Sign up</div>
 
@@ -124,8 +130,16 @@ class NewUser extends Component {
           </div>
           <br></br>
 
-          <button type="submit" className="ui primary button">Sign up</button>
+          <button type="submit" className="ui primary button">Send it!</button>
         </form>
+        <br></br>
+        <br></br>
+        <div>
+          {this.state.error ? 
+          <div className="ui bottom attached red message">{this.state.error}</div>
+          : null
+          }
+        </div>
       </div>
     )
   }

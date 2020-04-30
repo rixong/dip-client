@@ -66,7 +66,7 @@ class App extends Component {
         this.props.addCurrentAnnualReport(res1);
         this.props.addUsers(res2)
         this.props.addCabins(res3);
-      }).then(() => this.setCurUser)
+      }).then(() => this.setCurUser())
     }
   }
 
@@ -83,6 +83,8 @@ class App extends Component {
   }
 
   setCurUser = () => {
+    console.log('SetCurUser');
+    
     fetch("http://localhost:3000/api/v1/profile", {
       method: 'GET',
       headers: {

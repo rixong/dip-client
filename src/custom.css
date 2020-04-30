@@ -17,12 +17,6 @@ code {
   background-color: rgb(222, 225, 228);
 }
 
-
-
-.hide {
-  display: none
-}
-
 .app {
   height: 100%;
   background-color: rgb(222, 225, 228);
@@ -71,17 +65,61 @@ code {
   text-align: center;
 }
 
+/* Body wide formatting */
+
 .form-window {
   border: solid;
-  border-width: 4px;
+  border-width: 3px;
   border-radius: 10px;
   border-color: rgb(222, 225, 228);
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
   display: inline-block;
   position: relative;
   margin: 0 auto;
   top: 120px;
   width: 40%;
+}
+
+
+.form-header {
+  background-color: darkgray;
+  font-size: x-large;
+  border: solid;
+  border-width: 4px;
+  border-radius: 10px;
+  border-color: rgb(222, 225, 228);
+  padding: 15px;
+}
+
+.main-form {
+  margin: 0 auto;
+  text-align: left;
+  width: 80%;
+}
+
+#login-window {
+}
+
+#button-group {
+  text-align: center;
+}
+
+#login-button {
+  width: 110px;
+  margin-right: 20%;
+}
+
+#new-user-window {
+  height: 580px;
+}
+
+/* Weekly scheduling format */
+
+
+#schedule {
+  top:50px;
+  width: 75%;
+  height: 80%;
 }
 
 #home {
@@ -91,19 +129,6 @@ code {
   /* padding: 50px; */
   /* height: 300px; */
   /* background-color: mediumorchid; */
-}
-
-#login {}
-
-#new-user {}
-
-/* Weekly scheduling format */
-
-
-#schedule {
-  top:50px;
-  width: 75%;
-  height: 80%;
 }
 
 #schedule-grid {
@@ -153,17 +178,6 @@ code {
   background-color: lightslategray;
 }
 
-.form-header {
-  background-color: darkgray;
-  font-size: x-large;
-  padding: 10px;
-}
-
-.main-form {
-  margin-left: 50px;
-  text-align: left;
-  width: 80%;
-}
 
 #reservation-form {
   margin-top: 30px;
