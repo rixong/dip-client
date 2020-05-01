@@ -116,19 +116,21 @@ code {
 /* Weekly scheduling format */
 
 
+#home {
+  position: relative;
+  top: 200px;
+  width: 600px;
+  padding: 50px;
+  height: 300px;
+  border-style: solid;
+  border-radius: 5px;
+  /* background-color: mediumorchid; */
+}
+
 #schedule {
   top:50px;
   width: 75%;
   height: 80%;
-}
-
-#home {
-  position: relative;
-  top: 200px;
-  /* width: 600px; */
-  /* padding: 50px; */
-  /* height: 300px; */
-  /* background-color: mediumorchid; */
 }
 
 #schedule-grid {
@@ -165,6 +167,18 @@ code {
   text-align: right;
 }
 
+#cabin-info-box {
+  width:100%;
+  text-align: center;
+}
+#cabin-info {
+  margin: 0 auto;
+  font-size: larger;
+  text-align: center;
+  /* margin-top: 30px; */
+  width:800px;
+}
+
 #name-row {
   height: 40px;
 }
@@ -196,6 +210,9 @@ code {
   height: 60%;
 }
 
+#confirm-window {
+}
+
 #ticket {
   margin-top: 20px;
 }
@@ -203,4 +220,9 @@ code {
 #ticket-details {
   text-align: left;
   font-size: large;
+}
+
+#repair-confirmation-table {
+  margin: 0 auto;
+  width: 80%
 }

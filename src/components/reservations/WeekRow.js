@@ -5,7 +5,7 @@ import uuid from 'react-uuid'
 const colors = ['teal', 'blue', 'green', 'violet', 'olive', 'orange'];
 
 class WeekRow extends Component {
-  
+
   makeRow = () => {
     // let array = this.combineSingleCabinRes();
     // console.log(array);
@@ -24,7 +24,7 @@ class WeekRow extends Component {
           curUser = curDaysRes.userName
           // console.log(curUser);
         }
-        squares.push(<DaySquare key={uuid()} color={colors[curDaysRes.userId%6]} userName={curDaysRes.userName} />)
+        squares.push(<DaySquare key={uuid()} color={colors[curDaysRes.userId % 6]} userName={curDaysRes.userName} />)
       } else {
         squares.push(<DaySquare key={uuid()} color='default-square-color' />)
       }
@@ -35,14 +35,14 @@ class WeekRow extends Component {
 
   render() {
     return (
-    <div className="row" id="cabin-head">
-    <div className="two wide column" id="cabin-name" >{this.props.cabinName}</div>
-    <div className="fourteen wide column">
-      <div className="ui internally celled eight column grid" id="name-row">
-        {this.makeRow(this.props.cabinId)}
+      <div className="row" id="cabin-head">
+        <div className="two wide column" id="cabin-name" >{this.props.cabinName}</div>
+        <div className="fourteen wide column">
+          <div className="ui internally celled eight column grid" id="name-row">
+            {this.makeRow(this.props.cabinId)}
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
     )
   }
 }

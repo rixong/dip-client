@@ -1,16 +1,25 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
 class Home extends Component {
   render() {
     return (
       <div className="ui container" id="home">
         <h1>Welcome to Dog Island Point Connect</h1>
-        <p>Built to provide a space for managing a five generation old family
+    <h1>{this.props.curUser.firstname}</h1>
+        <h4>Built to provide a space for managing a five generation old family
         property on the coast of Penobscot Bay, state of Maine
-        </p>
+        </h4>
 
       </div>
     )
   }
 }
-export default Home;
+
+const mapStateToProps = state => {
+  return {
+    curUser: state.users.curUser
+  }
+};
+
+export default connect(mapStateToProps)(Home);

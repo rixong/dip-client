@@ -42,7 +42,7 @@ class Login extends Component {
         if (json.jwt) {
           localStorage.setItem('accessToken', json.jwt);
           this.props.addCurUser(json);
-          this.props.history.push('/home');
+          this.props.history.push('/');
         } else {
           this.setState({ error: json.message })
           // console.log(json.message);

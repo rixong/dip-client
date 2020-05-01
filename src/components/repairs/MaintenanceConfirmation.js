@@ -8,10 +8,10 @@ class MaintenanceConfirmation extends Component {
     const { category, description, submission_date, priority } = this.props.repair
 
     return (
-      <div>
+      <div id="confirm-window">
         <h3 id="ticket">Repair Ticket Confirmation</h3>
 
-        <table className="ui teal table">
+        <table className="ui teal table" id="repair-confirmation-table">
             <tbody>
             <tr>
               <td>House:</td>

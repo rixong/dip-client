@@ -113,16 +113,18 @@ class ReservationForm extends Component {
         </div>
       </form>
 
-      {this.state.cabin ? 
-      <div className="ui info message">
-        <div className="header">
-          House: {this.currentSelectedCabin(this.state.cabin).name}
+<div className="cabin-info-box">
+      {this.state.cabin ?
+        <div className="ui info message" id="cabin-info">
+          <div className="header">
+            {this.currentSelectedCabin(this.state.cabin).name}
+          </div>
+          <div>Daily Rent $ 
+            <strong>{this.calculateDailyPrice(this.currentSelectedCabin(this.state.cabin).multiplier).toFixed(2)}</strong></div>
         </div>
-        <div>Daily Rent: {this.calculateDailyPrice(this.currentSelectedCabin(this.state.cabin).multiplier)}</div>
-      </div>
-      : null}
-
+        : null}
     </div>
+</div>
   }
 }
 
