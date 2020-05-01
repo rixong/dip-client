@@ -13,6 +13,12 @@ export const deleteCurUser = () => {
   };
 };
 
+export const editCurUser = user => {
+  return {
+    type: 'EDIT_CUR_USER',
+    payload: user
+  }
+} 
 
 
 /// RESERVATION ACTIONS

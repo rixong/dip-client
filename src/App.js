@@ -10,18 +10,19 @@ import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import './App.css';
 import './custom.css'
-import 'semantic-ui-css/semantic.min.css'
+import 'semantic-ui-css/semantic.min.css';
 
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import Login from './components/Login';
-import NewUser from './components/NewUser'
+import NewUser from './components/NewUser';
 
 import Navbar from './components/Navbar';
-import Home from './components/Home'
-import ScheduleContainer from './components/reservations/ScheduleContainer'
-import MaintenanceContainer from './components/repairs/MaintenanceContainer'
-import AdminContainer from './components/administration/AdminContainer'
+import Home from './components/Home';
+import ScheduleContainer from './components/reservations/ScheduleContainer';
+import MaintenanceContainer from './components/repairs/MaintenanceContainer';
+import AdminContainer from './components/administration/AdminContainer';
+import UpdateProfile from './components/Profile';
 
 // import User from './components/User';
 
@@ -110,7 +111,10 @@ class App extends Component {
                 <PrivateRoute exact path='/schedule' component={ScheduleContainer} />
                 <PrivateRoute exact path='/maintenance' component={MaintenanceContainer} />
                 <PrivateRoute exact path='/admin' component={AdminContainer} />
+                <PrivateRoute exact path='/user' component={UpdateProfile} />
+                
               </Switch>
+
             </div>
           </Router>
         </div>
