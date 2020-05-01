@@ -1,26 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
+import {addCurUser} from '../actions/index'
 import PhotoUploadWidget from './PhotoUploadWidget'
+import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
 
 class UpdateProfile extends Component {
 
-  // constructor(props) {
-  //   super(props)
-  //   this.state = {
-  //     email: 'asdafsd',
-  //     password: '',
-  //     password_confirmation: '',
-  //     firstname: '',
-  //     lastname: '',
-  //     bday: '',
-  //     photo_url: '',
-  //     error: null
-  //   }
-  // }
+  constructor(props) {
+    super(props)
 
-  componentDidMount(){
+    this.state = {
+      // curUser: {},
+      email: '',
+      firstname: '',
+      lastname: '',
+      bday: '',
+      photo_url: '',
+      error: null
+    }
+  }
+
+  componentDidMount() {
+    // this.populateState()
     // this.setState({email: this.props.curUser.email})
     // console.log('did mount', this.props.curUser.firstname);
+  }
+
+  populateState = () => {
+    this.setState({
+      id: this.props.curUser.id,
+      email: this.props.curUser.email,
+      firstname: this.props.curUser.firstname,
+      lastname: this.props.curUser.lastname,
+      bday: this.props.curUser.bday,
+      photo_url: this.props.curUser.photo_url
+    })
   }
 
   handlePhotoUpload = url => {
@@ -28,8 +43,8 @@ class UpdateProfile extends Component {
   }
 
   handleChange = e => {
-    // console.log(this.props.curUser.firstname);
-      
+    console.log(this.props.curUser.firstname);
+
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -39,30 +54,29 @@ class UpdateProfile extends Component {
     e.preventDefault();
     // console.log('create user here');
 
-    fetch('http://localhost:3000/api/v1/users', {
-      method: "POST",
+    fetch(`http://localhost:3000/api/v1/users/${this.props.curUser.id}`, {
+      method: "PATCH",
       headers: {
         'Content-Type': 'application/json',
-        Accept: 'application/json'
+        Accept: 'application/json',
+        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
       },
       body: JSON.stringify({
         user: {
           email: this.state.email,
-          password: this.state.password,
-          password_confirmation: this.state.password_confirmation,
           firstname: this.state.firstname,
           lastname: this.state.lastname,
-          bday: this.state.bday
+          bday: this.state.bday,
+          phot_url: this.state.photo_url
         }
       })
     })
       .then(res => res.json())
       // .then(json => console.log(json))
       .then(json => {
-        if (json.jwt) {
-          localStorage.setItem('accessToken', json.jwt);
-          this.props.addCurUser(json);
-          this.props.history.push('/home');
+        if (json.message === "success") {
+          this.props.addCurUser(json.user);
+          // this.props.history.push('/home');
         } else {
           this.setState({ error: json.message })
           // console.log(json.message);
@@ -72,11 +86,10 @@ class UpdateProfile extends Component {
 
   render() {
     // const { firstname, lastname, email, bday } = this.props.curUser;
-    // console.log('did mount', this.props.curUser.firstname);
 
     return (
       <div className="form-window" id="new-user-window">
-
+        <button onClick={this.populateState}>Populate fields</button>
         <div className="form-header">Edit Your Profile</div>
 
         <form className="ui form main-form" onSubmit={this.handleSubmit}>
@@ -87,8 +100,8 @@ class UpdateProfile extends Component {
               type="text"
               name="email"
               onChange={event => this.handleChange(event)}
-              value={this.props.curUser.email}
-              required
+              value={this.state.email}
+              
             />
           </div>
 
@@ -100,7 +113,7 @@ class UpdateProfile extends Component {
                 name="password"
                 onChange={event => this.handleChange(event)}
                 value={this.state.password}
-                required
+                
               />
             </div>
             <div className='field'>
@@ -110,11 +123,11 @@ class UpdateProfile extends Component {
                 name="password_confirmation"
                 onChange={event => this.handleChange(event)}
                 value={this.state.password_confirmation}
-                required
+                
               />
             </div>
           </div> */}
-{/* 
+
           <div className='field'>
             <label htmlFor='firstname'> First Name</label>
             <input
@@ -122,7 +135,6 @@ class UpdateProfile extends Component {
               name="firstname"
               onChange={event => this.handleChange(event)}
               value={this.state.firstname}
-              required
             />
           </div>
 
@@ -133,7 +145,6 @@ class UpdateProfile extends Component {
               name="lastname"
               onChange={event => this.handleChange(event)}
               value={this.state.lastname}
-              required
             />
           </div>
 
@@ -145,24 +156,28 @@ class UpdateProfile extends Component {
               onChange={event => this.handleChange(event)}
               value={this.state.bday}
             />
-          </div> */}
+          </div>
           <br></br>
 
-        <PhotoUploadWidget handlePhotoUpload={this.handlePhotoUpload}/>
+          <PhotoUploadWidget handlePhotoUpload={this.handlePhotoUpload} />
 
           <br></br>
           <button type="submit" className="ui primary button">Send it!</button>
         </form>
         <br></br>
         <br></br>
+        
+        <div id="photo-box">
+        <Image cloudName="dzycwwun9" publicId={this.state.photoUrl} width="100" crop="scale" />
+        </div>
         {/* <img src={this.state.photo_url} ></img> */}
         <br></br>
         <br></br>
         <div>
-          {/* {this.state.error ?
+          {this.state.error ?
             <div className="ui bottom attached red message">{this.state.error}</div>
             : null
-          } */}
+          }
         </div>
       </div>
     )
@@ -175,4 +190,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps)(UpdateProfile);
+export default connect(mapStateToProps, {addCurUser})(UpdateProfile);

@@ -14,7 +14,7 @@ function usersReducer(
               firstname: '',
               lastname: '',
               bday: '',
-              admin: false,
+              admin: true,
               photo_url: ''
             }
           }, action

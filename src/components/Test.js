@@ -8,13 +8,19 @@ class Test extends Component {
         super(props)
 
         this.state = {
-          curUser: props.curUser,
-          email: ''
+          curUser: {...props.curUser}
         }
       }
 
+      componentDidMount(){
+        console.log("comDidMnt");
+        
+        this.setState({curUser: {...this.props.curUser}})
+      }
+
+
   render() {
-      console.log(this.props.curUser.email);
+      console.log("From render",this.props.curUser.email);
       
     return (
       <div>

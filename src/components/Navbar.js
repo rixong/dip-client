@@ -52,9 +52,17 @@ class Navbar extends Component {
               activeStyle={{
                 background: 'black'
               }}
-            >Maintenance</NavLink>
+            >Repairs</NavLink>
 
-            {/* {this.props.isLoggedIn && this.props.curUser.admin ? */}
+            <NavLink
+              to="/user"
+              exact
+              style={link}
+              activeStyle={{
+                background: 'black'
+              }}
+            >Update Profile</NavLink>
+
             {this.props.isLoggedIn && this.props.curUser.admin ?
               <NavLink
                 to="/admin"
