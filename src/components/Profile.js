@@ -4,18 +4,23 @@ import PhotoUploadWidget from './PhotoUploadWidget'
 
 class UpdateProfile extends Component {
 
-  constructor() {
-    super()
-    this.state = {
-      email: '',
-      password: '',
-      password_confirmation: '',
-      firstname: '',
-      lastname: '',
-      bday: '',
-      photo_url: '',
-      error: null
-    }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = {
+  //     email: 'asdafsd',
+  //     password: '',
+  //     password_confirmation: '',
+  //     firstname: '',
+  //     lastname: '',
+  //     bday: '',
+  //     photo_url: '',
+  //     error: null
+  //   }
+  // }
+
+  componentDidMount(){
+    // this.setState({email: this.props.curUser.email})
+    // console.log('did mount', this.props.curUser.firstname);
   }
 
   handlePhotoUpload = url => {
@@ -23,6 +28,8 @@ class UpdateProfile extends Component {
   }
 
   handleChange = e => {
+    // console.log(this.props.curUser.firstname);
+      
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -30,7 +37,7 @@ class UpdateProfile extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log('create user here');
+    // console.log('create user here');
 
     fetch('http://localhost:3000/api/v1/users', {
       method: "POST",
@@ -65,6 +72,7 @@ class UpdateProfile extends Component {
 
   render() {
     // const { firstname, lastname, email, bday } = this.props.curUser;
+    // console.log('did mount', this.props.curUser.firstname);
 
     return (
       <div className="form-window" id="new-user-window">
@@ -79,7 +87,7 @@ class UpdateProfile extends Component {
               type="text"
               name="email"
               onChange={event => this.handleChange(event)}
-              value={this.state.email}
+              value={this.props.curUser.email}
               required
             />
           </div>
@@ -106,7 +114,7 @@ class UpdateProfile extends Component {
               />
             </div>
           </div> */}
-
+{/* 
           <div className='field'>
             <label htmlFor='firstname'> First Name</label>
             <input
@@ -137,7 +145,7 @@ class UpdateProfile extends Component {
               onChange={event => this.handleChange(event)}
               value={this.state.bday}
             />
-          </div>
+          </div> */}
           <br></br>
 
         <PhotoUploadWidget handlePhotoUpload={this.handlePhotoUpload}/>
@@ -147,11 +155,14 @@ class UpdateProfile extends Component {
         </form>
         <br></br>
         <br></br>
+        {/* <img src={this.state.photo_url} ></img> */}
+        <br></br>
+        <br></br>
         <div>
-          {this.state.error ?
+          {/* {this.state.error ?
             <div className="ui bottom attached red message">{this.state.error}</div>
             : null
-          }
+          } */}
         </div>
       </div>
     )

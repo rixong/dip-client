@@ -7,7 +7,17 @@ const rootReducer = combineReducers({
 })
 
 function usersReducer(
-  state = { isLoggedIn: false }, action
+  state = { isLoggedIn: false,
+            curUser: {
+              id: '',
+              email: '',
+              firstname: '',
+              lastname: '',
+              bday: '',
+              admin: false,
+              photo_url: ''
+            }
+          }, action
 ) {
   // console.log('from users reducer', action);
   switch (action.type) {

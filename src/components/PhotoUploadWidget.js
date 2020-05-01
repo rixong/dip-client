@@ -8,9 +8,9 @@ class PhotoUploadWidget extends Component {
   // }
 
   checkLoadResults = (resultEvent) => {
-    console.log(resultEvent.event);
+    // console.log(resultEvent.event);
     if (resultEvent.event === 'success') {
-      console.log(resultEvent.info.secure_url);
+      // console.log(resultEvent.info.secure_url);
       this.props.handlePhotoUpload(resultEvent.info.secure_url)
       
       // this.setState({

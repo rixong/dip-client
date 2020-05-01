@@ -23,6 +23,7 @@ import ScheduleContainer from './components/reservations/ScheduleContainer';
 import MaintenanceContainer from './components/repairs/MaintenanceContainer';
 import AdminContainer from './components/administration/AdminContainer';
 import UpdateProfile from './components/Profile';
+// import Test from './components/Test'
 
 // import User from './components/User';
 
@@ -104,6 +105,7 @@ class App extends Component {
           <Router>
             <Navbar onLogoutClick={this.onLogoutClick} />
             <div className='main'>
+              {/* <Test/> */}
               <Switch>
                 <PublicRoute restricted={false} exact path='/' component={Home} />
                 <PublicRoute restricted={true} exact path='/login' component={Login} />
