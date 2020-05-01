@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import {addCurUser} from '../actions/index'
 import PhotoUploadWidget from './PhotoUploadWidget'
-import {Image, Video, Transformation, CloudinaryContext} from 'cloudinary-react';
+import {Image} from 'cloudinary-react';
 
 class UpdateProfile extends Component {
 
