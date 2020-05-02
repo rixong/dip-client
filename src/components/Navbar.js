@@ -29,8 +29,8 @@ class Navbar extends Component {
 
       <div className='ui grid' >
         <div className="ui three column row" id="navbar-container" >
-          <div className="four wide column" id="left-menu">
             {this.props.isLoggedIn ?
+          <div className="four wide column" id="left-menu">
 |
             <NavLink
               to="/"
@@ -61,9 +61,11 @@ class Navbar extends Component {
               activeStyle={activelink}
             >Update Profile</NavLink>
 |             
-            : null }
-
           </div>
+            :           
+            <div className="four wide column" id="left-menu"></div>
+          }
+
           
           <div className="eight wide column" id="center-menu">
             <div className='logo'></div>

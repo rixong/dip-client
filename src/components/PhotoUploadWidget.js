@@ -39,7 +39,7 @@ class PhotoUploadWidget extends Component {
       // }
     })
     return <div>
-      <button onClick={() => this.showWidget(widget)}>Upload your photo</button>
+      <button onClick={() => this.showWidget(widget)}>Add your photo</button>
     </div>
   }
 }

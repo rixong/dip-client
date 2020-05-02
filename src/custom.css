@@ -234,3 +234,17 @@ code {
   margin: 0 auto;
   width: 80%
 }
+
+/* PROFILE */
+
+#photo-box {
+  text-align: center;
+}
+
+#photo {
+  margin-top: 5px;
+  border:black;
+  border-style: solid;
+  border-width: 1px;
+
+}

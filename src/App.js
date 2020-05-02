@@ -91,7 +91,7 @@ class App extends Component {
       }
     })
       .then(res => res.json())
-      .then(json => this.props.addCurUser(json))
+      .then(json => this.props.addCurUser(json.user))
   }
 
   render() {

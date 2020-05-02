@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import * as Constants from '../constants'
 
-import {editCurUser} from '../actions/index'
+import { editCurUser } from '../actions/index'
 import PhotoUploadWidget from './PhotoUploadWidget'
-import {Image} from 'cloudinary-react';
+import { Image } from 'cloudinary-react';
 
 class UpdateProfile extends Component {
 
@@ -11,35 +12,35 @@ class UpdateProfile extends Component {
     super(props)
 
     this.state = {
-      // curUser: {},
       email: '',
       firstname: '',
       lastname: '',
       bday: '',
-      photo_url: '',
+      photoUrl: '',
       error: null
     }
   }
 
   componentDidMount() {
-    // this.populateState()
+    this.populateState()
     // this.setState({email: this.props.curUser.email})
-    // console.log('did mount', this.props.curUser.firstname);
+    console.log('did mount', this.props.curUser.firstname);
   }
 
   populateState = () => {
+
     this.setState({
       id: this.props.curUser.id,
       email: this.props.curUser.email,
       firstname: this.props.curUser.firstname,
       lastname: this.props.curUser.lastname,
-      bday: this.props.curUser.bday,
+      // bday: this.props.curUser.bday,
       photo_url: this.props.curUser.photo_url
     })
   }
 
   handlePhotoUpload = url => {
-    this.setState({photo_url: url})
+    this.setState({ photo_url: url })
   }
 
   handleChange = e => {
@@ -54,40 +55,41 @@ class UpdateProfile extends Component {
     // console.log('create user here');
     if (this.props.curUser) {
 
-    fetch(`http://localhost:3000/api/v1/users/${this.props.curUser.id}`, {
-      method: "PATCH",
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-      },
-      body: JSON.stringify({
-        user: {
-          email: this.state.email,
-          firstname: this.state.firstname,
-          lastname: this.state.lastname,
-          bday: this.state.bday,
-          phot_url: this.state.photo_url
-        }
+      fetch(`${Constants.baseUrl}/users/${this.props.curUser.id}`, {
+        method: "PATCH",
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+        },
+        body: JSON.stringify({
+          user: {
+            email: this.state.email,
+            firstname: this.state.firstname,
+            lastname: this.state.lastname,
+            bday: this.state.bday,
+            photo_url: this.state.photo_url
+          }
+        })
       })
-    })
-      .then(res => res.json())
-      // .then(json => console.log(json))
-      .then(json => {
-        if (json.message === "success") {
-          this.props.editCurUser(json.user);
-          // this.props.history.push('/home');
-        } else {
-          this.setState({ error: json.message })
-          // console.log(json.message);
-        }
-      })
+        .then(res => res.json())
+        // .then(json => console.log(json))
+        .then(json => {
+          if (json.message === "success") {
+            this.props.editCurUser(json.user);
+            // this.props.history.push('/home');
+          } else {
+            this.setState({ error: json.message })
+            // console.log(json.message);
+          }
+        })
 
     }
   }
 
   render() {
-    // const { firstname, lastname, email, bday } = this.props.curUser;
+
+    // this.populateState()
 
     return (
       <div className="form-window" id="new-user-window">
@@ -99,11 +101,11 @@ class UpdateProfile extends Component {
           <div className='field'>
             <label htmlFor='email'>Email</label>
             <input
-              type="text"
+              type="email"
               name="email"
               onChange={event => this.handleChange(event)}
               value={this.state.email}
-              
+
             />
           </div>
 
@@ -156,25 +158,25 @@ class UpdateProfile extends Component {
               type="date"
               name="bday"
               onChange={event => this.handleChange(event)}
-              value={this.state.bday}
+            // value={this.state.bday}
             />
           </div>
           <br></br>
 
-          <PhotoUploadWidget handlePhotoUpload={this.handlePhotoUpload} />
-
-          <br></br>
+          <div className="ui grid">
+            <div className="ui two column row">
+              <div className="eight wide column">
           <button type="submit" className="ui primary button">Send it!</button>
+              </div>
+              <div className="eight wide column">
+                <div id="photo-box">
+                  <PhotoUploadWidget handlePhotoUpload={this.handlePhotoUpload} />
+                  <Image cloudName="dzycwwun9" publicId={this.state.photo_url} width="100" crop="scale" id="photo"/>
+                </div>
+              </div>
+            </div>
+          </div>
         </form>
-        <br></br>
-        <br></br>
-        
-        <div id="photo-box">
-        <Image cloudName="dzycwwun9" publicId={this.state.photoUrl} width="100" crop="scale" />
-        </div>
-        {/* <img src={this.state.photo_url} ></img> */}
-        <br></br>
-        <br></br>
         <div>
           {this.state.error ?
             <div className="ui bottom attached red message">{this.state.error}</div>
@@ -186,10 +188,10 @@ class UpdateProfile extends Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = store => {
   return {
-    curUser: state.users.curUser
+    curUser: store.users.curUser
   }
 };
 
-export default connect(mapStateToProps, {editCurUser})(UpdateProfile);
+export default connect(mapStateToProps, { editCurUser })(UpdateProfile);
