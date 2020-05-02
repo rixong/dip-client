@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import DaySquare from './DaySquare';
 import uuid from 'react-uuid'
 
-const colors = ['teal', 'blue', 'green', 'violet', 'olive', 'orange'];
+const colors = ['teal', 'blue', 'green', 'violet', 'olive', 'orange', 'grey'];
 
 class WeekRow extends Component {
 
@@ -20,11 +20,14 @@ class WeekRow extends Component {
         curDaysRes = this.props.reservations.find(curDay => curDay.dif === i)
       }
       if (curDaysRes) {
+        // console.log(curDaysRes);
         if (!curUser || curDaysRes.user !== curUser) {
           curUser = curDaysRes.userName
-          // console.log(curUser);
         }
-        squares.push(<DaySquare key={uuid()} color={colors[curDaysRes.userId % 6]} userName={curDaysRes.userName} />)
+        let colorIdx = curDaysRes.pending ? 6 : curDaysRes.userId % 6; //Last color is reserved for pending res.
+        squares.push(<DaySquare key={uuid()}
+        color={colors[colorIdx]}
+        userName={curDaysRes.userName} />)
       } else {
         squares.push(<DaySquare key={uuid()} color='default-square-color' />)
       }

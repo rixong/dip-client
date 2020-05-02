@@ -17,10 +17,10 @@ class ScheduleWeekly extends Component {
     // Create rows for each cabin calling MakeRow() with each cabin
 
     let weekRowArray = [];
-    // console.log('cabins',this.props.cabins);
     for (let i = 0; i < this.props.cabins.length; i++) {
       let reservations = this.combineSingleCabinRes(i + 1)
-      weekRowArray.push(<WeekRow key={uuid()} 
+      console.log('reservations',reservations);
+      weekRowArray.push(<WeekRow key={uuid()}
         reservations={reservations} 
         cabinName={this.props.cabins[i].name} 
         />);
@@ -58,7 +58,8 @@ class ScheduleWeekly extends Component {
       reservedDaysArray.push(
         { userName: this.fullName(res), 
           userId: res.reserver.userId, 
-          dif: this.numDays(arr, start) 
+          dif: this.numDays(arr, start),
+          pending: res.pending
         });
       arr.add(1, 'day')
     }
