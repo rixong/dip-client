@@ -7,18 +7,18 @@ export const addCurUser = newUser => {
   };
 };
 
-export const deleteCurUser = () => {
-  return {
-    type: 'DELETE_CUR_USER'
-  };
-};
-
 export const editCurUser = user => {
   return {
     type: 'EDIT_CUR_USER',
     payload: user
   }
 } 
+
+export const deleteCurUser = () => {
+  return {
+    type: 'DELETE_CUR_USER'
+  };
+};
 
 
 /// RESERVATION ACTIONS

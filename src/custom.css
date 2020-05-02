@@ -25,11 +25,14 @@ code {
   /* margin-right: 40px; */
 }
 
-.nav-bar {
+#navbar-container{
   align-content: center;
-  height: 60px;
-  padding-top: 120px;
-  /* border-style: solid; */
+  height: 120px;
+  /* padding-top: 120px; */
+  /* background-color: mediumseagreen; */
+  border-bottom: black;
+  border-style: solid;
+  border-width: 1px;
 }
 
 /* .logo {
@@ -40,17 +43,21 @@ code {
 } */
 
 #left-menu {
-  padding-top: 30px;
+  padding-left: 20px;
 }
 
 #right-menu {
-  padding-top: 30px;
+  /* padding-top: 30px; */
 }
 
 #center-menu {
   text-align: center;
-  font-size: 3rem;
-  margin-top: 20px;
+  /* margin-top: 20px; */
+}
+
+#title {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 3em;
 }
 
 
@@ -58,6 +65,7 @@ code {
   height: 900px;
   position: relative;
   background-image: url(./assets/waterscape\ 1.jpg);
+  /* background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(./assets/waterscape\ 1.jpg); */
   /* height: 500px; You must set a specified height */
   background-position: center;
   background-repeat: no-repeat;
@@ -122,8 +130,8 @@ code {
   width: 600px;
   padding: 50px;
   height: 300px;
-  border-style: solid;
   border-radius: 5px;
+
   /* background-color: mediumorchid; */
 }
 

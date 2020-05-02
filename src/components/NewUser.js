@@ -49,7 +49,7 @@ class NewUser extends Component {
       .then(json => {
         if (json.jwt) {
           localStorage.setItem('accessToken', json.jwt);
-          this.props.addCurUser(json);
+          this.props.addCurUser(json.user);
           this.props.history.push('/home');
         } else {
           this.setState({ error: json.message })

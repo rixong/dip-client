@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {addCurUser} from '../actions/index'
+import {editCurUser} from '../actions/index'
 import PhotoUploadWidget from './PhotoUploadWidget'
 import {Image} from 'cloudinary-react';
 
@@ -43,8 +43,7 @@ class UpdateProfile extends Component {
   }
 
   handleChange = e => {
-    console.log(this.props.curUser.firstname);
-
+    // console.log(this.props.curUser.firstname);
     this.setState({
       [e.target.name]: e.target.value
     })
@@ -53,6 +52,7 @@ class UpdateProfile extends Component {
   handleSubmit = e => {
     e.preventDefault();
     // console.log('create user here');
+    if (this.props.curUser) {
 
     fetch(`http://localhost:3000/api/v1/users/${this.props.curUser.id}`, {
       method: "PATCH",
@@ -75,13 +75,15 @@ class UpdateProfile extends Component {
       // .then(json => console.log(json))
       .then(json => {
         if (json.message === "success") {
-          this.props.addCurUser(json.user);
+          this.props.editCurUser(json.user);
           // this.props.history.push('/home');
         } else {
           this.setState({ error: json.message })
           // console.log(json.message);
         }
       })
+
+    }
   }
 
   render() {
@@ -190,4 +192,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, {addCurUser})(UpdateProfile);
+export default connect(mapStateToProps, {editCurUser})(UpdateProfile);

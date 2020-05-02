@@ -3,12 +3,17 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom'
 
 const link = {
-  width: '100px',
-  padding: '12px',
+  // width: '100px',
+  paddingLeft: '10px',
   margin: '0 6px 6px',
-  background: 'darkgray',
   textDecoration: 'none',
-  color: 'white',
+  color: '#0B7C17',
+  fontSize: '16px'
+}
+
+const activelink = {
+  color: 'black',
+  textDecoration: 'underline'
 }
 
 class Navbar extends Component {
@@ -22,78 +27,70 @@ class Navbar extends Component {
 
     return (
 
-      <div className='ui celled grid nav-bar'>
-        <div className="three column row">
-          <div className="five wide column" id="left-menu">
-
+      <div className='ui grid' >
+        <div className="ui three column row" id="navbar-container" >
+          <div className="four wide column" id="left-menu">
+            {this.props.isLoggedIn ?
+|
             <NavLink
               to="/"
               exact
               style={link}
               /* add prop for activeStyle */
-              activeStyle={{
-                background: 'black'
-              }}
+              activeStyle={activelink}
             >Home</NavLink>
-
+|
             <NavLink
               to="/schedule"
               exact
               style={link}
-              activeStyle={{
-                background: 'black'
-              }}
+              activeStyle={activelink}
             >Schedule</NavLink>
-
+|
             <NavLink
               to="/maintenance"
               exact
               style={link}
-              activeStyle={{
-                background: 'black'
-              }}
+              activeStyle={activelink}
             >Repairs</NavLink>
-
+|
             <NavLink
               to="/user"
               exact
               style={link}
-              activeStyle={{
-                background: 'black'
-              }}
+              activeStyle={activelink}
             >Update Profile</NavLink>
-
-            {this.props.isLoggedIn && this.props.curUser.admin ?
-              <NavLink
-                to="/admin"
-                exact
-                style={link}
-                activeStyle={{
-                  background: 'black'
-                }}
-              >Admin</NavLink>
-              : null}
+|             
+            : null }
 
           </div>
+          
           <div className="eight wide column" id="center-menu">
             <div className='logo'></div>
-            <div className="title">Dog Island Point Connect</div>
+            <div className="title" id="title">Dog Island Point Connect</div>
           </div>
 
-          <div className="three wide column" id="right-menu">
+          <div className="four wide column" id="right-menu">
             {this.props.isLoggedIn ?
               <div>
                 Hello {this.props.curUser.firstname} {this.props.curUser.lastname}
-                {/* <button onClick={this.props.onLogoutClick}>Logout</button> */}
 
                 <NavLink
                   to="/login"
                   exact
                   onClick={this.props.onLogoutClick}
                   style={link}
-                  activeStyle={{ background: 'black' }}
+                  activeStyle={activelink}
                 >Logout</NavLink>
-
+          
+                  {this.props.isLoggedIn && this.props.curUser.admin ?
+                    <NavLink
+                      to="/admin"
+                      exact
+                      style={link}
+                      activeStyle={activelink}
+                    >Admin Menu</NavLink>
+                    : null}
 
               </div>
               :
@@ -102,9 +99,8 @@ class Navbar extends Component {
                 exact
                 onClick={this.props.onLogoutClick}
                 style={link}
-                activeStyle={{ background: 'black' }}
+                activeStyle={activelink}
               >Login</NavLink>
-              // <Link className="Nav-link" to="/login">Login</Link>
             }
           </div>
 

@@ -20,10 +20,12 @@ function usersReducer(
     }
   }, action
 ) {
-  // console.log('from users reducer', action);
+  console.log('from users reducer', action);
   switch (action.type) {
     case 'ADD_CUR_USER':
-      return { ...state, curUser: action.payload.user, isLoggedIn: true }
+      return { ...state, curUser: action.payload, isLoggedIn: true }
+    case 'EDIT_CUR_USER':
+      return { ...state, curUser: action.payload, dog: 'poodle' }
     case 'DELETE_CUR_USER':
       return { ...state, curUser: '', isLoggedIn: false }
 
