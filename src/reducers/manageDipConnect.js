@@ -2,7 +2,7 @@ import { combineReducers } from 'redux'
 
 const rootReducer = combineReducers({
   users: usersReducer,
-  reservations: reservationsReducer,
+  // reservations: reservationsReducer,
   admin: adminReducer
 })
 
@@ -34,27 +34,32 @@ function usersReducer(
   }
 }
 
-function reservationsReducer(
-  state = [],
-  action
-) {
+// function reservationsReducer(
+//   state = [],
+//   action
+// ) {
 
-  // console.log('from users reducer', action);
-  switch (action.type) {
-    case 'GET_RESERVATIONS':
-      return { ...state, curReservations: action.payload }
-    case 'ADD_RESERVATION':
-      return { ...state, curReservations: state.curReservations.concat(action.payload) }
+//   // console.log('from users reducer', action);
+//   switch (action.type) {
+//     // case 'GET_RESERVATIONS':
+//     //   return { ...state, curReservations: action.payload }
+//     // case 'ADD_RESERVATION':
+//     //   return { ...state, curReservations: state.curReservations.concat(action.payload) }
 
-    default:
-      return state
-  }
+//     default:
+//       return state
+//   }
 
-}
+// }
 
 function adminReducer(
   state =
-    { cabins: [] }
+    { cabins: [], 
+      reservations: [], 
+      annualReport:  {
+        year:''
+      }
+    }
   ,
   action
 ) {
@@ -71,6 +76,14 @@ function adminReducer(
       return { ...state, repairs:  state.repairs.concat(action.payload) }
     case 'ADD_CUR_REPORT':
       return { ...state, annualReport: action.payload }
+      case 'GET_RESERVATIONS':
+        return { ...state, reservations: action.payload }
+      case 'ADD_RESERVATION':
+        return { ...state, reservations: state.reservations.concat(action.payload) }
+        case 'APPROVE_RESERVATION':
+          // let res = ...state.reservations.filter(res => res.id === action.payload);
+          // res.pending = false;
+          // return { ...state, reservations: state.reservations.concat(action.payload) }
     default:
       return state
   }

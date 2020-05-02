@@ -3,13 +3,15 @@ import { connect } from 'react-redux';
 import { addReservation } from '../../actions/index'
 
 
+
 class ReservationForm extends Component {
 
 
   state = {
     arrival: '',
     departure: '',
-    cabin: ''
+    cabin: '',
+    error: ''
   }
 
   currentSelectedCabin = (cabinId) => {
@@ -28,7 +30,7 @@ class ReservationForm extends Component {
     //multiply by multiplier
   }
 
-  ///SUBMIT RESEVATION
+  ///SUBMIT RESERVATION
   onHandleSubmit = (e) => {
     e.preventDefault();
     console.log('Submit resrvation');
@@ -50,7 +52,13 @@ class ReservationForm extends Component {
     })
       .then(res => res.json())
       // .then(json => console.log(json))
-      .then(json => this.props.addReservation(json.res))
+      .then(json => {
+        if (json.message === 'success') {
+          this.props.addReservation(json.res)
+        } else {
+          this.setState({error: json.message})
+        }
+      })
   }
 
   handleChange = (e) => {
@@ -113,18 +121,24 @@ class ReservationForm extends Component {
         </div>
       </form>
 
-<div className="cabin-info-box">
-      {this.state.cabin ?
-        <div className="ui info message" id="cabin-info">
-          <div className="header">
-            {this.currentSelectedCabin(this.state.cabin).name}
-          </div>
-          <div>Daily Rent $ 
+      <div className="cabin-info-box">
+        {this.state.cabin ?
+          <div className="ui info message" id="cabin-info">
+            <div className="header">
+              {this.currentSelectedCabin(this.state.cabin).name}
+            </div>
+            <div>Daily Rent $
             <strong>{this.calculateDailyPrice(this.currentSelectedCabin(this.state.cabin).multiplier).toFixed(2)}</strong></div>
+          </div>
+          : null}
+      </div>
+      <div>
+          {this.state.error ? 
+          <div className="ui bottom attached red message">{this.state.error}</div>
+          : null
+          }
         </div>
-        : null}
     </div>
-</div>
   }
 }
 

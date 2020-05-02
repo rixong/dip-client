@@ -19,7 +19,7 @@ class ScheduleWeekly extends Component {
     let weekRowArray = [];
     for (let i = 0; i < this.props.cabins.length; i++) {
       let reservations = this.combineSingleCabinRes(i + 1)
-      console.log('reservations',reservations);
+      // console.log('reservations',reservations);
       weekRowArray.push(<WeekRow key={uuid()}
         reservations={reservations} 
         cabinName={this.props.cabins[i].name} 
@@ -132,7 +132,7 @@ class ScheduleWeekly extends Component {
 
 const mapStateToProps = state => {
   return {
-    curReservations: state.reservations.curReservations,
+    curReservations: state.admin.reservations,
     cabins: state.admin.cabins
   }
 }

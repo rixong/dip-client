@@ -37,6 +37,13 @@ export const addReservation = (reservation) => {
   }
 }
 
+export const approveReservation = (id) => {
+  return {
+    type: 'APPROVE_RESERVATION',
+    payload: id
+  }
+}
+
 // export const getCabinName = (cabinId) => {
 //   return {
 //     type: 'GET_CABIN_NAME',
