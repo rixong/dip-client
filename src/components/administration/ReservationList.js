@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import * as Constants from '../../constants'
 
-import { getReservations } from '../../actions/index'
+import { getReservations, approveReservation } from '../../actions/index'
 
 // const { cabinName, arrival, departure, cabin, reserver, email, pending } = this.props.reservations
 
@@ -26,28 +26,32 @@ class ReservationList extends Component {
   }
 
   renderReservations = () => {
-    return this.props.reservations.map((res, idx) => {
-      return (
-        <tr key={idx}>
-          <td data-label="House Name">{res.cabin.cabinName}</td>
-          <td data-label="Arrival">{res.arrival}</td>
-          <td data-label="Departure">{res.departure}</td>
-          <td data-label="Member">{res.reserver.firstName}</td>
-          <td data-label="Email">
-            <a href="mailto:rixong@gmail.com">{res.reserver.email}</a>
-          </td>
-          <td data-label="Approved" 
-          onClick={() => this.handleClick(res.id)}>
-            {res.pending ?
-            <i className="large red x icon"></i> :
-            <i className="large green checkmark icon"></i>
-            }
-          </td>
-        </tr>
-      )
-    })
+    console.log(this.props.reservations);
+    
+    if (this.props.reservations) {
+      return this.props.reservations.map((res, idx) => {
+        return (
+          <tr key={idx}>
+            <td data-label="House Name">{res.cabin.cabinName}</td>
+            <td data-label="Arrival">{res.arrival}</td>
+            <td data-label="Departure">{res.departure}</td>
+            <td data-label="Member">{res.reserver.firstName}</td>
+            <td data-label="Email">
+              <a href="mailto:rixong@gmail.com">{res.reserver.email}</a>
+            </td>
+            <td data-label="Approved"
+              onClick={() => this.handleClick(res.id)}>
+              {res.pending ?
+                <i className="large red x icon"></i> :
+                <i className="large green checkmark icon"></i>
+              }
+            </td>
+          </tr>
+        )
+      })
+    }
   }
-        //// Approve a reservation
+  //// Approve a reservation
   handleClick = (resId) => {
     console.log('click to approve.', resId);
     fetch(`${Constants.baseUrl}/reservations/${resId}`, {
@@ -57,10 +61,10 @@ class ReservationList extends Component {
         Accept: 'application/json',
         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
       },
-      body: JSON.stringify({pending: false})
+      body: JSON.stringify({ pending: false })
     })
-    .then(res => res.json())
-    .then(json => console.log(json))
+      .then(res => res.json())
+      .then(json => this.props.approveReservation(resId))
   }
 
   render() {
@@ -101,4 +105,4 @@ const mapStateToProps = state => {
     reservations: state.admin.reservations
   }
 };
-export default connect(mapStateToProps, { getReservations })(ReservationList);
+export default connect(mapStateToProps, { getReservations, approveReservation })(ReservationList);

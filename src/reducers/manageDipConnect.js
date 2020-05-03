@@ -80,12 +80,15 @@ function adminReducer(
         return { ...state, reservations: action.payload }
       case 'ADD_RESERVATION':
         return { ...state, reservations: state.reservations.concat(action.payload) }
-        case 'APPROVE_RESERVATION':
-          // let res = ...state.reservations.filter(res => res.id === action.payload);
-          // res.pending = false;
-          // return { ...state, reservations: state.reservations.concat(action.payload) }
-    default:
-      return state
+      case 'APPROVE_RESERVATION':
+        let idx = state.reservations.findIndex(res => res.id === action.payload);
+        let newRes = Object.assign({}, state.reservations[idx]);
+        newRes.pending = false;
+        let newReservations =  
+          [...state.reservations.slice(0, idx).concat(newRes).concat(...state.reservations.slice(idx + 1))];
+        return {...state, reservations: newReservations};
+      default:
+        return state
   }
 
 }
