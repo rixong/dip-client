@@ -13,6 +13,7 @@ import './custom.css'
 import 'semantic-ui-css/semantic.min.css';
 
 import PrivateRoute from './components/PrivateRoute';
+import AdminRoute from './components/AdminRoute';
 import PublicRoute from './components/PublicRoute';
 import Login from './components/Login';
 import NewUser from './components/NewUser';
@@ -101,8 +102,8 @@ class App extends Component {
                 <PublicRoute restricted={true} exact path='/newuser' component={NewUser} />
                 <PrivateRoute exact path='/schedule' component={ScheduleContainer} />
                 <PrivateRoute exact path='/maintenance' component={MaintenanceContainer} />
-                <PrivateRoute exact path='/admin' component={AdminContainer} />
                 <PrivateRoute exact path='/user' component={UpdateProfile} />
+                <AdminRoute exact path='/admin' component={AdminContainer} />
                 
               </Switch>
 
