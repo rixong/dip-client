@@ -30,55 +30,58 @@ class Navbar extends Component {
     return (
 
       <div className='ui grid' >
-        <div className="ui three column row" id="navbar-container" >
-            {this.props.isLoggedIn ?
-          <div className="four wide column" id="left-menu">
+        <div className="ui four column row" id="navbar-container" >
+          {this.props.isLoggedIn ?
+            <div className="five wide column" id="left-menu">
 
-            <NavLink
-              to="/"
-              exact
-              style={link}
-              activeStyle={activelink}
-            >Home</NavLink>
+              <NavLink
+                to="/"
+                exact
+                style={link}
+                activeStyle={activelink}
+              >Home</NavLink>
 |
             <NavLink
-              to="/schedule"
-              exact
-              style={link}
-              activeStyle={activelink}
-            >Schedule</NavLink>
+                to="/schedule"
+                exact
+                style={link}
+                activeStyle={activelink}
+              >Schedule</NavLink>
 |
             <NavLink
-              to="/maintenance"
-              exact
-              style={link}
-              activeStyle={activelink}
-            >Repairs</NavLink>
+                to="/maintenance"
+                exact
+                style={link}
+                activeStyle={activelink}
+              >Repairs</NavLink>
 |
             <NavLink
-              to="/user"
-              exact
-              style={link}
-              activeStyle={activelink}
-            >Profile</NavLink>
-|             
+                to="/user"
+                exact
+                style={link}
+                activeStyle={activelink}
+              >Profile</NavLink>
           </div>
-            :           
-            <div className="four wide column" id="left-menu"></div>
+            :
+            <div className="five wide column" id="left-menu"></div>
           }
 
-          
           <div className="eight wide column" id="center-menu">
-            <div className="title" id="title">Dog Island Point Connect</div>
-            <img src="lobster-icon.png" width="30px" alt="lobster" id="lobster"></img>
+            <div className="ui grid">
+              <div className="one wide column">
+                <img src="lobster-icon.png" width="30px" alt="lobster" id="lobster"></img>
+
+              </div>
+              <div className="fifteen wide column">
+
+                <div className="title" id="title">Dog Island Point Connect</div>
+              </div>
+            </div>
           </div>
 
-          <div className="three wide column" id="right-menu">
+          <div className="two wide column" id="right-menu">
             {this.props.isLoggedIn ?
               <div>
-                {/* Hello {this.props.curUser.firstname} {this.props.curUser.lastname} */}
-                <div>
-                </div>
 
                 <NavLink
                   to="/login"
@@ -87,15 +90,15 @@ class Navbar extends Component {
                   style={link}
                   activeStyle={activelink}
                 >Logout</NavLink>
-          
-                  {this.props.isLoggedIn && this.props.curUser.admin ?
-                    <NavLink
-                      to="/admin"
-                      exact
-                      style={link}
-                      activeStyle={activelink}
-                    >Admin Menu</NavLink>
-                    : null}
+
+                {this.props.isLoggedIn && this.props.curUser.admin ?
+                  <NavLink
+                    to="/admin"
+                    exact
+                    style={link}
+                    activeStyle={activelink}
+                  >Admin Menu</NavLink>
+                  : null}
 
               </div>
               :
@@ -109,11 +112,11 @@ class Navbar extends Component {
               // >Login</NavLink>
             }
           </div>
-          {this.props.isLoggedIn ? 
-          <div className="one wide column" id="navbar-photo-box" >
-            <Image cloudName="dzycwwun9" publicId={this.props.curUser.photo_url} 
-              width="50" radius='30' crop="scale"/>
-          </div> : null }
+          {this.props.isLoggedIn ?
+            <div className="one wide column" id="navbar-photo-box" >
+              <Image cloudName="dzycwwun9" publicId={this.props.curUser.photo_url}
+                width="50" radius='30' crop="scale" />
+            </div> : null}
         </div>
       </div>
     )
