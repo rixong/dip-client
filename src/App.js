@@ -28,13 +28,6 @@ import UpdateProfile from './components/Profile';
 
 class App extends Component {
 
-  // constructor() {
-  //   super()
-  //   this.state = {
-  //     isNewUser: false
-  //   }
-  // }
-
   componentDidMount() {
     if (localStorage.getItem('accessToken')) {
       Promise.all([

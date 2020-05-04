@@ -34,28 +34,12 @@ function usersReducer(
   }
 }
 
-// function reservationsReducer(
-//   state = [],
-//   action
-// ) {
-
-//   // console.log('from users reducer', action);
-//   switch (action.type) {
-//     // case 'GET_RESERVATIONS':
-//     //   return { ...state, curReservations: action.payload }
-//     // case 'ADD_RESERVATION':
-//     //   return { ...state, curReservations: state.curReservations.concat(action.payload) }
-
-//     default:
-//       return state
-//   }
-
-// }
-
 function adminReducer(
   state =
-    { cabins: [], 
-      reservations: [], 
+    { 
+      cabins: [], 
+      reservations: [],
+      repairs: [], 
       annualReport:  {
         year:''
       }

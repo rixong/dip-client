@@ -24,7 +24,7 @@ class UpdateProfile extends Component {
   componentDidMount() {
     this.populateState()
     // this.setState({email: this.props.curUser.email})
-    console.log('did mount', this.props.curUser.firstname);
+    // console.log('did mount', this.props.curUser.firstname);
   }
 
   populateState = () => {
@@ -93,7 +93,7 @@ class UpdateProfile extends Component {
 
     return (
       <div className="form-window" id="new-user-window">
-        <button onClick={this.populateState}>Populate fields</button>
+        {/* <button onClick={this.populateState}>Populate fields</button> */}
         <div className="form-header">Edit Your Profile</div>
 
         <form className="ui form main-form" onSubmit={this.handleSubmit}>

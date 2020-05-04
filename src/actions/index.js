@@ -44,14 +44,6 @@ export const approveReservation = (id) => {
   }
 }
 
-// export const getCabinName = (cabinId) => {
-//   return {
-//     type: 'GET_CABIN_NAME',
-//     action: cabinId
-//   }
-// }
-
-
 
 // ADMIN ACTIONS
 export const addRepairTickets = (repairs) => {

@@ -46,13 +46,18 @@ code {
   padding-left: 20px;
 }
 
-#right-menu {
-  /* padding-top: 30px; */
-}
-
 #center-menu {
   text-align: center;
   /* margin-top: 20px; */
+}
+
+#right-menu {
+  /* padding-bottom: 30px; */
+  text-align: right;
+}
+
+#navbar-photo-box {
+  padding-right:10px;
 }
 
 #title {

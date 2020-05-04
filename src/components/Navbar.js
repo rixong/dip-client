@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom'
+import { Image } from 'cloudinary-react';
+
 
 const link = {
   // width: '100px',
@@ -31,12 +33,11 @@ class Navbar extends Component {
         <div className="ui three column row" id="navbar-container" >
             {this.props.isLoggedIn ?
           <div className="four wide column" id="left-menu">
-|
+
             <NavLink
               to="/"
               exact
               style={link}
-              /* add prop for activeStyle */
               activeStyle={activelink}
             >Home</NavLink>
 |
@@ -59,7 +60,7 @@ class Navbar extends Component {
               exact
               style={link}
               activeStyle={activelink}
-            >Update Profile</NavLink>
+            >Profile</NavLink>
 |             
           </div>
             :           
@@ -72,10 +73,12 @@ class Navbar extends Component {
             <div className="title" id="title">Dog Island Point Connect</div>
           </div>
 
-          <div className="four wide column" id="right-menu">
+          <div className="three wide column" id="right-menu">
             {this.props.isLoggedIn ?
               <div>
-                Hello {this.props.curUser.firstname} {this.props.curUser.lastname}
+                {/* Hello {this.props.curUser.firstname} {this.props.curUser.lastname} */}
+                <div>
+                </div>
 
                 <NavLink
                   to="/login"
@@ -96,16 +99,21 @@ class Navbar extends Component {
 
               </div>
               :
-              <NavLink
-                to="/login"
-                exact
-                onClick={this.props.onLogoutClick}
-                style={link}
-                activeStyle={activelink}
-              >Login</NavLink>
+              null
+              // <NavLink
+              //   to="/login"
+              //   exact
+              //   onClick={this.props.onLogoutClick}
+              //   style={link}
+              //   activeStyle={activelink}
+              // >Login</NavLink>
             }
           </div>
-
+          {this.props.isLoggedIn ? 
+          <div className="one wide column" id="navbar-photo-box" >
+            <Image cloudName="dzycwwun9" publicId={this.props.curUser.photo_url} 
+              width="50" radius='30' crop="scale"/>
+          </div> : null }
         </div>
       </div>
     )
