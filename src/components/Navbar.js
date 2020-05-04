@@ -69,8 +69,8 @@ class Navbar extends Component {
 
           
           <div className="eight wide column" id="center-menu">
-            <div className='logo'></div>
             <div className="title" id="title">Dog Island Point Connect</div>
+            <img src="lobster-icon.png" width="30px" alt="lobster" id="lobster"></img>
           </div>
 
           <div className="three wide column" id="right-menu">

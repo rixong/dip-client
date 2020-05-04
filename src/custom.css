@@ -35,19 +35,14 @@ code {
   border-width: 1px;
 }
 
-/* .logo {
-  background-image: url(./assets/lobster-icon.png);
-  background-repeat: no-repeat;
-  alt: 'lobster';
-  height: 5px;
-} */
 
 #left-menu {
   padding-left: 20px;
 }
 
 #center-menu {
-  text-align: center;
+  /* text-align: center; */
+  display: inline;
   /* margin-top: 20px; */
 }
 
@@ -60,7 +55,12 @@ code {
   padding-right:10px;
 }
 
+#lobster {
+  float: right;
+}
+
 #title {
+  /* float: right; */
   font-family: 'Permanent Marker', cursive;
   font-size: 3em;
 }
