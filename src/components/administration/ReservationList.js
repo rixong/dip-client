@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
 import * as Constants from '../../constants'
+import { getMemberFullName } from '../../utilities'
 
 import { getReservations, approveReservation } from '../../actions/index'
 
@@ -9,7 +10,10 @@ class ReservationList extends Component {
 
 
   componentDidMount() {
-    /// fetch current reservations
+    this.fetchReservations()
+  }
+
+  fetchReservations = () => {
     fetch(`${Constants.baseUrl}/reservations`, {
       method: 'GET',
       headers: {
@@ -19,37 +23,12 @@ class ReservationList extends Component {
       .then(res => res.json())
       // .then(json => console.log(json))
       .then(json => this.props.getReservations(json))
-    //   .then(() => {
   }
 
-  renderReservations = () => {
-    console.log(this.props.reservations);
-
-    return this.props.reservations.map((res, idx) => {
-      return (
-        <tr key={idx}>
-          <td data-label="House Name">{res.cabin.cabinName}</td>
-          <td data-label="Arrival">{res.arrival}</td>
-          <td data-label="Departure">{res.departure}</td>
-          <td data-label="Member">{res.reserver.firstName}</td>
-          <td data-label="Email">
-            <a href="mailto:rixong@gmail.com">{res.reserver.email}</a>
-          </td>
-          <td data-label="Approved"
-            onClick={() => this.handleClick(res.id)}>
-            {res.pending ?
-              <i className="large red x icon"></i> :
-              <i className="large green checkmark icon"></i>
-            }
-          </td>
-        </tr>
-      )
-    })
-  }
-
-  //// Approve a reservation
-  handleClick = (resId) => {
+  ////  Reservation approval
+  handleApproval = (resId) => {
     console.log('click to approve.', resId);
+
     fetch(`${Constants.baseUrl}/reservations/${resId}`, {
       method: 'PATCH',
       headers: {
@@ -61,6 +40,49 @@ class ReservationList extends Component {
     })
       .then(res => res.json())
       .then(json => this.props.approveReservation(resId))
+  }
+
+  ////  Reservation Delete
+  handleDelete = (resId) => {
+    console.log('click to delete.', resId);
+    fetch(`${Constants.baseUrl}/reservations/${resId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+      }
+    })
+      .then(res => this.fetchReservations())
+    // .then(json => console.log(json));
+  }
+
+  renderReservations = () => {
+    console.log(this.props.reservations);
+
+    return this.props.reservations.map((res, idx) => {
+      return (
+        <tr key={idx}>
+          <td data-label="House Name">{res.cabin.cabinName}</td>
+          <td data-label="Arrival">{res.arrival}</td>
+          <td data-label="Departure">{res.departure}</td>
+          <td data-label="Member">{getMemberFullName(this.props.users, res.reserver.userId)}</td>
+          <td data-label="Email">
+            <a href="mailto:rixong@gmail.com">{res.reserver.email}</a>
+          </td>
+          <td data-label="Approved">
+            <div className="ui icon button">
+              {res.pending ?
+                <i className="large black x icon" onClick={() => this.handleApproval(res.id)}></i>
+                :
+                <i className="large green checkmark icon"></i>
+              }
+            </div>
+          </td>
+          <td><button className="ui button" onClick={() => this.handleDelete(res.id)}>Delete</button></td>
+        </tr>
+      )
+    })
   }
 
   render() {
@@ -77,6 +99,7 @@ class ReservationList extends Component {
               <th>Member</th>
               <th>Email</th>
               <th>Approved</th>
+              <th>Delete</th>
             </tr>
           </thead>
           <tbody>
@@ -98,7 +121,8 @@ class ReservationList extends Component {
 
 const mapStateToProps = state => {
   return {
-    reservations: state.admin.reservations
+    reservations: state.admin.reservations,
+    users: state.admin.users
   }
 };
 export default connect(mapStateToProps, { getReservations, approveReservation })(ReservationList);
