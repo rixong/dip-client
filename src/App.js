@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { 
-  addCurUser, 
-  deleteCurUser, 
-  addCurrentAnnualReport, 
+import {
+  addCurUser,
+  deleteCurUser,
+  addCurrentAnnualReport,
   addCabins,
-  addUsers } from './actions';
+  addUsers,
+  getReservations
+} from './actions';
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import './App.css';
@@ -53,12 +55,22 @@ class App extends Component {
           }
         }),
 
-      ]).then(([res1, res2, res3]) => {
-        return Promise.all([res1.json(), res2.json(), res3.json()])
-      }).then(([res1, res2, res3]) => {
+        fetch("http://localhost:3000/api/v1/reservations", {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+          }
+        }),
+
+
+
+      ]).then(([res1, res2, res3, res4]) => {
+        return Promise.all([res1.json(), res2.json(), res3.json(), res4.json()])
+      }).then(([res1, res2, res3, res4]) => {
         this.props.addCurrentAnnualReport(res1);
         this.props.addUsers(res2)
         this.props.addCabins(res3);
+        this.props.getReservations(res4);
       }).then(() => this.setCurUser())
     }
   }
@@ -77,7 +89,7 @@ class App extends Component {
 
   setCurUser = () => {
     console.log('SetCurUser');
-    
+
     fetch("http://localhost:3000/api/v1/profile", {
       method: 'GET',
       headers: {
@@ -104,7 +116,7 @@ class App extends Component {
                 <PrivateRoute exact path='/maintenance' component={MaintenanceContainer} />
                 <PrivateRoute exact path='/user' component={UpdateProfile} />
                 <AdminRoute exact path='/admin' component={AdminContainer} />
-                
+
               </Switch>
 
             </div>
@@ -123,4 +135,11 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps, { addCurUser, deleteCurUser, addCurrentAnnualReport, addCabins, addUsers })(App);
+export default connect(mapStateToProps, {
+  addCurUser,
+  deleteCurUser,
+  addCurrentAnnualReport,
+  addCabins,
+  addUsers,
+  getReservations
+})(App);

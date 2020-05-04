@@ -25,7 +25,7 @@ code {
   /* margin-right: 40px; */
 }
 
-#navbar-container{
+#navbar-container {
   align-content: center;
   height: 120px;
   /* padding-top: 120px; */
@@ -55,8 +55,7 @@ code {
   /* padding-right:10px; */
 }
 
-#lobster {
-}
+#lobster {}
 
 #title {
   /* float: right; */
@@ -109,8 +108,7 @@ code {
   width: 80%;
 }
 
-#login-window {
-}
+#login-window {}
 
 #button-group {
   text-align: center;
@@ -140,7 +138,7 @@ code {
 }
 
 #schedule {
-  top:50px;
+  top: 50px;
   width: 75%;
   height: 80%;
 }
@@ -180,15 +178,16 @@ code {
 }
 
 #cabin-info-box {
-  width:100%;
+  width: 100%;
   text-align: center;
 }
+
 #cabin-info {
   margin: 0 auto;
   font-size: larger;
   text-align: center;
   /* margin-top: 30px; */
-  width:800px;
+  width: 800px;
 }
 
 #name-row {
@@ -222,8 +221,7 @@ code {
   height: 60%;
 }
 
-#confirm-window {
-}
+#confirm-window {}
 
 #ticket {
   margin-top: 20px;
@@ -247,7 +245,7 @@ code {
 
 #photo {
   margin-top: 5px;
-  border:black;
+  border: black;
   border-style: solid;
   border-width: 1px;
 
@@ -257,15 +255,28 @@ code {
 
 #admin-container {
   top: 0px;
-  width:100%;
+  width: 100%;
   height: 100%;
   border-radius: 0px;
 }
 
 #admin-reservation-table {
-  margin-top:20px;
+  margin-top: 20px;
   /* border-style: solid; */
   /* width:80%; */
   /* text-align: center; */
   font-size: 1.3em;
+}
+
+#confirm-window {
+  margin: 0 auto;
+  width: 50%;
+}
+
+#repair-confirmation-table {
+  /* width: 50%; */
+}
+
+#repair-manager-ticket-notes {
+  /* width: 50%; */
 }

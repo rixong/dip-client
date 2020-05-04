@@ -12,17 +12,20 @@ class AdminContainer extends Component {
 
   state = {
     showConfirmation: false,
-    curRepair: ''
+    curRepair: '',
+    menuChoice: 'reservation'
   }
 
   changeDisplay = (repair) => {
     this.setState({
       showConfirmation: !this.state.showConfirmation,
       curRepair: repair,
-      menuChoice: ''
     })
-    console.log(repair);
+  }
 
+  onMenuClick = (menuChoice) => {
+    console.log(menuChoice);
+    this.setState({ menuChoice })
   }
 
   render() {
@@ -31,7 +34,8 @@ class AdminContainer extends Component {
         <div className="form-header">
           <div className="ui grid">
             <div className="four wide column">
-              {/* <div className="button" onClick={}>|Reservations|</div> */}
+              <div className="ui button" name="reservations" onClick={() => this.onMenuClick('reservation')}>|Reservations|</div>
+              <div className="ui button" name="repairs" onClick={() => this.onMenuClick('repair')}>|Repairs|</div>
             </div>
             <div className="eight wide column">
               Admin Panel - {this.props.currentYear.year}
@@ -44,11 +48,19 @@ class AdminContainer extends Component {
           <Route exact path={'/rep'} component={RepairLog} />
           
         </Switch> */}
+        {/* <ViewRepairTicket repair={this.state.curRepair} changeDisplay={this.changeDisplay} /> */}
+        {/* <RepairLog changeDisplay={this.changeDisplay} /> */}
 
-        <ReservationList />
-        {/* {!this.state.showConfirmation ?
-        <RepairLog changeDisplay={this.changeDisplay}/> :
-        <ViewRepairTicket repair={this.state.curRepair} changeDisplay={this.changeDisplay}/>} */}
+        {this.state.menuChoice === "reservation" ?
+          <ReservationList /> :
+          <div>
+            {!this.state.showConfirmation ?
+              <RepairLog changeDisplay={this.changeDisplay} /> :
+              <ViewRepairTicket repair={this.state.curRepair} changeDisplay={this.changeDisplay} />
+            }
+          </div>
+
+        }
       </div>
     )
   }

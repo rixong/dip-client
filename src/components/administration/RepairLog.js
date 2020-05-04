@@ -56,7 +56,7 @@ class RepairLog extends Component {
               <th>Submission Date</th>
               <th>Priority?</th>
               <th>Member</th>
-              <th>Pending?</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>

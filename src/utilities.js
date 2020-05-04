@@ -4,7 +4,11 @@
 
 export function getCabinName(cabins, id) {
   // console.log(cabins, id);
-  return cabins.find(cabin => cabin.id === id).name;
+  if (cabins.length > 0 && id) {
+    return cabins.find(cabin => cabin.id === id).name;
+  } else {
+    return '';
+  }
 }
 
 export function getMemberFullName(users, id) {
