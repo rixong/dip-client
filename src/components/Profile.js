@@ -24,7 +24,6 @@ class UpdateProfile extends Component {
   componentDidMount() {
     this.populateState()
     // this.setState({email: this.props.curUser.email})
-    // console.log('did mount', this.props.curUser.firstname);
   }
 
   populateState = () => {
