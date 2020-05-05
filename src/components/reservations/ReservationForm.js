@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addReservation } from '../../actions/index'
+import moment from 'moment';
+import { getCabinName, findCabin } from '../../utilities'
 
 
 
@@ -14,61 +16,68 @@ class ReservationForm extends Component {
     error: ''
   }
 
-  currentSelectedCabin = (cabinId) => {
-    return this.props.cabins.find(cabin => cabin.id === parseInt(cabinId, 10))
-    // console.log(this.props.cabins.find(cabin => cabin.id === parseInt(cabinId)))
-  }
+  // currentSelectedCabin = (cabinId) => {
+  //   return this.props.cabins.find(cabin => cabin.id === parseInt(cabinId, 10))
+  // }
 
   calculateDailyPrice = (multiplier) => {
     const { budget, dues_split } = this.props.annualReport
     const dailyConstant = (100 - dues_split) / 100 * budget / 40 / 7;
 
-    return dailyConstant * multiplier
-    //(100 - dues_split) * budget / 100 - full housing portion
-    //divide by 40 days
-    // divide by 7 houses
-    //multiply by multiplier
+    return (dailyConstant * multiplier).toFixed(0)
   }
+
+  // calculateReservationPrice
 
   ///SUBMIT RESERVATION
   onHandleSubmit = (e) => {
     e.preventDefault();
-    console.log('Submit resrvation');
-    fetch('http://localhost:3000/api/v1/reservations', {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`,
-        "Content-Type": "application/json",
-        "Accept": "application/json"
-      },
-      body: JSON.stringify({
-        arrival: this.state.arrival,
-        departure: this.state.departure,
-        cabin_id: this.state.cabin,
-        pending: true,
-        user_id: this.props.curUser.id,
-        annual_report_id: 1
+    // console.log('Submit reservation');
+    if (moment(this.state.departure).isSameOrBefore(this.state.arrival, 'day')) {
+      this.setState({ error: 'The departure date needs to be before the arrival date.' })
+    } else {
+
+      fetch('http://localhost:3000/api/v1/reservations', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer: ${localStorage.getItem('accessToken')}`,
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          arrival: this.state.arrival,
+          departure: this.state.departure,
+          cabin_id: this.state.cabin,
+          pending: true,
+          user_id: this.props.curUser.id,
+          annual_report_id: 1
+        })
       })
-    })
-      .then(res => res.json())
-      // .then(json => console.log(json))
-      .then(json => {
-        if (json.message === 'success') {
-          this.props.addReservation(json.res)
-        } else {
-          this.setState({error: json.message})
-        }
-      })
+        .then(res => res.json())
+        // .then(json => console.log(json))
+        .then(json => {
+          if (json.message === 'success') {
+            this.props.addReservation(json.res)
+            this.setState({ error: json.message })
+          } else {
+            this.setState({ error: 'warning' })
+          }
+        })
+    }
   }
 
   handleChange = (e) => {
     // console.log(e.target.value);
     this.setState({
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
+      error: ''
     })
   }
 
   render() {
+
+    let message = `ui bottom attached ${this.state.error} message`
+
     return <div>
       <form className="ui form" id="reservation-form" onSubmit={this.onHandleSubmit}>
         <div className="ui grid">
@@ -123,21 +132,21 @@ class ReservationForm extends Component {
 
       <div className="cabin-info-box">
         {this.state.cabin ?
-          <div className="ui info message" id="cabin-info">
-            <div className="header">
-              {this.currentSelectedCabin(this.state.cabin).name}
-            </div>
-            <div>Daily Rent $
-            <strong>{this.calculateDailyPrice(this.currentSelectedCabin(this.state.cabin).multiplier).toFixed(2)}</strong></div>
+          <div className="ui" id="cabin-info">
+            <h3>{getCabinName(this.props.cabins, this.state.cabin)}</h3>
+            <div>2020 Daily usage fee:&nbsp;&nbsp;$
+              <strong>{this.calculateDailyPrice(findCabin(this.props.cabins, this.state.cabin).multiplier)}
+              </strong></div>
+            Description:&nbsp;&nbsp;<strong>{findCabin(this.props.cabins, this.state.cabin).description}</strong>
           </div>
           : null}
       </div>
       <div>
-          {this.state.error ? 
-          <div className="ui bottom attached red message">{this.state.error}</div>
+        {this.state.error ?
+          <div className={message}>{this.state.error}</div>
           : null
-          }
-        </div>
+        }
+      </div>
     </div>
   }
 }

@@ -138,7 +138,7 @@ code {
 
 #home {
   position: relative;
-  padding:20px;
+  padding: 20px;
   top: 200px;
   width: 600px;
   height: 300px;
@@ -213,11 +213,11 @@ code {
 }
 
 #cabin-info {
-  margin: 0 auto;
   font-size: larger;
-  text-align: center;
-  /* margin-top: 30px; */
-  width: 800px;
+  text-align: left;
+  padding-top: 20px;
+  margin-left: 80px;
+  width: 80%;
 }
 
 #name-row {

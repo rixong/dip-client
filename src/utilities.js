@@ -1,11 +1,19 @@
-// import React from 'react';
-// import {useSelector} from 'react-redux'
+
 
 
 export function getCabinName(cabins, id) {
   // console.log(cabins, id);
   if (cabins.length > 0 && id) {
-    return cabins.find(cabin => cabin.id === id).name;
+    return cabins.find(cabin => cabin.id === parseInt(id, 10)).name;
+  } else {
+    return '';
+  }
+}
+
+export function findCabin(cabins, id) {
+  // console.log(cabins, id);
+  if (cabins.length > 0 && id) {
+    return cabins.find(cabin => cabin.id === parseInt(id, 10));
   } else {
     return '';
   }
