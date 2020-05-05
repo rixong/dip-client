@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addReservation } from '../../actions/index'
 import moment from 'moment';
+
+import DatePicker from 'react-datepicker';
+
 import { getCabinName, findCabin } from '../../utilities'
+import "react-datepicker/dist/react-datepicker.css";
+
 
 
 
@@ -10,8 +15,8 @@ class ReservationForm extends Component {
 
 
   state = {
-    arrival: '',
-    departure: '',
+    arrival: Date.now(),
+    departure: Date.now(),
     cabin: '',
     error: ''
   }
@@ -60,16 +65,27 @@ class ReservationForm extends Component {
             this.props.addReservation(json.res)
             this.setState({ error: json.message })
           } else {
-            this.setState({ error: 'warning' })
+            this.setState({ error: 'red' })
           }
         })
     }
   }
 
-  handleChange = (e) => {
-    // console.log(e.target.value);
+  handleCabinChange = (e) => {
+    console.log(e.target.value);
+    this.setState({ cabin: e.target.value })
+  }
+
+  handleStartChange = (date) => {
     this.setState({
-      [e.target.name]: e.target.value,
+      arrival: date,
+      error: ''
+    })
+  }
+
+  handleEndChange = (date) => {
+    this.setState({
+      departure: date,
       error: ''
     })
   }
@@ -84,8 +100,8 @@ class ReservationForm extends Component {
 
           <div className="four wide column">
             <div className="field">
-              <label>House</label>
-              <select className="menu" name="cabin" onChange={this.handleChange} required>
+              <label>Select a house</label>
+              <select className="ui select" name="cabin" onChange={this.handleCabinChange} required>
                 <option value="">Please select</option>
                 <option className="item" value="1">Big House</option>
                 <option className="item" value="2">Gray House</option>
@@ -98,30 +114,30 @@ class ReservationForm extends Component {
             </div>
           </div>
 
-          <div className="four wide column">
-            <div className='field'>
-              <label htmlFor='arrival'>Arrival</label>
-              <input
-                type="date"
-                name="arrival"
-                onChange={event => this.handleChange(event)}
-                required
-              // value='2020-06-01'
-              />
+          <div className="eight wide column">
+            {/* <form onSubmit={this.onFormSubmit}> */}
+            <div className="two fields">
+              <div className="field">
+                <label>Arrival</label>
+                <DatePicker
+                  selected={this.state.arrival}
+                  onChange={this.handleStartChange}
+                  name="arrival"
+                  dateFormat="MM/dd/yyyy"
+                />
+              </div>
+              <div className="field">
+                <label>Departure</label>
+                <DatePicker
+                  selected={this.state.departure}
+                  onChange={this.handleEndChange}
+                  name="departue"
+                  dateFormat="MM/dd/yyyy"
+                />
+              </div>
+              {/* <button className="btn btn-primary">Show Date</button> */}
             </div>
-          </div>
-
-          <div className="four wide column">
-            <div className='field'>
-              <label htmlFor='departure'>Departure</label>
-              <input
-                type="date"
-                name="departure"
-                onChange={event => this.handleChange(event)}
-                required
-              // value='2020-06-01'
-              />
-            </div>
+            {/* </form> */}
           </div>
 
           <div className="four wide column">

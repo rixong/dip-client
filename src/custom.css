@@ -208,7 +208,8 @@ code {
 }
 
 #cabin-info-box {
-  width: 100%;
+  margin-left: 10%;
+  width: 80%;
   text-align: center;
 }
 
