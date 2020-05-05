@@ -61,7 +61,7 @@ class Navbar extends Component {
                 style={link}
                 activeStyle={activelink}
               >Profile</NavLink>
-          </div>
+            </div>
             :
             <div className="five wide column" id="left-menu"></div>
           }
@@ -82,7 +82,7 @@ class Navbar extends Component {
           <div className="two wide column" id="right-menu">
             {this.props.isLoggedIn ?
               <div>
-
+                {/* `${this.props.curUser.firstname} ${this.props.curUser.lastname}`` */}
                 <NavLink
                   to="/login"
                   exact
@@ -103,13 +103,6 @@ class Navbar extends Component {
               </div>
               :
               null
-              // <NavLink
-              //   to="/login"
-              //   exact
-              //   onClick={this.props.onLogoutClick}
-              //   style={link}
-              //   activeStyle={activelink}
-              // >Login</NavLink>
             }
           </div>
           {this.props.isLoggedIn ?

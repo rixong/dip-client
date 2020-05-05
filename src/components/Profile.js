@@ -76,8 +76,9 @@ class UpdateProfile extends Component {
         // .then(json => console.log(json))
         .then(json => {
           if (json.message === "success") {
+            this.setState({ error: json.message })
             this.props.editCurUser(json.user);
-            // this.props.history.push('/home');
+            // this.props.history.push('/');
           } else {
             this.setState({ error: json.message })
             // console.log(json.message);
@@ -108,29 +109,6 @@ class UpdateProfile extends Component {
 
             />
           </div>
-
-          {/* <div className='two fields'>
-            <div className='field'>
-              <label htmlFor='password'>Password</label>
-              <input
-                type="password"
-                name="password"
-                onChange={event => this.handleChange(event)}
-                value={this.state.password}
-                
-              />
-            </div>
-            <div className='field'>
-              <label htmlFor='password_confirmation'>Confirm Password</label>
-              <input
-                type="password"
-                name="password_confirmation"
-                onChange={event => this.handleChange(event)}
-                value={this.state.password_confirmation}
-                
-              />
-            </div>
-          </div> */}
 
           <div className='field'>
             <label htmlFor='firstname'> First Name</label>
@@ -166,20 +144,20 @@ class UpdateProfile extends Component {
           <div className="ui grid">
             <div className="ui two column row">
               <div className="eight wide column">
-          <button type="submit" className="ui primary button">Send it!</button>
+                <button type="submit" className="ui primary button">Send it!</button>
               </div>
               <div className="eight wide column">
                 <div id="photo-box">
                   <PhotoUploadWidget handlePhotoUpload={this.handlePhotoUpload} />
-                  <Image cloudName="dzycwwun9" publicId={this.state.photo_url} width="100" crop="scale" id="photo"/>
+                  <Image cloudName="dzycwwun9" publicId={this.state.photo_url} width="100" crop="scale" id="photo" />
                 </div>
               </div>
             </div>
           </div>
         </form>
         <div>
-          {this.state.error ?
-            <div className="ui bottom attached red message">{this.state.error}</div>
+          {this.state.error === 'success' ?
+            <div className="ui bottom attached blue message">{this.state.error}</div>
             : null
           }
         </div>
