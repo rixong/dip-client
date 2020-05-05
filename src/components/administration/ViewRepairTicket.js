@@ -14,6 +14,10 @@ class ViewRepairTicket extends Component {
     status: ''
   }
 
+  componentDidMount() {
+    this.setState({followup: this.props.followup})
+  }
+
   onHandleChange = (e) => {
     // console.log(e.target.value);
     this.setState({ followup: e.target.value })
@@ -22,7 +26,7 @@ class ViewRepairTicket extends Component {
   onHandleChecked = (e) => {
     // console.log(e.target.checked);
     this.setState({
-      status: !e.target.checked
+      status: e.target.checked
     })
   }
 
@@ -37,7 +41,7 @@ class ViewRepairTicket extends Component {
       },
       body: JSON.stringify({
         followup: this.state.followup,
-        pending: this.state.status
+        pending: !this.state.status
       })
     })
       .then(res => {

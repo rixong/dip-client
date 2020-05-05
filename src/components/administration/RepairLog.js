@@ -29,6 +29,7 @@ class RepairLog extends Component {
             <td data-label="Submission-Date">{rep.submission_date}</td>
             <td data-label="Priority">{rep.priority ? <h3>High</h3> : <h3>Low</h3>}</td>
             <td data-label="Member">{getMemberFullName(this.props.users, rep.user_id)}</td>
+            <td data-label="Member">{rep.followup}</td>
             <td data-label="Pending">
               {rep.pending ?
                 <h3 className="ui message warning"> Open </h3> :
@@ -56,6 +57,7 @@ class RepairLog extends Component {
               <th>Submission Date</th>
               <th>Priority?</th>
               <th>Member</th>
+              <th>Followup</th>
               <th>Status</th>
             </tr>
           </thead>

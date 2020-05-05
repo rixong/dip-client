@@ -138,9 +138,9 @@ code {
 
 #home {
   position: relative;
+  padding:20px;
   top: 200px;
   width: 600px;
-  padding: 30px;
   height: 300px;
   border-radius: 5px;
 
@@ -149,15 +149,16 @@ code {
 
 #home-title {
   /* font-family: 'Permanent Marker', cursive; */
-  font-family: 'Courgette', cursive;
+  /* font-family: 'Courgette', cursive; */
   font-size: 2em;
+
 }
 
 #banner {
   font-family: 'Courgette', cursive;
   margin-left: 70px;
   width: 80%;
-  margin-top: 15px;
+  margin-bottom: 15px;
   text-align: left;
   font-size: 1.2em;
 }
