@@ -60,6 +60,13 @@ code {
   text-align: right;
 }
 
+.notification-badge {
+  background-color: tomato;
+  height: 10px;
+  width: 10px;
+  border-radius: 5px;
+}
+
 #navbar-photo-box {
   /* padding-right:10px; */
 }
@@ -67,9 +74,8 @@ code {
 #lobster {}
 
 #title {
-  /* float: right; */
-  /* font-family: 'Permanent Marker', cursive; */
-  font-family: 'Courgette', cursive;
+
+  font-family: 'Playfair Display', serif;
   font-size: 3em;
 }
 
@@ -78,7 +84,6 @@ code {
   height: 900px;
   position: relative;
   background-image: url(./assets/waterscape\ 1.jpg);
-  /* background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url(./assets/waterscape\ 1.jpg); */
   /* height: 500px; You must set a specified height */
   background-position: center;
   background-repeat: no-repeat;
@@ -143,24 +148,28 @@ code {
   width: 600px;
   height: 300px;
   border-radius: 5px;
+}
 
-  /* background-color: mediumorchid; */
+.home,
+div.home>*,
+li {
+  background-color: whitesmoke;
 }
 
 #home-title {
-  /* font-family: 'Permanent Marker', cursive; */
-  /* font-family: 'Courgette', cursive; */
-  font-size: 2em;
-
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8em;
+  padding-bottom: 15px;
 }
 
 #banner {
-  font-family: 'Courgette', cursive;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2em;
+  font-style: italic;
+  text-align: left;
   margin-left: 70px;
   width: 80%;
   margin-bottom: 15px;
-  text-align: left;
-  font-size: 1.2em;
 }
 
 #updates {
@@ -252,20 +261,22 @@ code {
   height: 60%;
 }
 
-#confirm-window {}
+#repair-confirmation-window {}
 
-#ticket {
+#ticket-header {
   margin-top: 20px;
 }
 
-#ticket-details {
+/* #ticket-details {
   text-align: left;
   font-size: large;
-}
+} */
 
 #repair-confirmation-table {
   margin: 0 auto;
-  width: 80%
+  width: 80%;
+  font-size: 1.2em;
+
 }
 
 /* PROFILE */
