@@ -15,7 +15,7 @@ const AdminRoute = ({ component: Component, ...rest }) => {
             isLoggedIn && admin ?
                 // true ?  ///for testing
                 <Component {...props} />
-                : <Redirect to="/" />
+                : <Redirect to="/login" />
         )} />
     );
 };

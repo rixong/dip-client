@@ -88,7 +88,7 @@ class App extends Component {
   }
 
   setCurUser = () => {
-    console.log('SetCurUser');
+    // console.log('SetCurUser');
 
     fetch("http://localhost:3000/api/v1/profile", {
       method: 'GET',

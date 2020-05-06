@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import WeekRow from './WeekRow'
 import uuid from 'react-uuid'
@@ -7,11 +7,11 @@ import uuid from 'react-uuid'
 var moment = require('moment')
 
 class ScheduleWeekly extends Component {
-  
-    state = {
-      startDate: new Date('2020-05-30T00:00:00'),
-      week: 1,
-    }
+
+  state = {
+    startDate: new Date('2020-05-30T00:00:00'),
+    week: 1,
+  }
 
   makeSchedule = () => {
     // Create rows for each cabin calling MakeRow() with each cabin
@@ -21,9 +21,9 @@ class ScheduleWeekly extends Component {
       let reservations = this.combineSingleCabinRes(i + 1)
       // console.log('reservations',reservations);
       weekRowArray.push(<WeekRow key={uuid()}
-        reservations={reservations} 
-        cabinName={this.props.cabins[i].name} 
-        />);
+        reservations={reservations}
+        cabinName={this.props.cabins[i].name}
+      />);
     }
     // console.log('weekRowArray', weekRowArray);
 
@@ -32,7 +32,7 @@ class ScheduleWeekly extends Component {
 
   // Combine reservations for one cabin in array.
   combineSingleCabinRes = (curCabinId) => {
-    let result = [];    
+    let result = [];
     if (this.props.curReservations) {
       result = this.props.curReservations.filter(res => res.cabin.cabinId === curCabinId)
       let finalArray = result.map(res => this.makeArray(res)).flat()
@@ -56,8 +56,9 @@ class ScheduleWeekly extends Component {
     // Take a reservation for specific cabin and make array of objects {dif: days from start of week}
     for (let i = 0; i < lengthOfStay; i++) {
       reservedDaysArray.push(
-        { userName: this.fullName(res), 
-          userId: res.reserver.userId, 
+        {
+          userName: this.fullName(res),
+          userId: res.reserver.userId,
           dif: this.numDays(arr, start),
           pending: res.pending
         });
@@ -80,11 +81,11 @@ class ScheduleWeekly extends Component {
   switchWeek = (e) => {
     let newWeek = '';
     let direction = e.target.closest('button').name;
-    direction === 'left' ? 
-    newWeek = moment(this.state.startDate).subtract(this.state.week, 'week').format() :
-    newWeek = moment(this.state.startDate).add(this.state.week, 'week').format();
+    direction === 'left' ?
+      newWeek = moment(this.state.startDate).subtract(this.state.week, 'week').format() :
+      newWeek = moment(this.state.startDate).add(this.state.week, 'week').format();
 
-    this.setState({startDate: newWeek})
+    this.setState({ startDate: newWeek })
   }
 
 
@@ -99,7 +100,7 @@ class ScheduleWeekly extends Component {
           <button className="ui icon button" name="left" onClick={(e) => this.switchWeek(e)}>
             <i className="arrow left icon big" ></i></button>
           Week of {moment(this.state.startDate).format("MMM D")}
-            - {moment(this.state.startDate).add(7, 'd').format("MMM D")}
+          &nbsp;- {moment(this.state.startDate).add(7, 'd').format("MMM D")}
           <button className="ui icon button" name="right" onClick={(e) => this.switchWeek(e)}>
             <i className="arrow right icon big" ></i></button>
         </div>
@@ -123,7 +124,7 @@ class ScheduleWeekly extends Component {
           </div>
           {this.makeSchedule()}
         </div>
-        </Fragment>
+      </Fragment>
       // </div>
 
     )

@@ -294,6 +294,13 @@ li {
 }
 
 /* ADMIN PANEL */
+#admin-home-table {
+  margin-top: 20px;
+  /* border-style: solid; */
+  /* width:80%; */
+  /* text-align: center; */
+  font-size: 1.3em;
+}
 
 #admin-container {
   top: 0px;
