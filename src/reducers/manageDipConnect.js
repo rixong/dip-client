@@ -36,19 +36,19 @@ function usersReducer(
 
 function adminReducer(
   state =
-    { 
-      cabins: [], 
+    {
+      cabins: [],
       reservations: [],
-      repairs: [], 
-      annualReport:  {
-        year:''
+      repairs: [],
+      annualReport: {
+        year: ''
       }
     }
   ,
   action
 ) {
 
-  // console.log('from users reducer', action);
+  console.log('from users reducer', action);
   switch (action.type) {
     case 'ADD_USERS':
       return { ...state, users: action.payload }
@@ -57,22 +57,24 @@ function adminReducer(
     case 'ADD_REPAIR_TICKETS':
       return { ...state, repairs: action.payload }
     case 'ADD_REPAIR_TICKET':
-      return { ...state, repairs:  state.repairs.concat(action.payload) }
+      return { ...state, repairs: state.repairs.concat(action.payload) }
     case 'ADD_CUR_REPORT':
       return { ...state, annualReport: action.payload }
-      case 'GET_RESERVATIONS':
-        return { ...state, reservations: action.payload }
-      case 'ADD_RESERVATION':
-        return { ...state, reservations: state.reservations.concat(action.payload) }
-      case 'APPROVE_RESERVATION':
-        let idx = state.reservations.findIndex(res => res.id === action.payload);
-        let newRes = Object.assign({}, state.reservations[idx]);
-        newRes.pending = false;
-        let newReservations =  
-          [...state.reservations.slice(0, idx).concat(newRes).concat(...state.reservations.slice(idx + 1))];
-        return {...state, reservations: newReservations};
-      default:
-        return state
+    case 'GET_RESERVATIONS':
+      return { ...state, reservations: action.payload }
+    case 'ADD_RESERVATION':
+      return { ...state, reservations: state.reservations.concat(action.payload) }
+    case 'APPROVE_RESERVATION':
+      let idx = state.reservations.findIndex(res => res.id === action.payload);
+      let newRes = Object.assign({}, state.reservations[idx]);
+      newRes.pending = false;
+      let newReservations =
+        [...state.reservations.slice(0, idx).concat(newRes).concat(...state.reservations.slice(idx + 1))];
+      return { ...state, reservations: newReservations };
+    case 'DELETE_ALL':
+      return {};
+    default:
+      return state
   }
 
 }

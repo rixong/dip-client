@@ -12,7 +12,7 @@ export const editCurUser = user => {
     type: 'EDIT_CUR_USER',
     payload: user
   }
-} 
+}
 
 export const deleteCurUser = () => {
   return {
@@ -46,6 +46,12 @@ export const approveReservation = (id) => {
 
 
 // ADMIN ACTIONS
+export const deleteAll = () => {
+  return {
+    type: 'DELETE_ALL'
+  }
+}
+
 export const addRepairTickets = (repairs) => {
   return {
     type: 'ADD_REPAIR_TICKETS',
