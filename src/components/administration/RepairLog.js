@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import moment from 'moment';
+
 import * as Constants from '../../constants'
 import { addRepairTickets } from '../../actions/index'
 import { getCabinName, getMemberFullName } from '../../utilities'
@@ -23,13 +25,16 @@ class RepairLog extends Component {
     if (this.props.repairs.length > 0 && this.props.cabins.length > 0) {
       return this.props.repairs.map((rep, idx) => {
         return (
-          <tr key={idx} onClick={() => this.props.changeDisplay(rep)}>
+          <tr key={idx}
+            onClick={() => this.props.changeDisplay(rep)}
+            followup={rep.followup}>
             <td data-label="House Name">{getCabinName(this.props.cabins, rep.cabin_id)}</td>
             <td data-label="Category">{rep.category}</td>
-            <td data-label="Submission-Date">{rep.submission_date}</td>
+            <td data-label="Submission-Date">{this.formatDate(rep.created_at)}</td>
             <td data-label="Priority">{rep.priority ? <h3>High</h3> : <h3>Low</h3>}</td>
+            <td data-label="Description">{rep.description}</td>
             <td data-label="Member">{getMemberFullName(this.props.users, rep.user_id)}</td>
-            <td data-label="Member">{rep.followup}</td>
+            <td data-label="Followup">{rep.followup}</td>
             <td data-label="Pending">
               {rep.pending ?
                 <h3 className="ui message warning"> Open </h3> :
@@ -42,6 +47,9 @@ class RepairLog extends Component {
     }
   }
 
+  formatDate = (date) => {
+    return moment(date).format('lll');
+  }
 
 
   render() {
@@ -56,6 +64,7 @@ class RepairLog extends Component {
               <th>Category</th>
               <th>Submission Date</th>
               <th>Priority?</th>
+              <th>Description</th>
               <th>Member</th>
               <th>Followup</th>
               <th>Status</th>

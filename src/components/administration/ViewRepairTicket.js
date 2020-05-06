@@ -14,9 +14,9 @@ class ViewRepairTicket extends Component {
     status: ''
   }
 
-  componentDidMount() {
-    this.setState({followup: this.props.followup})
-  }
+  // componentDidMount() {
+  //   this.setState({ followup: this.props.followup })
+  // }
 
   onHandleChange = (e) => {
     // console.log(e.target.value);
@@ -50,7 +50,7 @@ class ViewRepairTicket extends Component {
   }
 
   render() {
-    const { id, category, description, created_at, priority } = this.props.repair
+    const { id, category, description, created_at, priority, followup } = this.props.repair
 
     return (
 
@@ -86,6 +86,10 @@ class ViewRepairTicket extends Component {
             <tr>
               <td>Priority?</td>
               <td><strong>{priority ? 'Yes' : 'No'}</strong></td>
+            </tr>
+            <tr>
+              <td>Log</td>
+              <td><strong>{followup}</strong></td>
             </tr>
           </tbody>
         </table>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+import moment from 'moment';
 
 import * as Constants from '../../constants'
 import { getMemberFullName } from '../../utilities'
@@ -57,15 +58,19 @@ class ReservationList extends Component {
     // .then(json => console.log(json));
   }
 
+  formatDate = (date) => {
+    return moment(`${date}T00:00:00`).format('ddd, MMM D');
+  }
+
   renderReservations = () => {
-    console.log(this.props.reservations);
+    // console.log(this.props.reservations);
 
     return this.props.reservations.map((res, idx) => {
       return (
         <tr key={idx}>
           <td data-label="House Name">{res.cabin.cabinName}</td>
-          <td data-label="Arrival">{res.arrival}</td>
-          <td data-label="Departure">{res.departure}</td>
+          <td data-label="Arrival">{this.formatDate(res.arrival)}</td>
+          <td data-label="Departure">{this.formatDate(res.departure)}</td>
           <td data-label="Member">{getMemberFullName(this.props.users, res.reserver.userId)}</td>
           <td data-label="Email">
             <a href="mailto:rixong@gmail.com">{res.reserver.email}</a>
@@ -79,7 +84,7 @@ class ReservationList extends Component {
               }
             </div>
           </td>
-          <td><button className="ui button" onClick={() => this.handleDelete(res.id)}>Delete</button></td>
+          <td><button className="ui button" id="delete-button" onClick={() => this.handleDelete(res.id)}>Delete</button></td>
         </tr>
       )
     })
