@@ -49,9 +49,11 @@ function adminReducer(
   action
 ) {
 
-  console.log('from users reducer', action);
+  console.log('from reducer', action);
   switch (action.type) {
     case 'ADD_USERS':
+      console.log('from users');
+      
       return { ...state, users: action.payload }
     case 'ADD_CABINS':
       return { ...state, cabins: action.payload }
@@ -60,6 +62,8 @@ function adminReducer(
     case 'ADD_REPAIR_TICKET':
       return { ...state, repairs: state.repairs.concat(action.payload) }
     case 'ADD_CUR_ANNUAL_REPORT':
+      console.log('from CAR');
+      
       return action.payload
     case 'GET_RESERVATIONS':
       return { ...state, reservations: action.payload }

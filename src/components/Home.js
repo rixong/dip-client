@@ -8,37 +8,34 @@ import {
   addCurrentAnnualReport,
   addCabins,
   addUsers,
-  // getReservations,
-  // addRepairTickets,
   deleteAll
 } from '../actions/index';
 
 class Home extends Component {
 
   // componentDidMount() {
-  //   if (this.props.isLoggedIn) {
-  //     fetchCurrentAnnualReport()
-  //       .then(res => res.json())
-  //       // .then(json => console.log(json))
-  //       .then(json => this.props.addCurrentAnnualReport(json))
-  //   }
+
   // }
 
   render() {
 
     if (this.props.isLoggedIn) {
-      // fetchCurrentAnnualReport()
-      //   .then(res => res.json())
-      //   // .then(json => console.log(json))
-      //   .then(json => this.props.addCurrentAnnualReport(json.report))
-      // fetchUsers()
-      // .then(res => res.json())
-      //   // .then(json => console.log(json))
-      // .then(json => this.props.addUsers(json))
-      fetchCabins()
-      .then(res => res.json())
-        // .then(json => console.log(json))
-      .then(json => this.props.addCabins(json))
+
+      Promise.all([
+        fetchCurrentAnnualReport(),
+        fetchUsers(),
+        fetchCabins()
+      ]).then(([res1, res2, res3]) => {
+        return Promise.all([res1.json(), res2.json(), res3.json()])
+      }).then(([res1, res2, res3]) => {
+        this.props.addCurrentAnnualReport(res1.report);
+        return [res1, res2, res3]
+      })
+        .then(([res1, res2, res3]) => {
+          this.props.addUsers(res2);
+          return [res1, res2, res3]
+        })
+        // this.props.addCabins(res3);
     }
 
     return (
