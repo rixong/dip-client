@@ -61,7 +61,7 @@ export const addRepairTickets = (repairs) => {
 
 export const addCurrentAnnualReport = (report) => {
   return {
-    type: "ADD_CUR_REPORT",
+    type: "ADD_CUR_ANNUAL_REPORT",
     payload: report
   }
 }

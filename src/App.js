@@ -35,51 +35,52 @@ class App extends Component {
 
   componentDidMount() {
     if (localStorage.getItem('accessToken')) {
-      Promise.all([
-        fetch("http://localhost:3000/api/v1/annual_report/current", {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-          }
-        }),
+    //   Promise.all([
+    //     fetch("http://localhost:3000/api/v1/annual_report/current", {
+    //       method: 'GET',
+    //       headers: {
+    //         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    //       }
+    //     }),
 
-        fetch("http://localhost:3000/api/v1/users", {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-          }
-        }),
+    //     fetch("http://localhost:3000/api/v1/users", {
+    //       method: 'GET',
+    //       headers: {
+    //         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    //       }
+    //     }),
 
-        fetch("http://localhost:3000/api/v1/cabins", {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-          }
-        }),
+    //     fetch("http://localhost:3000/api/v1/cabins", {
+    //       method: 'GET',
+    //       headers: {
+    //         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    //       }
+    //     }),
 
-        fetch("http://localhost:3000/api/v1/reservations", {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-          }
-        }),
+    //     fetch("http://localhost:3000/api/v1/reservations", {
+    //       method: 'GET',
+    //       headers: {
+    //         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    //       }
+    //     }),
 
-        fetch("http://localhost:3000/api/v1/repairs", {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-          }
-        }),
+    //     fetch("http://localhost:3000/api/v1/repairs", {
+    //       method: 'GET',
+    //       headers: {
+    //         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    //       }
+    //     }),
 
-      ]).then(([res1, res2, res3, res4, res5]) => {
-        return Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()])
-      }).then(([res1, res2, res3, res4, res5]) => {
-        this.props.addCurrentAnnualReport(res1);
-        this.props.addUsers(res2)
-        this.props.addCabins(res3);
-        this.props.getReservations(res4);
-        this.props.addRepairTickets(res5);
-      }).then(() => this.setCurUser())
+    //   ]).then(([res1, res2, res3, res4, res5]) => {
+    //     return Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()])
+    //   }).then(([res1, res2, res3, res4, res5]) => {
+    //     this.props.addCurrentAnnualReport(res1);
+    //     this.props.addUsers(res2)
+    //     this.props.addCabins(res3);
+    //     this.props.getReservations(res4);
+    //     this.props.addRepairTickets(res5);
+    //   }).then(() => this.setCurUser())
+    this.setCurUser();
     }
   }
 
