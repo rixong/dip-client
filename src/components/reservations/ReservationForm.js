@@ -169,7 +169,7 @@ class ReservationForm extends Component {
 
 const mapsStateToProps = state => {
   return {
-    curUser: state.users.curUser,
+    curUser: state.curUser.user,
     annualReport: state.admin.annualReport,
     cabins: state.admin.cabins
   }

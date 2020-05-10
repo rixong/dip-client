@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import moment from 'moment';
 
 import * as Constants from '../../constants'
-import { getMemberFullName } from '../../utilities'
-
+import  {getCabinName, getMemberFullName, getMember } from '../../utilities'
+import {postApproveReservation} from '../../apiCalls'
 import { getReservations, approveReservation } from '../../actions/index'
 
 class ReservationList extends Component {
@@ -29,16 +29,7 @@ class ReservationList extends Component {
   ////  Reservation approval
   handleApproval = (resId) => {
     console.log('click to approve.', resId);
-
-    fetch(`${Constants.baseUrl}/reservations/${resId}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-      },
-      body: JSON.stringify({ pending: false })
-    })
+    postApproveReservation(resId)
       .then(res => res.json())
       .then(json => this.props.approveReservation(resId))
   }
@@ -66,14 +57,15 @@ class ReservationList extends Component {
     // console.log(this.props.reservations);
 
     return this.props.reservations.map((res, idx) => {
+      const user = getMember(this.props.users, res.userId)
       return (
         <tr key={idx}>
-          <td data-label="House Name">{res.cabin.cabinName}</td>
+          <td data-label="House Name">{getCabinName(this.props.cabins, res.cabinId)}</td>
           <td data-label="Arrival">{this.formatDate(res.arrival)}</td>
           <td data-label="Departure">{this.formatDate(res.departure)}</td>
-          <td data-label="Member">{getMemberFullName(this.props.users, res.reserver.userId)}</td>
+          <td data-label="Member">{getMemberFullName(this.props.users, user.id)}</td>
           <td data-label="Email">
-            <a href="mailto:rixong@gmail.com">{res.reserver.email}</a>
+            <a href="mailto:rixong@gmail.com">{user.email}</a>
           </td>
           <td data-label="Approved">
             <div className="ui icon button">
@@ -126,8 +118,9 @@ class ReservationList extends Component {
 
 const mapStateToProps = state => {
   return {
-    reservations: state.admin.reservations,
-    users: state.admin.users
+    reservations: state.admin.annualReport.reservations,
+    users: state.admin.users,
+    cabins: state.admin.cabins
   }
 };
 export default connect(mapStateToProps, { getReservations, approveReservation })(ReservationList);

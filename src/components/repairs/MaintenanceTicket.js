@@ -115,7 +115,7 @@ class MaintenanceTicket extends Component {
 
 const mapStateToProps = state => {
   return {
-    curUser: state.users.curUser
+    curUser: state.curUser.user
   }
 }
 

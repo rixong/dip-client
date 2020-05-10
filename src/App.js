@@ -139,12 +139,12 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
-    isLoggedIn: state.users.isLoggedIn,
-    curUser: state.users.curUser
+    isLoggedIn: state.curUser.isLoggedIn,
+    curUser: state.curUser.user
   }
-}
+};
 
 export default connect(mapStateToProps, {
   addCurUser,

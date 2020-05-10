@@ -82,7 +82,7 @@ class RepairLog extends Component {
 const mapStateToProps = state => {
   return {
     cabins: state.admin.cabins,
-    repairs: state.admin.repairs,
+    repairs: state.admin.annualReport.repairs,
     users: state.admin.users
   }
 };

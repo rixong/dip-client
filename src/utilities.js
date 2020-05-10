@@ -1,9 +1,7 @@
 
-
-
 export function getCabinName(cabins, id) {
-  // console.log(cabins, id);
-  if (cabins.length > 0 && id) {
+  console.log(cabins, id);
+  if (cabins  && id) {
     return cabins.find(cabin => cabin.id === parseInt(id, 10)).name;
   } else {
     return '';
@@ -28,6 +26,11 @@ export function getMemberFullName(users, id) {
   }
 }
 
+export function getMember(users, id) {
+  if (users && id) {
+    return users.find(user => user.id === id);
+  } else {
+    return '';
+  }
+}
 
-
-export default getCabinName

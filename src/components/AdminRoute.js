@@ -5,8 +5,8 @@ import { useSelector } from 'react-redux';
 
 const AdminRoute = ({ component: Component, ...rest }) => {
 
-    const isLoggedIn = useSelector(state => state.users.isLoggedIn)
-    const admin = useSelector(state => state.users.curUser.admin)
+    const isLoggedIn = useSelector(state => state.curUser.isLoggedIn)
+    const admin = useSelector(state => state.curUser.user.admin)
     return (
 
         // Show the component only when the user is logged in

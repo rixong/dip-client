@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import {findCabin} from '../../utilities'
 
 
 class AdminHome extends Component {
@@ -12,8 +13,9 @@ class AdminHome extends Component {
       let arr = moment(`${res.arrival}T00:00:00`)
       let dep = moment(`${res.departure}T00:00:00`)
       let length = dep.diff(arr, 'days')
-      let indTotal = length * this.calculateDailyPrice(res.cabin.cabinMultiplier)
-      console.log('indy total', indTotal);
+      // console.log('indy total', findCabin(this.props.cabins, res.cabinId));
+      let indTotal = length * 
+        this.calculateDailyPrice(findCabin(this.props.cabins, res.cabinId).multiplier)
       total += indTotal
     })
     return total;
@@ -56,7 +58,7 @@ class AdminHome extends Component {
 const mapStateToProps = state => {
   return {
     annualReport: state.admin.annualReport,
-    reservations: state.admin.reservations,
+    reservations: state.admin.annualReport.reservations,
     cabins: state.admin.cabins
   }
 };

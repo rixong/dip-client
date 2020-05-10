@@ -167,7 +167,7 @@ class UpdateProfile extends Component {
 
 const mapStateToProps = store => {
   return {
-    curUser: store.users.curUser
+    curUser: store.curUser.user
   }
 };
 

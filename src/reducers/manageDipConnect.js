@@ -1,15 +1,15 @@
 import { combineReducers } from 'redux'
 
 const rootReducer = combineReducers({
-  users: usersReducer,
+  curUser: curUserReducer,
   // reservations: reservationsReducer,
   admin: adminReducer
 })
 
-function usersReducer(
+function curUserReducer(
   state = {
     isLoggedIn: false,
-    curUser: {
+    user: {
       id: '',
       email: '',
       firstname: '',
@@ -23,12 +23,11 @@ function usersReducer(
   // console.log('from users reducer', action);
   switch (action.type) {
     case 'ADD_CUR_USER':
-      return { ...state, curUser: action.payload, isLoggedIn: true }
+      return { ...state, user: action.payload, isLoggedIn: true }
     case 'EDIT_CUR_USER':
-      return { ...state, curUser: action.payload }
+      return { ...state, user: action.payload }
     case 'DELETE_CUR_USER':
-      return { ...state, curUser: '', isLoggedIn: false }
-
+      return { ...state, user: '', isLoggedIn: false }
     default:
       return state
   }
@@ -52,8 +51,6 @@ function adminReducer(
   console.log('from reducer', action);
   switch (action.type) {
     case 'ADD_USERS':
-      console.log('from users');
-      
       return { ...state, users: action.payload }
     case 'ADD_CABINS':
       return { ...state, cabins: action.payload }
@@ -62,20 +59,22 @@ function adminReducer(
     case 'ADD_REPAIR_TICKET':
       return { ...state, repairs: state.repairs.concat(action.payload) }
     case 'ADD_CUR_ANNUAL_REPORT':
-      console.log('from CAR');
-      
       return action.payload
+
     case 'GET_RESERVATIONS':
-      return { ...state, reservations: action.payload }
+      let newAnnualReport = { ...state.annualReport, reservations: action.payload }
+      return { ...state, annualReport: newAnnualReport }
     case 'ADD_RESERVATION':
+      newAnnualReport = { ...state.annualReport, reservations: action.payload }
       return { ...state, reservations: state.reservations.concat(action.payload) }
     case 'APPROVE_RESERVATION':
       let idx = state.reservations.findIndex(res => res.id === action.payload);
       let newRes = Object.assign({}, state.reservations[idx]);
       newRes.pending = false;
       let newReservations =
-        [...state.reservations.slice(0, idx).concat(newRes).concat(...state.reservations.slice(idx + 1))];
-      return { ...state, reservations: newReservations };
+        [...state.annualReport.reservations.slice(0, idx).concat(newRes).concat(...state.annualReport.reservations.slice(idx + 1))];
+      newAnnualReport = Object.assign({}, ...state.annualReport, { reservations: newReservations })
+      return { ...state, newAnnualReport: newAnnualReport };
     case 'DELETE_ALL':
       return {};
     default:

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCurrentAnnualReport, fetchUsers, fetchCabins } from '../apiCalls'
+import { fetchCurrentAnnualReport, fetchCurrentReservations, fetchCurrentRepairs, fetchUsers, fetchCabins } from '../apiCalls'
 
 import {
   addCurUser,
@@ -23,19 +23,22 @@ class Home extends Component {
 
       Promise.all([
         fetchCurrentAnnualReport(),
+        fetchCurrentReservations(),
+        fetchCurrentRepairs(),
         fetchUsers(),
         fetchCabins()
-      ]).then(([res1, res2, res3]) => {
-        return Promise.all([res1.json(), res2.json(), res3.json()])
-      }).then(([res1, res2, res3]) => {
-        this.props.addCurrentAnnualReport(res1.report);
-        return [res1, res2, res3]
+      ]).then(([res1, res2, res3, res4, res5]) => {
+        return Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()])
       })
-        .then(([res1, res2, res3]) => {
-          this.props.addUsers(res2);
-          return [res1, res2, res3]
-        })
-        // this.props.addCabins(res3);
+      .then(([res1, res2, res3, res4, res5]) => {
+        this.props.addCurrentAnnualReport({
+          annualReport: res1.report, 
+          reservations: res2,
+          repairs: res3, 
+          users: res4, 
+          cabins: res5
+        });
+      })
     }
 
     return (
@@ -67,9 +70,8 @@ class Home extends Component {
 
 const mapStateToProps = state => {
   return {
-    curUser: state.users.curUser,
-    isLoggedIn: state.users.isLoggedIn
-
+    curUser: state.curUser.user,
+    isLoggedIn: state.curUser.isLoggedIn
   }
 };
 
