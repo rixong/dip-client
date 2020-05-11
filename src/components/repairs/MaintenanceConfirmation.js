@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+var moment = require('moment')
 
 class MaintenanceConfirmation extends Component {
 
 
   render() {
 
-    const { category, description, submission_date, priority } = this.props.repair
+    const { category, description, created_at, priority } = this.props.repair
 
     return (
       <div id="repair-confirmation-window">
@@ -19,7 +20,7 @@ class MaintenanceConfirmation extends Component {
             </tr>
             <tr>
               <td>Date Submitted:</td>
-              <td><strong>{submission_date}</strong></td>
+              <td><strong>{moment(created_at).format('llll')}</strong></td>
             </tr>
             <tr>
               <td>Category of Repair:</td>

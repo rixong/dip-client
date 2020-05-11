@@ -2,28 +2,21 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import moment from 'moment';
 
-import * as Constants from '../../constants'
 import  {getCabinName, getMemberFullName, getMember } from '../../utilities'
-import {postApproveReservation} from '../../apiCalls'
+import {postApproveReservation, postDeleteReservation, fetchCurrentReservations} from '../../apiCalls'
 import { getReservations, approveReservation } from '../../actions/index'
 
 class ReservationList extends Component {
 
 
   componentDidMount() {
-    this.fetchReservations()
+    // fetchCurrentReservations()
   }
 
-  fetchReservations = () => {
-    fetch(`${Constants.baseUrl}/reservations`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-      }
-    })
-      .then(res => res.json())
-      // .then(json => console.log(json))
-      .then(json => this.props.getReservations(json))
+  updateReservations = () => {
+    fetchCurrentReservations()
+    .then(res => res.json())
+    .then(json => this.props.getReservations(json))
   }
 
   ////  Reservation approval
@@ -37,15 +30,8 @@ class ReservationList extends Component {
   ////  Reservation Delete
   handleDelete = (resId) => {
     console.log('click to delete.', resId);
-    fetch(`${Constants.baseUrl}/reservations/${resId}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-      }
-    })
-      .then(res => this.fetchReservations())
+    postDeleteReservation(resId)
+      .then(res => this.updateReservations())
     // .then(json => console.log(json));
   }
 
@@ -118,7 +104,7 @@ class ReservationList extends Component {
 
 const mapStateToProps = state => {
   return {
-    reservations: state.admin.annualReport.reservations,
+    reservations: state.admin.reservations,
     users: state.admin.users,
     cabins: state.admin.cabins
   }

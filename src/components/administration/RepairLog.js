@@ -2,20 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import moment from 'moment';
 
-import * as Constants from '../../constants'
+import {fetchCurrentRepairs} from '../../apiCalls'
 import { addRepairTickets } from '../../actions/index'
 import { getCabinName, getMemberFullName } from '../../utilities'
 
 class RepairLog extends Component {
 
   componentDidMount() {
-    /// fetch current repairs
-    fetch(`${Constants.baseUrl}/repairs`, {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-      }
-    })
+    fetchCurrentRepairs()
       .then(res => res.json())
       // .then(json => console.log(json))
       .then(json => this.props.addRepairTickets(json))
@@ -28,12 +22,12 @@ class RepairLog extends Component {
           <tr key={idx}
             onClick={() => this.props.changeDisplay(rep)}
             followup={rep.followup}>
-            <td data-label="House Name">{getCabinName(this.props.cabins, rep.cabin_id)}</td>
+            <td data-label="House Name">{getCabinName(this.props.cabins, rep.cabinId)}</td>
             <td data-label="Category">{rep.category}</td>
             <td data-label="Submission-Date">{this.formatDate(rep.created_at)}</td>
             <td data-label="Priority">{rep.priority ? <h3>High</h3> : <h3>Low</h3>}</td>
             <td data-label="Description">{rep.description}</td>
-            <td data-label="Member">{getMemberFullName(this.props.users, rep.user_id)}</td>
+            <td data-label="Member">{getMemberFullName(this.props.users, rep.userId)}</td>
             <td data-label="Followup">{rep.followup}</td>
             <td data-label="Pending">
               {rep.pending ?
@@ -82,7 +76,7 @@ class RepairLog extends Component {
 const mapStateToProps = state => {
   return {
     cabins: state.admin.cabins,
-    repairs: state.admin.annualReport.repairs,
+    repairs: state.admin.repairs,
     users: state.admin.users
   }
 };

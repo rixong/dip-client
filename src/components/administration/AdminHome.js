@@ -22,14 +22,14 @@ class AdminHome extends Component {
   }
 
   calculateDailyPrice = (multiplier) => {
-    const { budget, dues_split } = this.props.annualReport
-    const dailyConstant = (100 - dues_split) / 100 * budget / 40 / 7;
+    const { budget, duesSplit } = this.props.annualReport
+    const dailyConstant = (100 - duesSplit) / 100 * budget / 40 / 7;
     return (dailyConstant * multiplier).toFixed(0)
   }
 
 
   render() {
-    const { budget, dues_split, year } = this.props.annualReport
+    const { budget, duesSplit, year } = this.props.annualReport
     // console.log(100 - dues_split);
 
     return (
@@ -42,7 +42,7 @@ class AdminHome extends Component {
             </tr>
             <tr>
               <td>{year} Income Split:</td>
-              <td>Member Dues:{dues_split}% - Usage Fees: {100 - dues_split}%</td>
+              <td>Member Dues:{duesSplit}% - Usage Fees: {100 - duesSplit}%</td>
             </tr>
             <tr>
               <td>{year} Current Usage Fees to date:</td>
@@ -58,7 +58,7 @@ class AdminHome extends Component {
 const mapStateToProps = state => {
   return {
     annualReport: state.admin.annualReport,
-    reservations: state.admin.annualReport.reservations,
+    reservations: state.admin.reservations,
     cabins: state.admin.cabins
   }
 };

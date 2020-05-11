@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 
 class PhotoUploadWidget extends Component {
 
-  // state = {
-  //   url: '',
-  //   caption: ''
-  // }
-
   checkLoadResults = (resultEvent) => {
     console.log('clicked save photo', resultEvent.event);
     if (resultEvent.event === 'success') {
@@ -22,6 +17,8 @@ class PhotoUploadWidget extends Component {
   }
 
   showWidget = (widget) => {
+    console.log('widget');
+    
     widget.open();
   }
 

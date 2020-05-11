@@ -1,10 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-
-import WeekRow from './WeekRow'
+import moment from 'moment';
 import uuid from 'react-uuid'
 
-var moment = require('moment')
+import {getMemberFullName} from '../../utilities'
+import WeekRow from './WeekRow'
+
 
 class ScheduleWeekly extends Component {
 
@@ -34,7 +35,7 @@ class ScheduleWeekly extends Component {
   combineSingleCabinRes = (curCabinId) => {
     let result = [];
     if (this.props.curReservations) {
-      result = this.props.curReservations.filter(res => res.cabin.cabinId === curCabinId)
+      result = this.props.curReservations.filter(res => res.cabinId === curCabinId)
       let finalArray = result.map(res => this.makeArray(res)).flat()
 
       // console.log('finalArray', finalArray);
@@ -57,8 +58,8 @@ class ScheduleWeekly extends Component {
     for (let i = 0; i < lengthOfStay; i++) {
       reservedDaysArray.push(
         {
-          userName: this.fullName(res),
-          userId: res.reserver.userId,
+          userName: getMemberFullName(this.props.users, res.userId),
+          userId: res.userId,
           dif: this.numDays(arr, start),
           pending: res.pending
         });
@@ -70,9 +71,9 @@ class ScheduleWeekly extends Component {
 
   /// Helper methods
 
-  fullName = (reservation) => {
-    return `${reservation.reserver.firstName} ${reservation.reserver.lastName}`
-  }
+  // fullName = (reservation) => {
+  //   return `${reservation.reserver.firstName} ${reservation.reserver.lastName}`
+  // }
 
   numDays = (end, start) => {
     return end.diff(start, 'days')
@@ -134,7 +135,8 @@ class ScheduleWeekly extends Component {
 const mapStateToProps = state => {
   return {
     curReservations: state.admin.reservations,
-    cabins: state.admin.cabins
+    cabins: state.admin.cabins,
+    users: state.admin.users
   }
 }
 

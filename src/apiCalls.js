@@ -57,3 +57,65 @@ export function postApproveReservation(resId) {
   })
 }
 
+export function postDeleteReservation(id) {
+  console.log('from api',id);
+  
+  return fetch(`${baseUrl}/reservations/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    }
+  })
+}
+
+
+export function updateRepairTicket(id, data) {
+  return fetch(`${baseUrl}/repairs/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    },
+    body: JSON.stringify({
+      followup: data.followup,
+      pending: !data.status
+    })
+  })
+}
+
+export function addRepairTicket(body) {
+  return fetch(`${baseUrl}/repairs`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    },
+    body: JSON.stringify(body)
+  })
+}
+
+export function updateUser(body) {
+  return fetch(`${baseUrl}/users/${body.id}`, {
+    method: "PATCH",
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json',
+      Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    },
+    body: JSON.stringify({
+      user: {
+        email: body.email,
+        firstname: body.firstname,
+        lastname: body.lastname,
+        bday: body.bday,
+        photo_url: body.photo_url
+      }
+    })
+  })
+
+
+}

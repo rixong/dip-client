@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as Constants from '../constants'
-
-import { editCurUser } from '../actions/index'
 import PhotoUploadWidget from './PhotoUploadWidget'
 import { Image } from 'cloudinary-react';
+import DatePicker from 'react-datepicker';
+
+import { editCurUser } from '../actions/index'
+import { updateUser } from '../apiCalls'
 
 class UpdateProfile extends Component {
 
@@ -12,65 +13,63 @@ class UpdateProfile extends Component {
     super(props)
 
     this.state = {
-      email: '',
-      firstname: '',
-      lastname: '',
-      bday: '',
-      photoUrl: '',
+      curUser: {
+        id: '',
+        email: '',
+        firstname: '',
+        lastname: '',
+        photo_url: '',
+        bday: new Date()
+      },
       error: null
     }
   }
 
   componentDidMount() {
     this.populateState()
-    // this.setState({email: this.props.curUser.email})
   }
 
   populateState = () => {
-
     this.setState({
-      id: this.props.curUser.id,
-      email: this.props.curUser.email,
-      firstname: this.props.curUser.firstname,
-      lastname: this.props.curUser.lastname,
-      // bday: this.props.curUser.bday,
-      photo_url: this.props.curUser.photo_url
+      curUser: {
+        id: this.props.curUser.id,
+        email: this.props.curUser.email,
+        firstname: this.props.curUser.firstname,
+        lastname: this.props.curUser.lastname,
+        photo_url: this.props.curUser.photo_url,
+        bday: new Date(this.props.curUser.bday)
+      }
     })
   }
 
   handlePhotoUpload = url => {
-    this.setState({ photo_url: url })
+    this.setState({
+      curUser: {...this.state.curUser, photo_url: url }
+    })
   }
 
   handleChange = e => {
-    // console.log(this.props.curUser.firstname);
+    console.log(e.target.value);
+    this.setState(
+      {
+      curUser: {...this.state.curUser, [e.target.name]: e.target.value }
+      }
+    )
+  }
+
+  handleDateChange = date => {
+    console.log(date);
     this.setState({
-      [e.target.name]: e.target.value
+      curUser: { ...this.state.curUser, bday: new Date(date) }
     })
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    // console.log('create user here');
+    console.log(e.target);
     if (this.props.curUser) {
 
-      fetch(`${Constants.baseUrl}/users/${this.props.curUser.id}`, {
-        method: "PATCH",
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-        },
-        body: JSON.stringify({
-          user: {
-            email: this.state.email,
-            firstname: this.state.firstname,
-            lastname: this.state.lastname,
-            bday: this.state.bday,
-            photo_url: this.state.photo_url
-          }
-        })
-      })
+        updateUser(this.state.curUser)
         .then(res => res.json())
         // .then(json => console.log(json))
         .then(json => {
@@ -104,7 +103,7 @@ class UpdateProfile extends Component {
               type="email"
               name="email"
               onChange={event => this.handleChange(event)}
-              value={this.state.email}
+              value={this.state.curUser.email}
 
             />
           </div>
@@ -115,7 +114,7 @@ class UpdateProfile extends Component {
               type="text"
               name="firstname"
               onChange={event => this.handleChange(event)}
-              value={this.state.firstname}
+              value={this.state.curUser.firstname}
             />
           </div>
 
@@ -125,19 +124,21 @@ class UpdateProfile extends Component {
               type="text"
               name="lastname"
               onChange={event => this.handleChange(event)}
-              value={this.state.lastname}
+              value={this.state.curUser.lastname}
             />
           </div>
 
-          <div className='field'>
+          <div className="field">
             <label htmlFor='bday'>Birthday</label>
-            <input
-              type="date"
+            <DatePicker
+              selected={this.state.curUser.bday}
+              onChange={this.handleDateChange}
               name="bday"
-              onChange={event => this.handleChange(event)}
+              dateFormat="MM/dd/yyyy"
             // value={this.state.bday}
             />
           </div>
+
           <br></br>
 
           <div className="ui grid">
@@ -148,7 +149,7 @@ class UpdateProfile extends Component {
               <div className="eight wide column">
                 <div id="photo-box">
                   <PhotoUploadWidget handlePhotoUpload={this.handlePhotoUpload} />
-                  <Image cloudName="dzycwwun9" publicId={this.state.photo_url} width="100" crop="scale" id="photo" />
+                  <Image cloudName="dzycwwun9" publicId={this.state.curUser.photo_url} width="100" crop="scale" id="photo" />
                 </div>
               </div>
             </div>

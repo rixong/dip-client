@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getMemberFullName, getCabinName } from '../../utilities'
-import * as Constants from '../../constants'
+import {updateRepairTicket} from '../../apiCalls'
 
 
 var moment = require('moment')
@@ -14,9 +14,6 @@ class ViewRepairTicket extends Component {
     status: ''
   }
 
-  // componentDidMount() {
-  //   this.setState({ followup: this.props.followup })
-  // }
 
   onHandleChange = (e) => {
     // console.log(e.target.value);
@@ -32,18 +29,7 @@ class ViewRepairTicket extends Component {
 
   onSubmit = (id) => {
     console.log("submit repair update");
-    fetch(`${Constants.baseUrl}/repairs/${id}`, {
-      method: 'PATCH',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-      },
-      body: JSON.stringify({
-        followup: this.state.followup,
-        pending: !this.state.status
-      })
-    })
+    updateRepairTicket(id, this.state)
       .then(res => {
         this.props.changeDisplay([]);
       })
@@ -61,7 +47,7 @@ class ViewRepairTicket extends Component {
           <tbody>
             <tr>
               <td>House:</td>
-              <td><strong>{getCabinName(this.props.cabins, this.props.repair.cabin_id)}</strong></td>
+              <td><strong>{getCabinName(this.props.cabins, this.props.repair.cabinId)}</strong></td>
             </tr>
             <tr>
               <td>Date Submitted:</td>
@@ -73,7 +59,7 @@ class ViewRepairTicket extends Component {
             </tr>
             <tr>
               <td>Member Reporting:</td>
-              <td><strong>{getMemberFullName(this.props.users, this.props.repair.user_id)}</strong></td>
+              <td><strong>{getMemberFullName(this.props.users, this.props.repair.userId)}</strong></td>
             </tr>
             <tr>
               <td>Member's Email:</td>

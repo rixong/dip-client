@@ -131,7 +131,7 @@ class ReservationForm extends Component {
                 <DatePicker
                   selected={this.state.departure}
                   onChange={this.handleEndChange}
-                  name="departue"
+                  name="departure"
                   dateFormat="MM/dd/yyyy"
                 />
               </div>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
+import {addRepairTicket} from '../../apiCalls';
+
 class MaintenanceTicket extends Component {
 
   constructor(props) {
@@ -28,22 +30,14 @@ class MaintenanceTicket extends Component {
 
   onHandleSubmit = (e) => {
     e.preventDefault();
-    // console.log(Date.now());
-      fetch('http://localhost:3000/api/v1/repairs', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer: ${localStorage.getItem('accessToken')}`,
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          user_id: this.props.curUser.id,
-          cabin_id: parseInt(this.state.cabin, 10),
-          category: this.state.category,
-          description: this.state.description,
-          priority: this.state.priority
-        })
-      })
+    const body ={
+      user_id: this.props.curUser.id,
+      cabin_id: parseInt(this.state.cabin, 10),
+      category: this.state.category,
+      description: this.state.description,
+      priority: this.state.priority
+    };
+    addRepairTicket(body)
       .then(res => {
         if (!res.ok) {
           throw Error(res.statusText);
@@ -51,6 +45,7 @@ class MaintenanceTicket extends Component {
         return res;
       })
       .then(res => res.json())
+      // .then(json => console.log(json))
       .then(json => this.props.changeDisplay(json.repair))
       .catch(error => console.log('This is the error', error))
   }
