@@ -1,6 +1,6 @@
 
 export function getCabinName(cabins, id) {
-  console.log(cabins, id);
+  // console.log(cabins, id);
   if (cabins  && id) {
     return cabins.find(cabin => cabin.id === parseInt(id, 10)).name;
   } else {

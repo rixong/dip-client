@@ -4,35 +4,32 @@ import { connect } from 'react-redux';
 import ScheduleWeekly from './ScheduleWeekly';
 import ReservationForm from './ReservationForm';
 
-import { getReservations, addCabins } from '../../actions/index'
+import { getReservations, addCabins } from '../../actions/index';
+import {fetchCurrentReservations} from '../../apiCalls';
 
 class ScheduleContainer extends Component {
 
   componentDidMount() {
     
     /// fetch current reservations
-    fetch('http://localhost:3000/api/v1/reservations', {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-      }
-    })
+
+    fetchCurrentReservations()
       .then(res => res.json())
       // .then(json => console.log(json))
       .then(json => this.props.getReservations(json))
-    //   .then(() => {
   }
 
-  addNewReservation = (res) => {
-    this.setState({ reservations: this.state.reservations.concat(res) })
-  }
+  // addNewReservation = (res) => {
+  //   this.setState({ reservations: this.state.reservations.concat(res) })
+  // }
 
   render() {
     return (
       <div className="form-window" id="schedule">
         <Fragment>
           < ScheduleWeekly />
-          < ReservationForm curUser={this.props.curUser} addNewReservation={this.addNewReservation} />
+          {/* < ReservationForm curUser={this.props.curUser} addNewReservation={this.addNewReservation} /> */}
+          < ReservationForm curUser={this.props.curUser} />
         </Fragment>
       </div>
     )

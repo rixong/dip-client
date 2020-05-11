@@ -21,7 +21,7 @@ class ReservationList extends Component {
 
   ////  Reservation approval
   handleApproval = (resId) => {
-    console.log('click to approve.', resId);
+    // console.log('click to approve.', resId);
     postApproveReservation(resId)
       .then(res => res.json())
       .then(json => this.props.approveReservation(resId))
@@ -29,7 +29,7 @@ class ReservationList extends Component {
 
   ////  Reservation Delete
   handleDelete = (resId) => {
-    console.log('click to delete.', resId);
+    // console.log('click to delete.', resId);
     postDeleteReservation(resId)
       .then(res => this.updateReservations())
     // .then(json => console.log(json));

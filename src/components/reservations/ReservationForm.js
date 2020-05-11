@@ -1,34 +1,34 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addReservation } from '../../actions/index'
 import moment from 'moment';
-
 import DatePicker from 'react-datepicker';
-
-import { getCabinName, findCabin } from '../../utilities'
 import "react-datepicker/dist/react-datepicker.css";
 
+import { addReservation } from '../../actions/index'
+import { getCabinName, findCabin } from '../../utilities'
+import { postAddReservation } from '../../apiCalls'
 
-
+const startDate = new Date('2020-05-30T00:00:00')
 
 class ReservationForm extends Component {
 
-
   state = {
-    arrival: Date.now(),
-    departure: Date.now(),
-    cabin: '',
+    reservation: {
+      arrival: startDate,
+      departure: startDate,
+      cabin_id: '',
+      user_id: this.props.curUser.id,
+      annualReport_id: this.props.annualReport.id
+    },
     error: ''
   }
 
-  // currentSelectedCabin = (cabinId) => {
-  //   return this.props.cabins.find(cabin => cabin.id === parseInt(cabinId, 10))
-  // }
-
   calculateDailyPrice = (multiplier) => {
-    const { budget, dues_split } = this.props.annualReport
-    const dailyConstant = (100 - dues_split) / 100 * budget / 40 / 7;
-
+    
+    const { budget, duesSplit } = this.props.annualReport
+    const dailyConstant = (100 - duesSplit) / 100 * budget / 40 / 7;
+    
+    // console.log(multiplier, dailyConstant);
     return (dailyConstant * multiplier).toFixed(0)
   }
 
@@ -38,26 +38,10 @@ class ReservationForm extends Component {
   onHandleSubmit = (e) => {
     e.preventDefault();
     // console.log('Submit reservation');
-    if (moment(this.state.departure).isSameOrBefore(this.state.arrival, 'day')) {
+    if (moment(this.state.reservation.departure).isSameOrBefore(this.state.reservation.arrival, 'day')) {
       this.setState({ error: 'The departure date needs to be before the arrival date.' })
     } else {
-
-      fetch('http://localhost:3000/api/v1/reservations', {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer: ${localStorage.getItem('accessToken')}`,
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          arrival: this.state.arrival,
-          departure: this.state.departure,
-          cabin_id: this.state.cabin,
-          pending: true,
-          user_id: this.props.curUser.id,
-          annual_report_id: 1
-        })
-      })
+      postAddReservation(this.state.reservation)
         .then(res => res.json())
         // .then(json => console.log(json))
         .then(json => {
@@ -72,22 +56,15 @@ class ReservationForm extends Component {
   }
 
   handleCabinChange = (e) => {
-    console.log(e.target.value);
-    this.setState({ cabin: e.target.value })
+    this.setState({ reservation: { ...this.state.reservation, cabin_id: parseInt(e.target.value, 10) } })
   }
 
   handleStartChange = (date) => {
-    this.setState({
-      arrival: date,
-      error: ''
-    })
+    this.setState({ reservation: { ...this.state.reservation, arrival: date } })
   }
 
   handleEndChange = (date) => {
-    this.setState({
-      departure: date,
-      error: ''
-    })
+    this.setState({ reservation: { ...this.state.reservation, departure: date } })
   }
 
   render() {
@@ -120,7 +97,7 @@ class ReservationForm extends Component {
               <div className="field">
                 <label>Arrival</label>
                 <DatePicker
-                  selected={this.state.arrival}
+                  selected={this.state.reservation.arrival}
                   onChange={this.handleStartChange}
                   name="arrival"
                   dateFormat="MM/dd/yyyy"
@@ -129,15 +106,13 @@ class ReservationForm extends Component {
               <div className="field">
                 <label>Departure</label>
                 <DatePicker
-                  selected={this.state.departure}
+                  selected={this.state.reservation.departure}
                   onChange={this.handleEndChange}
                   name="departure"
                   dateFormat="MM/dd/yyyy"
                 />
               </div>
-              {/* <button className="btn btn-primary">Show Date</button> */}
             </div>
-            {/* </form> */}
           </div>
 
           <div className="four wide column">
@@ -147,13 +122,13 @@ class ReservationForm extends Component {
       </form>
 
       <div className="cabin-info-box">
-        {this.state.cabin ?
+        {this.state.reservation.cabin_id ?
           <div className="ui" id="cabin-info">
-            <h3>{getCabinName(this.props.cabins, this.state.cabin)}</h3>
+            <h3>{getCabinName(this.props.cabins, this.state.reservation.cabin_id)}</h3>
             <div>2020 Daily usage fee:&nbsp;&nbsp;$
-              <strong>{this.calculateDailyPrice(findCabin(this.props.cabins, this.state.cabin).multiplier)}
+              <strong>{this.calculateDailyPrice(findCabin(this.props.cabins, this.state.reservation.cabin_id).multiplier)}
               </strong></div>
-            Description:&nbsp;&nbsp;<strong>{findCabin(this.props.cabins, this.state.cabin).description}</strong>
+            Description:&nbsp;&nbsp;<strong>{findCabin(this.props.cabins, this.state.reservation.cabin_id).description}</strong>
           </div>
           : null}
       </div>

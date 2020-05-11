@@ -45,6 +45,26 @@ export function fetchCabins() {
   })
 }
 
+export function postAddReservation(body) {
+  
+  return fetch(`${baseUrl}/reservations`, {
+    method: 'POST',
+    headers: {
+      Authorization: `Bearer: ${localStorage.getItem('accessToken')}`,
+      "Content-Type": "application/json",
+      "Accept": "application/json"
+    },
+    body: JSON.stringify({
+      arrival: body.arrival,
+      departure: body.departure,
+      cabin_id: body.cabin_id,
+      // pending: true,
+      user_id: body.user_id,
+      // annual_report_id: body.annual_report_id
+    })
+  })
+}
+
 export function postApproveReservation(resId) {
   return fetch(`${baseUrl}/reservations/${resId}`, {
     method: 'PATCH',
@@ -58,8 +78,7 @@ export function postApproveReservation(resId) {
 }
 
 export function postDeleteReservation(id) {
-  console.log('from api',id);
-  
+
   return fetch(`${baseUrl}/reservations/${id}`, {
     method: 'DELETE',
     headers: {
