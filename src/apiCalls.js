@@ -1,4 +1,50 @@
 export const baseUrl = "http://localhost:3000/api/v1";
+// export const baseUrl = "https://fast-peak-03793.herokuapp.com/api/v1";
+
+export function postLogin(loginInfo) {  
+  return fetch(`${baseUrl}/login`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    body: JSON.stringify({
+      user: {
+        email: loginInfo.email,
+        password: loginInfo.password,
+      }
+    })
+  })
+}
+
+export function postNewUser(user) {
+  return fetch(`${baseUrl}/users`, {
+    method: "POST",
+    headers: {
+      'Content-Type': 'application/json',
+      Accept: 'application/json'
+    },
+    body: JSON.stringify({
+      user: {
+        email: user.email,
+        password: user.password,
+        password_confirmation: user.password_confirmation,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        bday: user.bday
+      }
+    })
+  })
+}
+
+export function postCurUser() {
+  return fetch(`${baseUrl}/profile`, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    }
+  })
+}
 
 export function fetchCurrentAnnualReport() {
   return fetch(`${baseUrl}/annual_report/current`, {
@@ -46,7 +92,7 @@ export function fetchCabins() {
 }
 
 export function postAddReservation(body) {
-  
+
   return fetch(`${baseUrl}/reservations`, {
     method: 'POST',
     headers: {

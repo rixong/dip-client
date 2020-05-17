@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {addCurUser} from '../actions/index'
+import {postNewUser} from './/../apiCalls'
 
 class NewUser extends Component {
 
@@ -25,25 +26,7 @@ class NewUser extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log('create user here');
-
-    fetch('http://localhost:3000/api/v1/users', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify({
-        user: {
-          email: this.state.email,
-          password: this.state.password,
-          password_confirmation: this.state.password_confirmation,
-          firstname: this.state.firstname,
-          lastname: this.state.lastname,
-          bday: this.state.bday
-        }
-      })
-    })
+    postNewUser(this.state)
       .then(res => res.json())
       // .then(json => console.log(json))
       .then(json => {

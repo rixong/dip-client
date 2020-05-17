@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addCurUser } from '../actions/index'
+import { addCurUser } from '../actions/index';
+import { postLogin } from '../apiCalls';
 
 class Login extends Component {
 
@@ -21,21 +22,7 @@ class Login extends Component {
 
   handleLoginSubmit = (e) => {
     e.preventDefault();
-    // console.log('login here');
-
-    fetch('http://localhost:3000/api/v1/login', {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify({
-        user: {
-          email: this.state.email,
-          password: this.state.password,
-        }
-      })
-    })
+    postLogin(this.state)
       .then(res => res.json())
       // .then(json => console.log(json))
       .then(json => {
@@ -45,12 +32,9 @@ class Login extends Component {
           this.props.history.push('/');
         } else {
           this.setState({ error: json.message })
-          // console.log(json.message);
         }
       })
-
   }
-
 
   render() {
     return (
@@ -87,9 +71,9 @@ class Login extends Component {
         <br></br>
         <br></br>
         <div>
-          {this.state.error ? 
-          <div className="ui bottom attached red message">{this.state.error}</div>
-          : null
+          {this.state.error ?
+            <div className="ui bottom attached red message">{this.state.error}</div>
+            : null
           }
         </div>
 

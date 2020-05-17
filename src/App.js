@@ -12,9 +12,9 @@ import {
 } from './actions';
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
-import './App.css';
 import './custom.css'
 import 'semantic-ui-css/semantic.min.css';
+import {postCurUser} from './/apiCalls';
 
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
@@ -29,57 +29,11 @@ import MaintenanceContainer from './components/repairs/MaintenanceContainer';
 import AdminContainer from './components/administration/AdminContainer';
 import UpdateProfile from './components/Profile';
 
-// const baseURL = 'http://localhost:3000/api/v1'
 
 class App extends Component {
 
   componentDidMount() {
     if (localStorage.getItem('accessToken')) {
-    //   Promise.all([
-    //     fetch("http://localhost:3000/api/v1/annual_report/current", {
-    //       method: 'GET',
-    //       headers: {
-    //         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-    //       }
-    //     }),
-
-    //     fetch("http://localhost:3000/api/v1/users", {
-    //       method: 'GET',
-    //       headers: {
-    //         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-    //       }
-    //     }),
-
-    //     fetch("http://localhost:3000/api/v1/cabins", {
-    //       method: 'GET',
-    //       headers: {
-    //         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-    //       }
-    //     }),
-
-    //     fetch("http://localhost:3000/api/v1/reservations", {
-    //       method: 'GET',
-    //       headers: {
-    //         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-    //       }
-    //     }),
-
-    //     fetch("http://localhost:3000/api/v1/repairs", {
-    //       method: 'GET',
-    //       headers: {
-    //         Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-    //       }
-    //     }),
-
-    //   ]).then(([res1, res2, res3, res4, res5]) => {
-    //     return Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()])
-    //   }).then(([res1, res2, res3, res4, res5]) => {
-    //     this.props.addCurrentAnnualReport(res1);
-    //     this.props.addUsers(res2)
-    //     this.props.addCabins(res3);
-    //     this.props.getReservations(res4);
-    //     this.props.addRepairTickets(res5);
-    //   }).then(() => this.setCurUser())
     this.setCurUser();
     }
   }
@@ -99,16 +53,9 @@ class App extends Component {
 
   setCurUser = () => {
     // console.log('SetCurUser');
-
-    fetch("http://localhost:3000/api/v1/profile", {
-      method: 'GET',
-      headers: {
-        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-      }
-    })
+    postCurUser()
       .then(res => res.json())
       .then(json => this.props.addCurUser(json.user))
-
   }
 
   render() {
