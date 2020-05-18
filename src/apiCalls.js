@@ -1,5 +1,5 @@
-// export const baseUrl = "http://localhost:3000/api/v1";
-export const baseUrl = "https://fast-peak-03793.herokuapp.com/api/v1";
+export const baseUrl = "http://localhost:3000/api/v1";
+// export const baseUrl = "https://fast-peak-03793.herokuapp.com/api/v1";
 
 export function postLogin(loginInfo) {  
   return fetch(`${baseUrl}/login`, {
