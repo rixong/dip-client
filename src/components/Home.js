@@ -13,13 +13,10 @@ import {
 
 class Home extends Component {
 
-  // componentDidMount() {
-
-  // }
-
   render() {
 
     if (this.props.isLoggedIn) {
+      
 
       Promise.all([
         fetchCurrentAnnualReport(),

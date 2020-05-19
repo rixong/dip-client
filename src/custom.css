@@ -123,10 +123,16 @@ code {
   width: 80%;
 }
 
-#login-window {}
+#login-window {
+  height: 350px;
+}
 
 #button-group {
   text-align: center;
+}
+
+.loader {
+  background-color: black;
 }
 
 #login-button {

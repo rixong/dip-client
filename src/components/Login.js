@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addCurUser } from '../actions/index';
 import { postLogin } from '../apiCalls';
+import Spinner from './Spinner';
 
 class Login extends Component {
 
@@ -10,7 +11,8 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      error: null
+      error: null,
+      loading: false
     }
   }
 
@@ -22,6 +24,7 @@ class Login extends Component {
 
   handleLoginSubmit = (e) => {
     e.preventDefault();
+    this.setState({ loading: true })
     postLogin(this.state)
       .then(res => res.json())
       // .then(json => console.log(json))
@@ -31,7 +34,7 @@ class Login extends Component {
           this.props.addCurUser(json.user);
           this.props.history.push('/');
         } else {
-          this.setState({ error: json.message })
+          this.setState({ loading: false, error: json.message })
         }
       })
   }
@@ -40,43 +43,48 @@ class Login extends Component {
     return (
 
       <div className="form-window" id="login-window">
+        {!this.state.loading ?
+          <div>
+            <div className="form-header">Log in</div>
+            <form className="ui form main-form" onSubmit={this.handleLoginSubmit}>
+              <div className="field">
+                <label htmlFor='email'>Email</label>
+                <input
+                  type="text"
+                  name="email"
+                  onChange={event => this.handleChange(event)}
+                  value={this.state.email}
+                />
+              </div>
 
-        <div className="form-header">Log in</div>
-        <form className="ui form main-form" onSubmit={this.handleLoginSubmit}>
-          <div className="field">
-            <label htmlFor='email'>Email</label>
-            <input
-              type="text"
-              name="email"
-              onChange={event => this.handleChange(event)}
-              value={this.state.email}
-            />
+              <div className="field">
+                <label htmlFor='password'>Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  onChange={event => this.handleChange(event)}
+                  value={this.state.password}
+                />
+              </div>
+              <br></br>
+              <div id="button-group">
+                <button className="ui primary button" id="login-button" type="submit"> Login </button>
+                <button className="ui grey button" onClick={() => this.props.history.push('/newuser')}>New User?</button>
+              </div>
+            </form>
           </div>
-
-          <div className="field">
-            <label htmlFor='password'>Password</label>
-            <input
-              type="password"
-              name="password"
-              onChange={event => this.handleChange(event)}
-              value={this.state.password}
-            />
-          </div>
-          <br></br>
-          <div id="button-group">
-            <button className="ui primary button" id="login-button" type="submit"> Login </button>
-            <button className="ui grey button" onClick={() => this.props.history.push('/newuser')}>New User?</button>
-          </div>
-        </form>
+          :
+          <Spinner />
+        }
         <br></br>
         <br></br>
         <div>
-          {this.state.error ?
-            <div className="ui bottom attached red message">{this.state.error}</div>
-            : null
+          {
+            this.state.error ?
+              <div className="ui bottom attached red message">{this.state.error}</div>
+              : null
           }
         </div>
-
       </div>
     )
   }

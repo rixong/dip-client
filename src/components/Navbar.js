@@ -108,7 +108,7 @@ class Navbar extends Component {
           {this.props.isLoggedIn ?
             <div className="one wide column" id="navbar-photo-box" >
               <Image cloudName="dzycwwun9" publicId={this.props.curUser.photo_url}
-                width="50" radius='30' crop="scale" />
+                width="36" radius='30' crop="scale" />
             </div> : null}
         </div>
       </div>
