@@ -20,7 +20,7 @@ function curUserReducer(
     }
   }, action
 ) {
-  // console.log('from users reducer', action);
+  console.log('from users reducer', action);
   switch (action.type) {
     case 'ADD_CUR_USER':
       return { ...state, user: action.payload, isLoggedIn: true }

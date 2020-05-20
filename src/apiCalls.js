@@ -1,3 +1,6 @@
+
+import axios from 'axios';
+
 // export const baseUrl = "http://localhost:3000/api/v1";
 export const baseUrl = "https://fast-peak-03793.herokuapp.com/api/v1";
 
@@ -37,9 +40,8 @@ export function postNewUser(user) {
   })
 }
 
-export function postCurUser() {
-  return fetch(`${baseUrl}/profile`, {
-    method: 'GET',
+export function postCurUser () {
+  return axios.get(`${baseUrl}/profile`, {
     headers: {
       Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
     }
@@ -81,6 +83,8 @@ export function fetchUsers() {
     }
   })
 }
+
+
 
 export function fetchCabins() {
   return fetch(`${baseUrl}/cabins`, {

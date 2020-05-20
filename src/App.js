@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  addCurUser,
-  deleteCurUser,
-  addCurrentAnnualReport,
-  addCabins,
-  addUsers,
-  getReservations,
-  addRepairTickets,
-  deleteAll
-} from './actions';
 import { BrowserRouter as Router, Switch } from 'react-router-dom'
 
 import './custom.css'
 import 'semantic-ui-css/semantic.min.css';
-import {postCurUser} from './/apiCalls';
+
+import {
+  addCurUser,
+  deleteCurUser,
+  deleteAll
+} from './actions';
+
+// import {postCurUser} from './/apiCalls';
 
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
@@ -34,28 +31,21 @@ class App extends Component {
 
   componentDidMount() {
     if (localStorage.getItem('accessToken')) {
-    this.setCurUser();
+      // this.getCurUser();
+      this.props.addCurUser();
     }
   }
 
-  onLogoutClick = () => {
-    console.log('logout');
+  // getCurUser = async () => {
+  //   const response = await postCurUser();
+  //   this.props.addCurUser(response.data.user)
+  // }
 
+  onLogoutClick = () => {
     localStorage.removeItem('accessToken')
-    this.setState(
-      {
-        isNewUser: false
-      }
-    )
+    this.setState( {isNewUser: false} )
     this.props.deleteAll();
     this.props.deleteCurUser();
-  }
-
-  setCurUser = () => {
-    // console.log('SetCurUser');
-    postCurUser()
-      .then(res => res.json())
-      .then(json => this.props.addCurUser(json.user))
   }
 
   render() {
@@ -74,7 +64,6 @@ class App extends Component {
                 <PrivateRoute exact path='/maintenance' component={MaintenanceContainer} />
                 <PrivateRoute exact path='/user' component={UpdateProfile} />
                 <AdminRoute exact path='/admin' component={AdminContainer} />
-
               </Switch>
 
             </div>
@@ -96,10 +85,5 @@ const mapStateToProps = state => {
 export default connect(mapStateToProps, {
   addCurUser,
   deleteCurUser,
-  addCurrentAnnualReport,
-  addCabins,
-  addUsers,
-  getReservations,
-  addRepairTickets,
   deleteAll
 })(App);

@@ -1,11 +1,29 @@
+// import dipApi from '../apis/dipApi'
+import axios from 'axios';
+
+
 ///users reducer
 
-export const addCurUser = newUser => {
-  return {
-    type: 'ADD_CUR_USER',
-    payload: newUser
+export const addCurUser = () => {
+  
+  return async dispatch => {
+    const response = await axios.get('https://fast-peak-03793.herokuapp.com/api/v1/profile', {
+      headers: {
+        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+      }
+    })
+    // console.log('here');
+    dispatch ({ type: 'ADD_CUR_USER', payload: response.data.user});
   };
 };
+
+
+// export const addCurUser = user => {
+//   return {
+//     type: 'ADD_CUR_USER',
+//     payload: user
+//   }
+// }
 
 export const editCurUser = user => {
   return {

@@ -1,15 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCurrentAnnualReport, fetchCurrentReservations, fetchCurrentRepairs, fetchUsers, fetchCabins } from '../apiCalls'
 
-import {
-  addCurUser,
-  deleteCurUser,
-  addCurrentAnnualReport,
-  addCabins,
-  addUsers,
-  deleteAll
-} from '../actions/index';
+import { fetchCurrentAnnualReport, fetchCurrentReservations, fetchCurrentRepairs, fetchUsers, fetchCabins } from '../apiCalls'
+import {addCurrentAnnualReport} from '../actions/index';
 
 class Home extends Component {
 
@@ -17,7 +10,6 @@ class Home extends Component {
 
     if (this.props.isLoggedIn) {
       
-
       Promise.all([
         fetchCurrentAnnualReport(),
         fetchCurrentReservations(),
@@ -72,11 +64,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default connect(mapStateToProps, {
-  addCurUser,
-  deleteCurUser,
-  addCurrentAnnualReport,
-  addCabins,
-  addUsers,
-  deleteAll
-})(Home);
+export default connect(mapStateToProps, { addCurrentAnnualReport })(Home);
