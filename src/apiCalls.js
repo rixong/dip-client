@@ -1,8 +1,8 @@
 
-import axios from 'axios';
+// import dipApi from './api/dipApi';
 
-// export const baseUrl = "http://localhost:3000/api/v1";
-export const baseUrl = "https://fast-peak-03793.herokuapp.com/api/v1";
+export const baseUrl = "http://localhost:3000/api/v1";
+// export const baseUrl = "https://fast-peak-03793.herokuapp.com/api/v1";
 
 export function postLogin(loginInfo) {  
   return fetch(`${baseUrl}/login`, {
@@ -40,13 +40,13 @@ export function postNewUser(user) {
   })
 }
 
-export function postCurUser () {
-  return axios.get(`${baseUrl}/profile`, {
-    headers: {
-      Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-    }
-  })
-}
+// export function postCurUser () {    MOVED TO ACTION W/THUNK
+//   return axios.get(`${baseUrl}/profile`, {
+//     headers: {
+//       Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+//     }
+//   })
+// }
 
 export function fetchCurrentAnnualReport() {
   return fetch(`${baseUrl}/annual_report/current`, {
@@ -83,8 +83,6 @@ export function fetchUsers() {
     }
   })
 }
-
-
 
 export function fetchCabins() {
   return fetch(`${baseUrl}/cabins`, {

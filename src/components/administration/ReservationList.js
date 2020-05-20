@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import moment from 'moment';
 
 import  {getCabinName, getMemberFullName, getMember } from '../../utilities'
-import {postApproveReservation, postDeleteReservation, fetchCurrentReservations} from '../../apiCalls'
-import { getReservations, approveReservation } from '../../actions/index'
+import {postApproveReservation, postDeleteReservation} from '../../apiCalls'
+import { addReservations, approveReservation } from '../../actions/index'
 
 class ReservationList extends Component {
 
@@ -14,9 +14,10 @@ class ReservationList extends Component {
   }
 
   updateReservations = () => {
-    fetchCurrentReservations()
-    .then(res => res.json())
-    .then(json => this.props.getReservations(json))
+    this.props.addReservations();
+    // fetchCurrentReservations()
+    // .then(res => res.json())
+    // .then(json => this.props.getReservations(json))
   }
 
   ////  Reservation approval
@@ -109,4 +110,4 @@ const mapStateToProps = state => {
     cabins: state.admin.cabins
   }
 };
-export default connect(mapStateToProps, { getReservations, approveReservation })(ReservationList);
+export default connect(mapStateToProps, { addReservations, approveReservation })(ReservationList);

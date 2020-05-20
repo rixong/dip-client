@@ -81,8 +81,8 @@ class Login extends Component {
         <div>
           {
             this.state.error ?
-              <div className="ui bottom attached red message">{this.state.error}</div>
-              : null
+            <div className="ui bottom attached red message">{this.state.error}</div>
+            : null
           }
         </div>
       </div>

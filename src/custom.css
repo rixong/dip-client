@@ -132,7 +132,7 @@ code {
 }
 
 .loader {
-  background-color: black;
+  background-color: rgba(196, 21, 21, 0);
 }
 
 #login-button {

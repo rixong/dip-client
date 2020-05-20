@@ -1,29 +1,12 @@
-// import dipApi from '../apis/dipApi'
-import axios from 'axios';
-
-
-///users reducer
+import dipApi from '../api/dipApi';  // axios instance
+// import axios from 'axios';
 
 export const addCurUser = () => {
-  
   return async dispatch => {
-    const response = await axios.get('https://fast-peak-03793.herokuapp.com/api/v1/profile', {
-      headers: {
-        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
-      }
-    })
-    // console.log('here');
-    dispatch ({ type: 'ADD_CUR_USER', payload: response.data.user});
+    const response = await dipApi.get('/profile')
+    dispatch({ type: 'ADD_CUR_USER', payload: response.data.user });
   };
 };
-
-
-// export const addCurUser = user => {
-//   return {
-//     type: 'ADD_CUR_USER',
-//     payload: user
-//   }
-// }
 
 export const editCurUser = user => {
   return {
@@ -40,13 +23,6 @@ export const deleteCurUser = () => {
 
 
 /// RESERVATION ACTIONS
-
-export const getReservations = (reservations) => {
-  return {
-    type: 'GET_RESERVATIONS',
-    payload: reservations
-  }
-}
 
 export const addReservation = (reservation) => {
   return {
@@ -70,31 +46,40 @@ export const deleteAll = () => {
   }
 }
 
-export const addRepairTickets = (repairs) => {
-  return {
-    type: 'ADD_REPAIR_TICKETS',
-    payload: repairs
-  }
+
+export const addReservations = () => async dispatch => {
+  const response = await dipApi.get('/reservations')
+
+  dispatch({ type: 'ADD_RESERVATIONS', payload: response.data })
+};
+
+export const addRepairTickets = () => async dispatch => {
+  const response = await dipApi.get('/repairs')
+
+  dispatch({ type: 'ADD_REPAIR_TICKETS', payload: response.data })
 }
 
-export const addCurrentAnnualReport = (report) => {
-  return {
-    type: "ADD_CUR_ANNUAL_REPORT",
-    payload: report
-  }
-}
+export const addCurrentAnnualReport = () => async dispatch => {
+  const response = await dipApi.get('/annual_report/current')
 
-export const addUsers = (users) => {
-  return {
-    type: "ADD_USERS",
-    payload: users
-  }
-}
+  dispatch({ type: "ADD_CUR_ANNUAL_REPORT", payload: response.data.report })
+};
 
-export const addCabins = (cabins) => {
-  return {
-    type: 'ADD_CABINS',
-    payload: cabins
-  }
-}
+export const addUsers = () => async dispatch => {
+  const response = await dipApi.get('/users')
+
+  dispatch({ type: "ADD_USERS", payload: response.data })
+};
+
+export const addCabins = () => async dispatch => {
+  const response = await dipApi.get('/cabins')
+  
+  dispatch({ type: 'ADD_CABINS', payload: response.data })
+};
+
+export const addCabinMultipliers = () => async dispatch => {
+  const response = await dipApi.get('/cabinmultipliers')
+
+  dispatch({ type: 'ADD_CABINS', payload: response.data })
+};
 

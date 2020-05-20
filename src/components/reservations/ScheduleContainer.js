@@ -4,19 +4,20 @@ import { connect } from 'react-redux';
 import ScheduleWeekly from './ScheduleWeekly';
 import ReservationForm from './ReservationForm';
 
-import { getReservations, addCabins } from '../../actions/index';
-import {fetchCurrentReservations} from '../../apiCalls';
+import { addReservations, addCabins } from '../../actions/index';
+// import {fetchCurrentReservations} from '../../apiCalls';
 
 class ScheduleContainer extends Component {
 
   componentDidMount() {
     
     /// fetch current reservations
+    this.props.addReservations()
 
-    fetchCurrentReservations()
-      .then(res => res.json())
-      // .then(json => console.log(json))
-      .then(json => this.props.getReservations(json))
+    // fetchCurrentReservations()
+    //   .then(res => res.json())
+    //   // .then(json => console.log(json))
+    //   .then(json => this.props.addReservations(json))
   }
 
   // addNewReservation = (res) => {
@@ -36,4 +37,4 @@ class ScheduleContainer extends Component {
   }
 }
 
-export default connect(null, { getReservations, addCabins })(ScheduleContainer);
+export default connect(null, { addReservations, addCabins })(ScheduleContainer);

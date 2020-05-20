@@ -20,7 +20,7 @@ function curUserReducer(
     }
   }, action
 ) {
-  console.log('from users reducer', action);
+  // console.log('from users reducer', action);
   switch (action.type) {
     case 'ADD_CUR_USER':
       return { ...state, user: action.payload, isLoggedIn: true }
@@ -56,14 +56,13 @@ function adminReducer(
       return { ...state, cabins: action.payload }
     case 'ADD_REPAIR_TICKETS':
       return { ...state, repairs: action.payload }
+    case 'ADD_CUR_ANNUAL_REPORT':
+      return { ...state, annualReport: action.payload}
+    case 'ADD_RESERVATIONS':
+      return { ...state, reservations: action.payload }
+
     case 'ADD_REPAIR_TICKET':
       return { ...state, repairs: state.repairs.concat(action.payload) }
-
-    case 'ADD_CUR_ANNUAL_REPORT':
-      return action.payload
-
-    case 'GET_RESERVATIONS':
-      return { ...state, reservations: action.payload }
     case 'ADD_RESERVATION':
       return { ...state, reservations: state.reservations.concat(action.payload) }
     case 'APPROVE_RESERVATION':
