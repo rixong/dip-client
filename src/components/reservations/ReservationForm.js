@@ -23,12 +23,10 @@ class ReservationForm extends Component {
     error: ''
   }
 
-  calculateDailyPrice = (multiplier) => {
-    
-    const { budget, duesSplit } = this.props.annualReport
-    const dailyConstant = (100 - duesSplit) / 100 * budget / 40 / 7;
-    
-    // console.log(multiplier, dailyConstant);
+  calculateDailyPrice = (id) => {
+    const { budget, duesSplit, cabinMultipliers } = this.props.annualReport
+    const multiplier = cabinMultipliers.find(mul => mul.cabinId === id).multiplier;
+    const dailyConstant = ((100 - duesSplit) / 100) * budget / 40 / 7;
     return (dailyConstant * multiplier).toFixed(0)
   }
 
@@ -125,8 +123,9 @@ class ReservationForm extends Component {
         {this.state.reservation.cabin_id ?
           <div className="ui" id="cabin-info">
             <h3>{getCabinName(this.props.cabins, this.state.reservation.cabin_id)}</h3>
-            <div>2020 Daily usage fee:&nbsp;&nbsp;$
-              <strong>{this.calculateDailyPrice(findCabin(this.props.cabins, this.state.reservation.cabin_id).multiplier)}
+            <div>{this.props.annualReport.year} Daily usage fee:&nbsp;&nbsp;$
+              <strong>{
+              this.calculateDailyPrice(this.state.reservation.cabin_id)}
               </strong></div>
             Description:&nbsp;&nbsp;<strong>{findCabin(this.props.cabins, this.state.reservation.cabin_id).description}</strong>
           </div>

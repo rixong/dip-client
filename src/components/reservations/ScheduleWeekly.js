@@ -18,6 +18,7 @@ class ScheduleWeekly extends Component {
     // Create rows for each cabin calling MakeRow() with each cabin
 
     let weekRowArray = [];
+    // const publicCabins = this.props
     for (let i = 0; i < this.props.cabins.length; i++) {
       let reservations = this.combineSingleCabinRes(i + 1)
       // console.log('reservations',reservations);
@@ -135,7 +136,7 @@ class ScheduleWeekly extends Component {
 const mapStateToProps = state => {
   return {
     curReservations: state.admin.reservations,
-    cabins: state.admin.cabins,
+    cabins: state.admin.cabins.filter(cabin => cabin.owner === 'LLC'),  // Filters public cabins
     users: state.admin.users
   }
 }
