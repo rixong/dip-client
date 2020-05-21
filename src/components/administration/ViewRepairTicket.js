@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
-import { getMemberFullName, getCabinName } from '../../utilities'
+import { getMemberFullName, getCabinName, getMember } from '../../utilities'
 import {updateRepairTicket} from '../../apiCalls'
 
 
@@ -13,7 +13,6 @@ class ViewRepairTicket extends Component {
     followup: '',
     status: ''
   }
-
 
   onHandleChange = (e) => {
     // console.log(e.target.value);
@@ -36,7 +35,8 @@ class ViewRepairTicket extends Component {
   }
 
   render() {
-    const { id, category, description, created_at, priority, followup } = this.props.repair
+    const { id, category, description, created_at, priority, followup, userId } = this.props.repair
+    const member = getMember(this.props.users, userId)
 
     return (
 
@@ -63,7 +63,7 @@ class ViewRepairTicket extends Component {
             </tr>
             <tr>
               <td>Member's Email:</td>
-              <td><strong>{}</strong></td>
+              <td><strong><a href="mailto:rixong@gmail.com">{member.email}</a></strong></td>
             </tr>
             <tr>
               <td>Description:</td>

@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 // import { BrowserRouter as Switch, Route } from 'react-router-dom'
 
 
+import AdminHome from './AdminHome';
 import RepairLog from './RepairLog';
 import ReservationList from './ReservationList';
 import ViewRepairTicket from './ViewRepairTicket';
-import AdminHome from './AdminHome';
+import Members from './Members';
+
 
 
 class AdminContainer extends Component {
@@ -52,6 +54,7 @@ class AdminContainer extends Component {
               <div className="ui button" name="home" onClick={() => this.onMenuClick('home')}>|Admin Home|</div>
               <div className="ui button" name="reservations" onClick={() => this.onMenuClick('reservation')}>|Reservations|</div>
               <div className="ui button" name="repairs" onClick={() => this.onMenuClick('repair')}>|Repairs|</div>
+              <div className="ui button" name="members" onClick={() => this.onMenuClick('members')}>|Members|</div>
             </div>
             <div className="six wide column">
               Admin Panel - {this.props.currentYear.year}
