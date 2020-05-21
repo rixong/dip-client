@@ -39,6 +39,8 @@ class AdminContainer extends Component {
       return (<ReservationList />);
     } else if (menuChoice === 'repair' && !showConfirmation) {
       return (<RepairLog changeDisplay={this.changeDisplay} />);
+    } else if (menuChoice === 'members'){
+      return (< Members />)
     } else {
       return (< ViewRepairTicket repair={this.state.curRepair} changeDisplay={this.changeDisplay} />)
     }
