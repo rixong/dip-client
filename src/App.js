@@ -6,7 +6,7 @@ import './custom.css'
 import 'semantic-ui-css/semantic.min.css';
 
 import {
-  addCurUser,
+  fetchCurUser,
   deleteCurUser,
   deleteAll
 } from './actions';
@@ -31,17 +31,12 @@ class App extends Component {
 
   componentDidMount() {
     if (localStorage.getItem('accessToken')) {
-      // this.getCurUser();
-      this.props.addCurUser();
+      this.props.fetchCurUser();
     }
   }
 
-  // getCurUser = async () => {
-  //   const response = await postCurUser();
-  //   this.props.addCurUser(response.data.user)
-  // }
-
   onLogoutClick = () => {
+    // this.props.history.push('/login');
     localStorage.removeItem('accessToken')
     this.setState( {isNewUser: false} )
     this.props.deleteAll();
@@ -63,7 +58,7 @@ class App extends Component {
                 <PrivateRoute exact path='/schedule' component={ScheduleContainer} />
                 <PrivateRoute exact path='/maintenance' component={MaintenanceContainer} />
                 <PrivateRoute exact path='/user' component={UpdateProfile} />
-                <AdminRoute exact path='/admin' component={AdminContainer} />
+                <AdminRoute path='/admin' component={AdminContainer} />
               </Switch>
 
             </div>
@@ -83,7 +78,7 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  addCurUser,
+  fetchCurUser,
   deleteCurUser,
   deleteAll
 })(App);

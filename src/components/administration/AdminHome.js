@@ -35,8 +35,9 @@ class AdminHome extends Component {
     // console.log(100 - dues_split);
 
     return (
-      <div className="ui segment">
-        <table className="ui celled table" id="admin-home-table">
+      <div className="ui segment" id="admin-table">
+        <div className="ui center align" >EF LLC Stats for {this.props.annualReport.year}</div>
+        <table className="ui celled table">
           <tbody>
             <tr>
               <td>{year} Annual Budget:</td>

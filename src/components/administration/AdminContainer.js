@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import { BrowserRouter as Switch, Route } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 
+import AdminRoute from '../AdminRoute';
 
 import AdminHome from './AdminHome';
 import RepairLog from './RepairLog';
@@ -9,80 +10,96 @@ import ReservationList from './ReservationList';
 import ViewRepairTicket from './ViewRepairTicket';
 import Members from './Members';
 
+const link = {
+  // width: '100px',
+  paddingLeft: '10px',
+  margin: '0 6px 6px',
+  textDecoration: 'none',
+  color: '#0B7C17',
+  fontSize: '16px'
+}
 
+const activelink = {
+  color: 'black',
+  textDecoration: 'underline'
+}
 
 class AdminContainer extends Component {
 
   state = {
     showConfirmation: false,
     curRepair: '',
-    menuChoice: 'home'
   }
 
   changeDisplay = (repair) => {
     this.setState({
       showConfirmation: !this.state.showConfirmation,
-      curRepair: repair,
+      curRepair: repair
     })
   }
 
-  onMenuClick = (menuChoice) => {
-    console.log(menuChoice);
-    this.setState({ menuChoice })
-  }
-
-  renderPage = () => {
-    const { menuChoice, showConfirmation } = this.state;
-    if (menuChoice === 'home') {
-      return (<AdminHome />);
-    } else if (menuChoice === 'reservation') {
-      return (<ReservationList />);
-    } else if (menuChoice === 'repair' && !showConfirmation) {
-      return (<RepairLog changeDisplay={this.changeDisplay} />);
-    } else if (menuChoice === 'members'){
-      return (< Members />)
-    } else {
-      return (< ViewRepairTicket repair={this.state.curRepair} changeDisplay={this.changeDisplay} />)
-    }
-
-  }
-
   render() {
+
     return (
       <div className="form-window" id="admin-container">
-        <div className="form-header">
+        <div className="form-header" id="admin-header">
           <div className="ui grid">
+            
+          <div className="four wide column"></div>
+
             <div className="six wide column">
-              <div className="ui button" name="home" onClick={() => this.onMenuClick('home')}>|Admin Home|</div>
-              <div className="ui button" name="reservations" onClick={() => this.onMenuClick('reservation')}>|Reservations|</div>
-              <div className="ui button" name="repairs" onClick={() => this.onMenuClick('repair')}>|Repairs|</div>
-              <div className="ui button" name="members" onClick={() => this.onMenuClick('members')}>|Members|</div>
+              Admin Panel
             </div>
+
             <div className="six wide column">
-              Admin Panel - {this.props.currentYear.year}
+              <NavLink
+                to={`${this.props.match.url}`}
+                exact
+                style={link}
+                activeStyle={activelink}
+              >Home</NavLink>
+
+              <NavLink
+                to={`${this.props.match.url}/reservations`}
+                exact
+                style={link}
+                activeStyle={activelink}
+              >Reservations</NavLink>
+
+              <NavLink
+                to={`${this.props.match.url}/repairs`}
+                exact
+                style={link}
+                activeStyle={activelink}
+              >Repairs</NavLink>
+
+              <NavLink
+                to={`${this.props.match.url}/members`}
+                exact
+                style={link}
+                activeStyle={activelink}
+              >Members</NavLink>
             </div>
-            <div className="four wide column"></div>
+
           </div>
         </div>
-        {this.renderPage()}
-        {/* <Switch>
-          <Route exact path={'/res'} component={ReservationList} />
-          <Route exact path={'/rep'} component={RepairLog} />
+
+        <AdminRoute exact path={`${this.props.match.path}/`} component={AdminHome} />
+        <AdminRoute path={`${this.props.match.path}/reservations`} component={ReservationList} />
+        <AdminRoute path={`${this.props.match.path}/members`} component={Members} />
+        { !this.state.showConfirmation ?
+        <AdminRoute 
+          path={`${this.props.match.path}/repairs`} 
+          component={() => <RepairLog changeDisplay={this.changeDisplay} />} 
           
-        </Switch> */}
-        {/* <ViewRepairTicket repair={this.state.curRepair} changeDisplay={this.changeDisplay} /> */}
-        {/* <RepairLog changeDisplay={this.changeDisplay} /> */}
-
-        {/* {this.state.menuChoice === "reservation" ?
-          <ReservationList /> : <AdminHome />}
-
-        {this.state.menuChoice === 'repair'
-            {!this.state.showConfirmation ?
-          <RepairLog changeDisplay={this.changeDisplay} /> :
-          <ViewRepairTicket repair={this.state.curRepair} changeDisplay={this.changeDisplay} />
+          />
+        :
+        <AdminRoute 
+          path={`${this.props.match.path}/repairs`} 
+          component={() => <ViewRepairTicket changeDisplay={this.changeDisplay} repair={this.state.curRepair}/>} 
+          />
         }
-            : <AdminHome />
-        } */}
+
       </div>
     )
   }

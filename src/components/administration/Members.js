@@ -12,7 +12,7 @@ class Members extends Component {
         <td>{getMemberFullName(this.props.users, user.id)}</td>
         <td>{this.getAge(user.bday)}</td>
         <td>{user.phone}</td>
-        <td>{user.email}</td>
+        <td><a href={`mailto:${user.email}`} target="_blank" rel="noopener noreferrer">{user.email}</a></td>
         <td>{user.address1}</td>
         <td>{user.address2}</td>
         <td>{user.city}</td>
@@ -35,7 +35,7 @@ class Members extends Component {
 
     
     return (
-      <div className="ui segment" id="admin-reservation-table">
+      <div className="ui segment" id="admin-table">
         <div className="ui center align">Members</div>
         <table className="ui celled table">
           <thead>

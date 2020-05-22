@@ -19,7 +19,7 @@ code {
 
 
 * {
-  background-color: rgb(222, 225, 228);
+  /* background-color: rgb(222, 225, 228); */
 }
 
 .app {
@@ -94,6 +94,7 @@ code {
 /* Body wide formatting */
 
 .form-window {
+  background-color: rgb(222, 225, 228);
   border: solid;
   border-width: 3px;
   border-radius: 10px;
@@ -133,6 +134,10 @@ code {
 
 .loader {
   background-color: rgba(196, 21, 21, 0);
+}
+
+.gray {
+  background-color: rgb(119, 224, 224);
 }
 
 #login-button {
@@ -300,13 +305,6 @@ li {
 }
 
 /* ADMIN PANEL */
-#admin-home-table {
-  margin-top: 20px;
-  /* border-style: solid; */
-  /* width:80%; */
-  /* text-align: center; */
-  font-size: 1.3em;
-}
 
 #admin-container {
   top: 0px;
@@ -315,7 +313,11 @@ li {
   border-radius: 0px;
 }
 
-#admin-reservation-table {
+#admin-header {
+  background-color: white;
+}
+
+#admin-table {
   margin-top: 20px;
   /* border-style: solid; */
   /* width:80%; */
@@ -326,12 +328,4 @@ li {
 #confirm-window {
   margin: 0 auto;
   width: 50%;
-}
-
-#repair-confirmation-table {
-  /* width: 50%; */
-}
-
-#repair-manager-ticket-notes {
-  /* width: 50%; */
 }

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// import { fetchCurrentAnnualReport, fetchCurrentReservations, fetchCurrentRepairs, fetchUsers, fetchCabins } from '../apiCalls'
 import {
   addCurrentAnnualReport,
   addUsers,
@@ -12,36 +11,27 @@ import {
 
 class Home extends Component {
 
-  render() {
-
+  componentDidMount() {
+    console.log('cdmount');
+    
     if (this.props.isLoggedIn) {
       this.props.addCurrentAnnualReport();
       this.props.addUsers();
       this.props.addCabins();
       this.props.addRepairTickets();
       this.props.addReservations();
-
-
-
-      // Promise.all([
-      //   fetchCurrentAnnualReport(),
-      //   fetchCurrentReservations(),
-      //   fetchCurrentRepairs(),
-      //   fetchUsers(),
-      //   fetchCabins()
-      // ]).then(([res1, res2, res3, res4, res5]) => {
-      //   return Promise.all([res1.json(), res2.json(), res3.json(), res4.json(), res5.json()])
-      // })
-      // .then(([res1, res2, res3, res4, res5]) => {
-      //   this.props.addCurrentAnnualReport({
-      //     annualReport: res1.report, 
-      //     reservations: res2,
-      //     repairs: res3, 
-      //     users: res4, 
-      //     cabins: res5
-      //   });
-      // })
     }
+  }
+
+  render() {
+
+    // if (this.props.isLoggedIn) {
+    //   this.props.addCurrentAnnualReport();
+    //   this.props.addUsers();
+    //   this.props.addCabins();
+    //   this.props.addRepairTickets();
+    //   this.props.addReservations();
+    // }
 
     return (
       <div className="ui container home" id="home">

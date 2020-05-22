@@ -1,11 +1,18 @@
 import dipApi from '../api/dipApi';  // axios instance
 // import axios from 'axios';
 
-export const addCurUser = () => {
+export const fetchCurUser = () => {
   return async dispatch => {
     const response = await dipApi.get('/profile')
     dispatch({ type: 'ADD_CUR_USER', payload: response.data.user });
   };
+};
+
+export const addCurUser = user => {
+  return {
+    type: 'ADD_CUR_USER', 
+    payload: user
+  }
 };
 
 export const editCurUser = user => {

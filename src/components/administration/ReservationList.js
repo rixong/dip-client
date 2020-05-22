@@ -52,7 +52,7 @@ class ReservationList extends Component {
           <td data-label="Departure">{this.formatDate(res.departure)}</td>
           <td data-label="Member">{getMemberFullName(this.props.users, user.id)}</td>
           <td data-label="Email">
-            <a href="mailto:rixong@gmail.com">{user.email}</a>
+            <a href={`mailto:${user.email}`} target="_blank" rel="noopener noreferrer">{user.email} </a>
           </td>
           <td data-label="Approved">
             <div className="ui icon button">
@@ -72,7 +72,7 @@ class ReservationList extends Component {
   render() {
 
     return (
-      <div className="ui segment" id="admin-reservation-table">
+      <div className="ui segment" id="admin-table">
         <div className="ui center align">Current Reservations</div>
         <table className="ui celled table">
           <thead>

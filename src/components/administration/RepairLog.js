@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import moment from 'moment';
 
-import {fetchCurrentRepairs} from '../../apiCalls'
+import { fetchCurrentRepairs } from '../../apiCalls'
 import { addRepairTickets } from '../../actions/index'
 import { getCabinName, getMemberFullName } from '../../utilities'
 
@@ -16,6 +16,7 @@ class RepairLog extends Component {
   }
 
   renderRepairTicketList = () => {
+
     if (this.props.repairs.length > 0 && this.props.cabins.length > 0) {
       return this.props.repairs.map((rep, idx) => {
         return (
@@ -45,13 +46,12 @@ class RepairLog extends Component {
     return moment(date).format('lll');
   }
 
-
   render() {
 
     return (
-      <div className="ui segment" id="admin-reservation-table">
+      <div className="ui segment" id="admin-table">
         <div className="ui center align">Maintenance Tickets</div>
-        <table className="ui celled table">
+        <table className="ui selectable celled table">
           <thead>
             <tr>
               <th>House Name</th>

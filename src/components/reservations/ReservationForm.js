@@ -30,7 +30,9 @@ class ReservationForm extends Component {
     return (dailyConstant * multiplier).toFixed(0)
   }
 
-  // calculateReservationPrice
+ conflictCheck = (dates) => {
+  
+ }
 
   ///SUBMIT RESERVATION
   onHandleSubmit = (e) => {
@@ -38,6 +40,9 @@ class ReservationForm extends Component {
     // console.log('Submit reservation');
     if (moment(this.state.reservation.departure).isSameOrBefore(this.state.reservation.arrival, 'day')) {
       this.setState({ error: 'The departure date needs to be before the arrival date.' })
+    } else if (this.conflictCheck()) {
+      console.log('Conflict found');
+
     } else {
       postAddReservation(this.state.reservation)
         .then(res => res.json())
@@ -125,7 +130,7 @@ class ReservationForm extends Component {
             <h3>{getCabinName(this.props.cabins, this.state.reservation.cabin_id)}</h3>
             <div>{this.props.annualReport.year} Daily usage fee:&nbsp;&nbsp;$
               <strong>{
-              this.calculateDailyPrice(this.state.reservation.cabin_id)}
+                this.calculateDailyPrice(this.state.reservation.cabin_id)}
               </strong></div>
             Description:&nbsp;&nbsp;<strong>{findCabin(this.props.cabins, this.state.reservation.cabin_id).description}</strong>
           </div>
@@ -145,7 +150,8 @@ const mapsStateToProps = state => {
   return {
     curUser: state.curUser.user,
     annualReport: state.admin.annualReport,
-    cabins: state.admin.cabins
+    cabins: state.admin.cabins,
+    reservations: state.admin.reservations
   }
 }
 

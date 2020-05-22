@@ -16,15 +16,14 @@ class ScheduleWeekly extends Component {
 
   makeSchedule = () => {
     // Create rows for each cabin calling MakeRow() with each cabin
-
+    const cabins = this.props.allCabins.filter(cabin => cabin.owner === 'LLC')
     let weekRowArray = [];
-    // const publicCabins = this.props
-    for (let i = 0; i < this.props.cabins.length; i++) {
+    for (let i = 0; i < cabins.length; i++) {
       let reservations = this.combineSingleCabinRes(i + 1)
       // console.log('reservations',reservations);
       weekRowArray.push(<WeekRow key={uuid()}
         reservations={reservations}
-        cabinName={this.props.cabins[i].name}
+        cabinName={cabins[i].name}
       />);
     }
     // console.log('weekRowArray', weekRowArray);
@@ -71,10 +70,6 @@ class ScheduleWeekly extends Component {
   }
 
   /// Helper methods
-
-  // fullName = (reservation) => {
-  //   return `${reservation.reserver.firstName} ${reservation.reserver.lastName}`
-  // }
 
   numDays = (end, start) => {
     return end.diff(start, 'days')
@@ -136,7 +131,7 @@ class ScheduleWeekly extends Component {
 const mapStateToProps = state => {
   return {
     curReservations: state.admin.reservations,
-    cabins: state.admin.cabins.filter(cabin => cabin.owner === 'LLC'),  // Filters public cabins
+    allCabins: state.admin.cabins,
     users: state.admin.users
   }
 }

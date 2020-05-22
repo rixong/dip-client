@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getMemberFullName, getCabinName, getMember } from '../../utilities'
-import {updateRepairTicket} from '../../apiCalls'
+import { updateRepairTicket } from '../../apiCalls'
 
-
-var moment = require('moment')
-
+import moment from 'moment';
 
 class ViewRepairTicket extends Component {
 
@@ -63,7 +61,9 @@ class ViewRepairTicket extends Component {
             </tr>
             <tr>
               <td>Member's Email:</td>
-              <td><strong><a href="mailto:rixong@gmail.com">{member.email}</a></strong></td>
+              <td><strong>
+                <a href={`mailto:${member.email}`} target="_blank" rel="noopener noreferrer">{member.email} </a>
+              </strong></td>
             </tr>
             <tr>
               <td>Description:</td>
