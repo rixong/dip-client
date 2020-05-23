@@ -16,8 +16,8 @@ import {
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
 import PublicRoute from './components/PublicRoute';
-import Login from './components/Login';
-import NewUser from './components/NewUser';
+import Login from './components/main/Login';
+import NewUser from './components/main/NewUser';
 
 import Navbar from './components/main/Navbar';
 import Home from './components/main/Home';

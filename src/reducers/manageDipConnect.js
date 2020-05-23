@@ -73,7 +73,15 @@ function adminReducer(
         [...state.reservations.slice(0, idx).concat(newRes).concat(...state.reservations.slice(idx + 1))];
       return { ...state, reservations: newReservations };
     case 'DELETE_ALL':
-      return {};
+      return {
+        users: [],
+        cabins: [],
+        reservations: [],
+        repairs: [],
+        annualReport: {
+          year: ''
+        }
+      };
     default:
       return state
   }

@@ -9,15 +9,14 @@ import { link, activelink } from './menuStyle';
 class RightMenu extends Component {
 
   onLogoutClick = () => {
-    // this.props.history.push('/login');
     localStorage.removeItem('accessToken')
     this.props.deleteAll();
     this.props.deleteCurUser();
   }
 
   adminNotice = () => {
-    return this.props.reservations.find(reservation => reservation.pending)
 
+    return this.props.reservations.filter(reservation => reservation.pending)
   }
 
   render() {

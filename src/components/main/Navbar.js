@@ -11,8 +11,8 @@ class Navbar extends Component {
     return (
 
       <div className='ui grid' >
-
         <div className="ui three column row" id="navbar-container" >
+          
           {this.props.isLoggedIn ?
             <div className="five wide column" id="left-menu">
               <LeftMenu />
@@ -36,10 +36,7 @@ class Navbar extends Component {
             <RightMenu />
           </div>
 
-
-
         </div>
-
       </div>
     )
   }
