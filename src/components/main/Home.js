@@ -12,7 +12,7 @@ import {
 class Home extends Component {
 
   componentDidMount() {
-    // console.log('cdmount');
+    console.log('cdmount');
     
     if (this.props.isLoggedIn) {
       this.props.addCurrentAnnualReport();
@@ -24,7 +24,7 @@ class Home extends Component {
   }
 
   render() {
-
+    console.log('render');
     if (this.props.isLoggedIn) {
       this.props.addCurrentAnnualReport();
       this.props.addUsers();

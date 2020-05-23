@@ -15,8 +15,7 @@ class RightMenu extends Component {
   }
 
   adminNotice = () => {
-
-    return this.props.reservations.filter(reservation => reservation.pending)
+    return this.props.reservations.find(reservation => reservation.pending)
   }
 
   render() {
