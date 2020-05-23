@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import moment from 'moment';
 
 import  {getCabinName, getMemberFullName, getMember } from '../../utilities'
-import {postApproveReservation, postDeleteReservation} from '../../apiCalls'
+import {postApproveReservation, postDeleteReservation} from '../../api/apiCalls'
 import { addReservations, approveReservation } from '../../actions/index'
 
 class ReservationList extends Component {

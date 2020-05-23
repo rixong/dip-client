@@ -7,7 +7,7 @@ import MaintenanceTicket from './MaintenanceTicket'
 import MaintenanceConfirmation from './MaintenanceConfirmation'
 import { addRepairTickets } from '../../actions/index'
 import { getCabinName } from '../../utilities'
-import { fetchCurrentRepairs } from '../../apiCalls'
+// import { fetchCurrentRepairs } from '../../apiCalls'
 
 class MaintenanceContainer extends Component {
 
@@ -20,9 +20,10 @@ class MaintenanceContainer extends Component {
 
   /// FETCH REPAIR TICKETS
   componentDidMount() {
-    fetchCurrentRepairs()
-      .then(res => res.json())
-      .then(json => this.props.addRepairTickets(json))
+    this.props.addRepairTickets()
+    // fetchCurrentRepairs()
+    //   .then(res => res.json())
+    //   .then(json => this.props.addRepairTickets(json))
   }
 
   changeDisplay = (repair) => {

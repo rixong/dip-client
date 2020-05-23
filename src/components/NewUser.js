@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {addCurUser} from '../actions/index'
-import {postNewUser} from './/../apiCalls'
+import {postNewUser} from '../api/apiCalls'
 
 class NewUser extends Component {
 

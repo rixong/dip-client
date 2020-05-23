@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 
-import {addRepairTicket} from '../../apiCalls';
+import {addRepairTicket} from '../../api/apiCalls';
 
 class MaintenanceTicket extends Component {
 

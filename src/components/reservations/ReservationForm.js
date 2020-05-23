@@ -6,7 +6,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 import { addReservation } from '../../actions/index'
 import { getCabinName, findCabin } from '../../utilities'
-import { postAddReservation } from '../../apiCalls'
+import { postAddReservation } from '../../api/apiCalls'
 
 const startDate = new Date('2020-05-30T00:00:00')
 

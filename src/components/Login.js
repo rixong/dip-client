@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { addCurUser } from '../actions/index';
-import { postLogin } from '../apiCalls';
+import { postLogin } from '../api/apiCalls';
 import Spinner from './Spinner';
 
 class Login extends Component {

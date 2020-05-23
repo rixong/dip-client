@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { getMemberFullName, getCabinName, getMember } from '../../utilities'
-import { updateRepairTicket } from '../../apiCalls'
+import { updateRepairTicket } from '../../api/apiCalls'
 
 import moment from 'moment';
 

@@ -5,7 +5,7 @@ import { Image } from 'cloudinary-react';
 import DatePicker from 'react-datepicker';
 
 import { editCurUser } from '../actions/index'
-import { updateUser } from '../apiCalls'
+import { updateUser } from '../api/apiCalls'
 
 class UpdateProfile extends Component {
 

@@ -2,17 +2,18 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import moment from 'moment';
 
-import { fetchCurrentRepairs } from '../../apiCalls'
+// import { fetchCurrentRepairs } from '../../apiCalls'
 import { addRepairTickets } from '../../actions/index'
 import { getCabinName, getMemberFullName } from '../../utilities'
 
 class RepairLog extends Component {
 
   componentDidMount() {
-    fetchCurrentRepairs()
-      .then(res => res.json())
-      // .then(json => console.log(json))
-      .then(json => this.props.addRepairTickets(json))
+    this.props.addRepairTickets()
+    // fetchCurrentRepairs()
+    //   .then(res => res.json())
+    //   // .then(json => console.log(json))
+    //   .then(json => this.props.addRepairTickets(json))
   }
 
   renderRepairTicketList = () => {
