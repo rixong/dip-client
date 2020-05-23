@@ -37,8 +37,7 @@ code {
 #navbar-container {
   align-content: center;
   height: 120px;
-  /* padding-top: 120px; */
-  /* background-color: mediumseagreen; */
+  padding-right: 15px;
   border-bottom: black;
   border-style: solid;
   border-width: 1px;

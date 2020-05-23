@@ -1,5 +1,4 @@
 import dipApi from '../api/dipApi';  // axios instance
-// import axios from 'axios';
 
 export const fetchCurUser = () => {
   return async dispatch => {

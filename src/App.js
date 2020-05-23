@@ -19,8 +19,8 @@ import PublicRoute from './components/PublicRoute';
 import Login from './components/Login';
 import NewUser from './components/NewUser';
 
-import Navbar from './components/Navbar';
-import Home from './components/Home';
+import Navbar from './components/main/Navbar';
+import Home from './components/main/Home';
 import ScheduleContainer from './components/reservations/ScheduleContainer';
 import MaintenanceContainer from './components/repairs/MaintenanceContainer';
 import AdminContainer from './components/administration/AdminContainer';
@@ -35,13 +35,13 @@ class App extends Component {
     }
   }
 
-  onLogoutClick = () => {
-    // this.props.history.push('/login');
-    localStorage.removeItem('accessToken')
-    this.setState( {isNewUser: false} )
-    this.props.deleteAll();
-    this.props.deleteCurUser();
-  }
+  // onLogoutClick = () => {
+  //   // this.props.history.push('/login');
+  //   localStorage.removeItem('accessToken')
+  //   // this.setState( {isNewUser: false} )
+  //   this.props.deleteAll();
+  //   this.props.deleteCurUser();
+  // }
 
   render() {
     // console.log('From App render',this.props.curUser);

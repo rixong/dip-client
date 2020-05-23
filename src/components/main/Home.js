@@ -7,12 +7,12 @@ import {
   addCabins,
   addRepairTickets,
   addReservations
-} from '../actions/index';
+} from '../../actions/index';
 
 class Home extends Component {
 
   componentDidMount() {
-    console.log('cdmount');
+    // console.log('cdmount');
     
     if (this.props.isLoggedIn) {
       this.props.addCurrentAnnualReport();
