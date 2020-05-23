@@ -314,7 +314,9 @@ li {
 }
 
 #admin-header {
-  background-color: white;
+  background-color: rgb(71, 143, 161);
+  text-align: left;
+  color:whitesmoke;
 }
 
 #admin-table {

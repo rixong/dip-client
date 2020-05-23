@@ -20,7 +20,8 @@ class ReservationForm extends Component {
       user_id: this.props.curUser.id,
       annualReport_id: this.props.annualReport.id
     },
-    error: ''
+    error: '',
+    errorType: 'warning'
   }
 
   calculateDailyPrice = (id) => {
@@ -30,31 +31,50 @@ class ReservationForm extends Component {
     return (dailyConstant * multiplier).toFixed(0)
   }
 
- conflictCheck = (dates) => {
-  
- }
+  conflictCheck = () => {
+    return this.props.reservations.find(res => {
+      return res.cabinId === this.state.reservation.cabin_id &&
+        (moment(res.arrival).isBetween
+          (moment(this.state.reservation.arrival), moment(this.state.reservation.departure), 'day', '[]') ||
+        moment(res.departure).isBetween
+          (moment(this.state.reservation.arrival), moment(this.state.reservation.departure), 'day', '[]')
+        )
+    })
+  }
 
   ///SUBMIT RESERVATION
   onHandleSubmit = (e) => {
     e.preventDefault();
     // console.log('Submit reservation');
     if (moment(this.state.reservation.departure).isSameOrBefore(this.state.reservation.arrival, 'day')) {
-      this.setState({ error: 'The departure date needs to be before the arrival date.' })
+      this.setState({ 
+        error: 'The departure date needs to be before the arrival date.', 
+        errorType: 'ui negative message' 
+      })
     } else if (this.conflictCheck()) {
-      console.log('Conflict found');
-
+      console.log('conflict');
+      this.setState({
+        error: 'Conflicts with another reservation.', 
+        errorType: 'ui negative message'
+      })
     } else {
-      postAddReservation(this.state.reservation)
-        .then(res => res.json())
-        // .then(json => console.log(json))
-        .then(json => {
-          if (json.message === 'success') {
-            this.props.addReservation(json.res)
-            this.setState({ error: json.message })
-          } else {
-            this.setState({ error: 'red' })
-          }
-        })
+      console.log('No conflict found');
+    
+    postAddReservation(this.state.reservation)
+      .then(res => res.json())
+      // .then(json => console.log(json))
+      .then(json => {
+        if (json.message === 'success') {
+          this.props.addReservation(json.res)
+          this.setState({ 
+            error: 'Reservation submitted.', 
+            errorType: 'ui info message' })
+        } else {
+          this.setState({
+            error: 'Something went wrong.',
+            errorType: 'ui negative message' })
+        }
+      })
     }
   }
 
@@ -72,7 +92,7 @@ class ReservationForm extends Component {
 
   render() {
 
-    let message = `ui bottom attached ${this.state.error} message`
+    // let error = `ui bottom attached ${this.state.error} message`
 
     return <div>
       <form className="ui form" id="reservation-form" onSubmit={this.onHandleSubmit}>
@@ -138,7 +158,7 @@ class ReservationForm extends Component {
       </div>
       <div>
         {this.state.error ?
-          <div className={message}>{this.state.error}</div>
+          <div className={this.state.errorType}>{this.state.error}</div>
           : null
         }
       </div>

@@ -25,6 +25,7 @@ class AdminHome extends Component {
 
   calculateDailyPrice = (multiplier) => {
     const { budget, duesSplit } = this.props.annualReport
+    //daily constant is total usage percentage 
     const dailyConstant = (100 - duesSplit) / 100 * budget / 40 / 7;
     return (dailyConstant * multiplier).toFixed(0)
   }
@@ -50,6 +51,10 @@ class AdminHome extends Component {
             <tr>
               <td>{year} Current Usage Fees to date:</td>
               <td>${this.totalFeesFromCurrentReservations()}.00</td>
+            </tr>
+            <tr>
+              <td>{year} Private Home contribution:</td>
+              <td>${(100 - duesSplit) / 100 * budget * 0.3}.00</td>
             </tr>
           </tbody>
         </table>

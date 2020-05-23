@@ -25,13 +25,13 @@ class Home extends Component {
 
   render() {
 
-    // if (this.props.isLoggedIn) {
-    //   this.props.addCurrentAnnualReport();
-    //   this.props.addUsers();
-    //   this.props.addCabins();
-    //   this.props.addRepairTickets();
-    //   this.props.addReservations();
-    // }
+    if (this.props.isLoggedIn) {
+      this.props.addCurrentAnnualReport();
+      this.props.addUsers();
+      this.props.addCabins();
+      this.props.addRepairTickets();
+      this.props.addReservations();
+    }
 
     return (
       <div className="ui container home" id="home">
