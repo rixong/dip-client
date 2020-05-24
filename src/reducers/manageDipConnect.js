@@ -48,7 +48,7 @@ function adminReducer(
   action
 ) {
 
-  // console.log('from reducer', action);
+  console.log('from reducer', action);
   switch (action.type) {
     case 'ADD_USERS':
       return { ...state, users: action.payload }

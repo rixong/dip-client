@@ -2,14 +2,19 @@ import dipApi from '../api/dipApi';  // axios instance
 
 export const fetchCurUser = () => {
   return async dispatch => {
-    const response = await dipApi.get('/profile')
+    const response = await dipApi.get('/profile', {
+      headers: {
+        Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+      }
+    })
+
     dispatch({ type: 'ADD_CUR_USER', payload: response.data.user });
   };
 };
 
 export const addCurUser = user => {
   return {
-    type: 'ADD_CUR_USER', 
+    type: 'ADD_CUR_USER',
     payload: user
   }
 };
@@ -54,38 +59,53 @@ export const deleteAll = () => {
 
 
 export const addReservations = () => async dispatch => {
-  const response = await dipApi.get('/reservations')
+  const response = await dipApi.get('/reservations', {
+    headers: {
+      Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    }
+  })
 
   dispatch({ type: 'ADD_RESERVATIONS', payload: response.data })
 };
 
 export const addRepairTickets = () => async dispatch => {
-  const response = await dipApi.get('/repairs')
+  const response = await dipApi.get('/repairs', {
+    headers: {
+      Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    }
+  })
 
   dispatch({ type: 'ADD_REPAIR_TICKETS', payload: response.data })
 }
 
 export const addCurrentAnnualReport = () => async dispatch => {
-  const response = await dipApi.get('/annual_report/current')
+  const response = await dipApi.get('/annual_report/current', {
+    headers: {
+      Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    }
+  })
 
   dispatch({ type: "ADD_CUR_ANNUAL_REPORT", payload: response.data.report })
 };
 
 export const addUsers = () => async dispatch => {
-  const response = await dipApi.get('/users')
+  const response = await dipApi.get('/users', {
+    headers: {
+      Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    }
+  })
 
   dispatch({ type: "ADD_USERS", payload: response.data })
 };
 
 export const addCabins = () => async dispatch => {
-  const response = await dipApi.get('/cabins')
-  
-  dispatch({ type: 'ADD_CABINS', payload: response.data })
-};
-
-export const addCabinMultipliers = () => async dispatch => {
-  const response = await dipApi.get('/cabinmultipliers')
+  const response = await dipApi.get('/cabins', {
+    headers: {
+      Authorization: `Bearer: ${localStorage.getItem('accessToken')}`
+    }
+  })
 
   dispatch({ type: 'ADD_CABINS', payload: response.data })
 };
+
 

@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addCurUser } from '../../actions/index';
-import { postLogin } from '../../api/apiCalls';
 import Spinner from '../Spinner';
+
+import { postLogin } from '../../api/apiCalls';
+import {
+  addCurUser,
+  addCurrentAnnualReport,
+  addUsers,
+  addCabins,
+  addRepairTickets,
+  addReservations
+} from '../../actions/index';
 
 class Login extends Component {
 
@@ -32,6 +40,11 @@ class Login extends Component {
         if (json.jwt) {
           localStorage.setItem('accessToken', json.jwt);
           this.props.addCurUser(json.user);
+          // this.props.addCurrentAnnualReport();
+          // this.props.addUsers();
+          // this.props.addCabins();
+          // this.props.addRepairTickets();
+          // this.props.addReservations();
           this.props.history.push('/');
         } else {
           this.setState({ loading: false, error: json.message })
@@ -90,4 +103,11 @@ class Login extends Component {
   }
 }
 
-export default connect(null, { addCurUser })(Login);
+export default connect(null, { 
+  addCurUser,
+  addCurrentAnnualReport,
+  addUsers,
+  addCabins,
+  addRepairTickets,
+  addReservations
+ })(Login);

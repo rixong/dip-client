@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// import Modal from '../helpers/modal'
 
 import {
   addCurrentAnnualReport,
@@ -11,17 +12,17 @@ import {
 
 class Home extends Component {
 
-  componentDidMount() {
-    console.log('cdmount');
-    
-    if (this.props.isLoggedIn) {
-      this.props.addCurrentAnnualReport();
-      this.props.addUsers();
-      this.props.addCabins();
-      this.props.addRepairTickets();
-      this.props.addReservations();
-    }
-  }
+  // componentDidMount() {
+  //   console.log('cdmount');
+
+  //   if (this.props.isLoggedIn) {
+  //     this.props.addCurrentAnnualReport();
+  //     this.props.addUsers();
+  //     this.props.addCabins();
+  //     this.props.addRepairTickets();
+  //     this.props.addReservations();
+  //   }
+  // }
 
   render() {
     console.log('render');
@@ -54,7 +55,7 @@ class Home extends Component {
 
           </ul>
         </div>
-
+        {/* <Modal /> */}
       </div>
     )
   }
