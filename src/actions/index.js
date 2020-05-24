@@ -35,6 +35,26 @@ export const deleteCurUser = () => {
 
 /// RESERVATION ACTIONS
 
+// export const addReservation = (reservation) => async dispatch => {
+//   const response = await dipApi.post('/reservations', {
+//     headers: {
+//       Authorization: `Bearer: ${localStorage.getItem('accessToken')}`,
+//       "Content-Type": "application/json",
+//       "Accept": "application/json"
+//     },
+//     body: JSON.stringify({
+//       arrival: reservation.arrival,
+//       departure: reservation.departure,
+//       cabin_id: reservation.cabin_id,
+//       user_id: reservation.user_id,
+//     })
+//   })
+//   return {
+//     type: 'ADD_RESERVATION',
+//     payload: response
+//   }
+// }
+
 export const addReservation = (reservation) => {
   return {
     type: 'ADD_RESERVATION',
