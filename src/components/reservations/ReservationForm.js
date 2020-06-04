@@ -51,6 +51,11 @@ class ReservationForm extends Component {
         error: 'The departure date needs to be before the arrival date.', 
         errorType: 'ui negative message' 
       })
+    } else if (moment(this.state.reservation.arrival).isBefore(new Date(), 'day')) {
+      this.setState({ 
+        error: 'The arrival date needs to be later than today\'s date.', 
+        errorType: 'ui negative message' 
+      })
     } else if (this.conflictCheck()) {
       console.log('conflict');
       this.setState({
