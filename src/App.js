@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter as Router, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
+
 
 import './custom.css'
 import 'semantic-ui-css/semantic.min.css';
@@ -25,6 +26,7 @@ import ScheduleContainer from './components/reservations/ScheduleContainer';
 import MaintenanceContainer from './components/repairs/MaintenanceContainer';
 import AdminContainer from './components/administration/AdminContainer';
 import UpdateProfile from './components/Profile';
+// import modal from './components/helpers/modal'
 
 
 class App extends Component {
@@ -55,6 +57,7 @@ class App extends Component {
 
             </div>
           </Router>
+          {/* <modal /> */}
         </div>
 
       </div>

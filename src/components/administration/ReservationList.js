@@ -8,17 +8,36 @@ import { addReservations, approveReservation } from '../../actions/index'
 
 class ReservationList extends Component {
 
+  state = {
+    sort: 'cabin'
+  }
 
-  componentDidMount() {
-    // fetchCurrentReservations()
+  // componentDidMount() {
+
+  // };
+
+  sort = () => {
+    const sorts = {
+      cabin: (a, b) => 
+        getCabinName(this.props.cabins, a.cabinId).localeCompare
+        (getCabinName(this.props.cabins, b.cabinId)),
+      arrival: (a, b) => 
+        a.arrival.localeCompare(b.arrival),
+      memberName: (a, b) =>
+        getMember(this.props.users, a.userId).lastname.localeCompare
+        (getMember(this.props.users, b.userId).lastname)
+    }
+    return this.props.reservations.sort(sorts[this.state.sort])
+  }
+
+  handleSortClick = (e) => {
+    console.log(e.target.name);
+    this.setState({sort: e.target.name})
   }
 
   updateReservations = () => {
     this.props.addReservations();
-    // fetchCurrentReservations()
-    // .then(res => res.json())
-    // .then(json => this.props.getReservations(json))
-  }
+  };
 
   ////  Reservation approval
   handleApproval = (resId) => {
@@ -43,7 +62,8 @@ class ReservationList extends Component {
   renderReservations = () => {
     // console.log(this.props.reservations);
 
-    return this.props.reservations.map((res, idx) => {
+    // return this.props.reservations.map((res, idx) => {
+    return this.sort().map((res, idx) => {
       const user = getMember(this.props.users, res.userId)
       return (
         <tr key={idx}>
@@ -77,10 +97,10 @@ class ReservationList extends Component {
         <table className="ui celled table">
           <thead>
             <tr>
-              <th>House Name</th>
-              <th>Arrival</th>
+              <th><button  className="sort-button" name="cabin" onClick={this.handleSortClick}>House Name</button></th>
+              <th><button  className="sort-button" name="arrival" onClick={this.handleSortClick}>Arrival</button></th>
               <th>Departure</th>
-              <th>Member</th>
+              <th><button  className="sort-button" name="memberName" onClick={this.handleSortClick}>Member</button></th>
               <th>Email</th>
               <th>Approved</th>
               <th>Delete</th>
@@ -107,7 +127,8 @@ const mapStateToProps = state => {
   return {
     reservations: state.admin.reservations,
     users: state.admin.users,
-    cabins: state.admin.cabins
+    cabins: state.admin.cabins,
+    annualReport: state.admin.annualReport
   }
 };
 export default connect(mapStateToProps, { addReservations, approveReservation })(ReservationList);

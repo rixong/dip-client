@@ -10,7 +10,7 @@ const modal = props => {
           Login
         </div>
         <div className="content">
-          This is where you login...
+          This is a modal...
         </div>
         <div className="actions">
           <button className="ui primary button">Login</button>

@@ -330,3 +330,8 @@ li {
   margin: 0 auto;
   width: 50%;
 }
+
+.sort-button {
+  font-weight: bold;
+  /* background-color: teal; */
+}
