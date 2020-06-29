@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import moment from 'moment';
 import ForecastDisplay from './ForecastDisplay';
 
 // const weatherAccessKey = '955f4360db810b737228b3305fadd113';
-const weatherAccessKey = '5d68eeeaffdf83bc57c62f8cda5f044';
+const weatherAccessKey = '5d68eeeaffdf83bc57c62f8cda5f0445';
 //sample icon "https://assets.weatherstack.com/images/wsymbols01_png_64/wsymbol_0017_cloudy_with_light_rain.png"
 
 const coord = {
@@ -22,12 +23,12 @@ class Forecast extends Component {
       weather_icons: null
     },
     error: false,
-    loading: true 
+    loading: true
   }
 
-  componentDidMount() {
-    this.getForecast()
-  }
+  // componentDidMount() {
+  //   this.getForecast()
+  // }
 
   getForecast = () => {
     const weatherURL =
@@ -42,12 +43,12 @@ class Forecast extends Component {
           const { temperature, feelslike, weather_descriptions, wind_speed, wind_dir, weather_icons } = json.data.current
           this.setState({
             weather: {
-            temperature,
-            feelslike,
-            weather_descriptions: weather_descriptions[0],
-            wind_speed,
-            wind_dir,
-            weather_icons: weather_icons[0]
+              temperature,
+              feelslike,
+              weather_descriptions: weather_descriptions[0],
+              wind_speed,
+              wind_dir,
+              weather_icons: weather_icons[0]
             },
             error: false,
             loading: false
@@ -56,15 +57,22 @@ class Forecast extends Component {
       })
   }
 
-  render() {
-    if(this.state.loading){
+  renderView = () => {
+    if (this.state.loading) {
       return <p>Loading...</p>
     }
     else if (this.state.error) {
       return <p>Weather currently unavailable</p>
     } else {
-      return <ForecastDisplay forecast={this.state.weather}/>
+      return <ForecastDisplay forecast={this.state.weather} />
     }
+  }
+
+  render() {
+    return <div>
+      <h4>Harborside Weather on {moment(Date.now()).format('MMM Do')} at {moment(Date.now()).format('LT')}:</h4>
+      {this.renderView()}
+    </div>
   }
 
 }

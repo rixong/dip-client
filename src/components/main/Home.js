@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 // import Modal from '../helpers/modal'
-import Forecast from './Forecast'
+import Forecast from './Forecast';
+import Tides from './Tides';
 
 import {
   addCurrentAnnualReport,
@@ -55,8 +55,8 @@ class Home extends Component {
               rel="noopener noreferrer"
             >Find us on Google Maps</a> </li>
           </ul>
-          <h4>Harborside Weather on {moment(Date.now()).format('MMM Do')} at {moment(Date.now()).format('LT')}:</h4>
           <Forecast/>
+          <Tides/>
         </div>
         {/* <Modal /> */}
       </div>
