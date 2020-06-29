@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 // import Modal from '../helpers/modal'
+import Forecast from './Forecast'
 
 import {
   addCurrentAnnualReport,
@@ -36,14 +38,14 @@ class Home extends Component {
 
     return (
       <div className="ui container home" id="home">
-        <div id="banner">Managing a five generation old family property
-        on the coast of Penobscot Bay, down-east Maine.
+        <div id="banner">Managing property
+        on the coast of Penobscot Bay, Maine.
         </div>
         <div className="ui divider"></div>
         <div id="home-title">Welcome {this.props.curUser.firstname} {this.props.curUser.lastname}</div>
 
         <div id="updates">
-          <h3 className="home">News:</h3>
+          <h4>News:</h4>
           <ul className="home">
             <li>Summer 2020 Reservations are happening now!</li>
             <li>Be safe this summer. Maintain social distancing.</li>
@@ -52,8 +54,9 @@ class Home extends Component {
               target="_blank"
               rel="noopener noreferrer"
             >Find us on Google Maps</a> </li>
-
           </ul>
+          <h4>Harborside Weather on {moment(Date.now()).format('MMM Do')} at {moment(Date.now()).format('LT')}:</h4>
+          <Forecast/>
         </div>
         {/* <Modal /> */}
       </div>

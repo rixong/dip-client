@@ -78,7 +78,6 @@ code {
   font-size: 3em;
 }
 
-
 .main {
   height: 900px;
   position: relative;
@@ -154,9 +153,9 @@ code {
 #home {
   position: relative;
   padding: 20px;
-  top: 200px;
+  top: 150px;
   width: 600px;
-  height: 300px;
+  height: 400px;
   border-radius: 5px;
 }
 
@@ -167,13 +166,13 @@ li {
 }
 
 #home-title {
-  font-family: 'Playfair Display', serif;
+  /* font-family: 'Playfair Display', serif; */
   font-size: 1.8em;
   padding-bottom: 15px;
 }
 
 #banner {
-  font-family: 'Playfair Display', serif;
+  /* font-family: 'Playfair Display', serif; */
   font-size: 1.2em;
   font-style: italic;
   text-align: left;

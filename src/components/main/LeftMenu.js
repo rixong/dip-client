@@ -18,7 +18,7 @@ const LeftMenu = () => {
         exact
         style={link}
         activeStyle={activelink}
-      >Schedule</NavLink>
+      >Reserve</NavLink>
 |
       <NavLink
         to="/maintenance"
