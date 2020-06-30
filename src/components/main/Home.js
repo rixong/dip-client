@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import Modal from '../helpers/modal'
+
+import NOAALogo from '../../assets/noaa.jpg'
+import weatherStackLogo from '../../assets/weatherstack_logo_white.png'
 import Forecast from './Forecast';
 import Tides from './Tides';
 
