@@ -57,7 +57,10 @@ class Home extends Component {
           <Forecast/>
           <Tides/>
         </div>
-        {/* <Modal /> */}
+        <div id="footer">
+          <a href="https://weatherstack.com" target="_blank" rel="noopener noreferrer"><img src={weatherStackLogo} alt="Weatherstack logo" height="25px"></img></a>
+          <a href="https://tidesandcurrents.noaa.gov/api/" target="_blank" rel="noopener noreferrer"><img src={NOAALogo} alt='NOAA logo' height="25px" ></img></a>
+        </div>
       </div>
     )
   }
