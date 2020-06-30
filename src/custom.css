@@ -18,8 +18,10 @@ code {
 }
 
 
-* {
-  /* background-color: rgb(222, 225, 228); */
+.clearfix:after {
+  content: '';
+  clear: both;
+  display: table;
 }
 
 .app {
@@ -32,6 +34,10 @@ code {
 
 .message {
   padding: 15px 0;
+}
+
+.h4 {
+  margin-bottom: 5px;
 }
 
 #navbar-container {
@@ -183,6 +189,20 @@ li {
 
 #updates {
   text-align: left;
+  padding-left: 60px;
+}
+
+/* #tide-display {
+  margin-top: 10px;
+} */
+
+#footer {
+  position: absolute;
+  bottom:10px;
+}
+
+#footer a {
+  padding-left: 90px;
 }
 
 #schedule {

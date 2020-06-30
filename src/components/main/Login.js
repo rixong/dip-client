@@ -91,7 +91,7 @@ class Login extends Component {
         }
         <br></br>
         <p>Admin account - email: <strong>admin@gmail.com</strong> pw: <strong>1234</strong></p>
-        <p>Sample only - Not in service.</p>
+        <p>Sample only - Not real data.</p>
         <br></br>
         <div>
           {
