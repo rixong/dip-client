@@ -19,6 +19,12 @@ class Login extends Component {
     }
   }
 
+  handleFocus = e => {
+    this.setState({
+      error: null
+    })
+  }
+
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
@@ -51,12 +57,14 @@ class Login extends Component {
           <div>
             <div className="form-header">Log in</div>
             <form className="ui form main-form" onSubmit={this.handleLoginSubmit}>
+              
               <div className="field">
                 <label htmlFor='email'>Email</label>
                 <input
                   type="text"
                   name="email"
                   onChange={event => this.handleChange(event)}
+                  onFocus={event => this.handleFocus(event)}
                   value={this.state.email}
                 />
               </div>
@@ -67,6 +75,7 @@ class Login extends Component {
                   type="password"
                   name="password"
                   onChange={event => this.handleChange(event)}
+                  onFocus={event => this.handleFocus(event)}
                   value={this.state.password}
                 />
               </div>
@@ -81,6 +90,8 @@ class Login extends Component {
           <Spinner />
         }
         <br></br>
+        <p>Admin account - email: <strong>admin@gmail.com</strong> pw: <strong>1234</strong></p>
+        <p>Sample only - Not in service.</p>
         <br></br>
         <div>
           {
