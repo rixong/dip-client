@@ -27,7 +27,6 @@ class Home extends Component {
   // }
 
   render() {
-    console.log('render');
     if (this.props.isLoggedIn) {
       this.props.addCurrentAnnualReport();
       this.props.addUsers();

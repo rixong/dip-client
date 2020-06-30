@@ -26,9 +26,9 @@ class Forecast extends Component {
     loading: true
   }
 
-  // componentDidMount() {
-  //   this.getForecast()
-  // }
+  componentDidMount() {
+    this.getForecast()
+  }
 
   getForecast = () => {
     const weatherURL =
@@ -36,7 +36,7 @@ class Forecast extends Component {
 
     axios.get(weatherURL)
       .then(json => {
-        console.log(json.data);
+        // console.log(json.data);
         if (json.data.success === false) {
           this.setState({ loading: false, error: true })
         } else {
@@ -70,7 +70,7 @@ class Forecast extends Component {
 
   render() {
     return <div>
-      <h4>Harborside Weather on {moment(Date.now()).format('MMM Do')} at {moment(Date.now()).format('LT')}:</h4>
+      <h4>Harborside Weather and Tides for {moment(Date.now()).format('MMM Do')} at {moment(Date.now()).format('LT')}:</h4>
       {this.renderView()}
     </div>
   }
