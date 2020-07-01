@@ -11,24 +11,25 @@ const curDay = moment(Date.now()).format('YYYYMMDD').toString();
 class Tides extends Component {
 
   state = {
-    tides: [],
-    rising: true
+    tides: []
   }
 
   componentDidMount() {
-    // if(this.props.tides){
+    if(this.props.tides){
       this.calculateMaxMinTides()
-    // }
+    }
   }
 
   calculateMaxMinTides = () => {
-    let data = this.props.tides;
+    const data = [...this.props.tides]
+    console.log(data);
+    
     if (data){
       data.forEach(entry => entry.v = parseFloat(entry.v));
-      console.log(data[0].v);
-    this.setState({ rising: data[0].v < data[1].v });  ///false
+      console.log(data[0].v < data[1].v);
+    this.setState({rising: false});  ///false
     console.log('rising',this.state.rising);
-
+    
     for (let j = 1; j < data.length; j++) {
       if (this.state.rising && (data[j - 1].v) > data[j].v) {
         this.addHighLowTide(data[j - 1], 'High')
