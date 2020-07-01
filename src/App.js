@@ -9,7 +9,8 @@ import 'semantic-ui-css/semantic.min.css';
 import {
   fetchCurUser,
   deleteCurUser,
-  deleteAll
+  deleteAll,
+  addTides
 } from './actions';
 
 // import {postCurUser} from './/apiCalls';
@@ -34,6 +35,7 @@ class App extends Component {
   componentDidMount() {
     if (localStorage.getItem('accessToken')) {
       this.props.fetchCurUser();
+      this.props.addTides();
     }
   }
 
@@ -68,12 +70,14 @@ class App extends Component {
 const mapStateToProps = state => {
   return {
     isLoggedIn: state.curUser.isLoggedIn,
-    curUser: state.curUser.user
+    curUser: state.curUser.user,
+    tides: state.externalApis.tides
   }
 };
 
 export default connect(mapStateToProps, {
   fetchCurUser,
   deleteCurUser,
-  deleteAll
+  deleteAll,
+  addTides
 })(App);

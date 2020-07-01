@@ -1,4 +1,6 @@
 import dipApi from '../api/dipApi';  // axios instance
+import axios from 'axios';
+import moment from 'moment';
 
 export const fetchCurUser = () => {
   return async dispatch => {
@@ -128,4 +130,14 @@ export const addCabins = () => async dispatch => {
   dispatch({ type: 'ADD_CABINS', payload: response.data })
 };
 
-
+export const addTides = () => {
+  const URL = 'https://tidesandcurrents.noaa.gov/api/datagetter';
+  const otherParams = 'station=8413320&product=predictions&datum=MLW&time_zone=lst_ldt&units=english&format=json'
+  const curDay = moment(Date.now()).format('YYYYMMDD').toString();
+  const nextDay = moment(Date.now()).add(1, 'd').format('YYYYMMDD').toString();
+  return async dispatch => {
+    const response = await axios.get(`${URL}?begin_date=${curDay}&end_date=${nextDay}&${otherParams}`)
+    
+    dispatch({type: 'ADD_TIDES', payload: response.data.predictions})
+  }
+};

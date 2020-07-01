@@ -3,8 +3,19 @@ import { combineReducers } from 'redux'
 const rootReducer = combineReducers({
   curUser: curUserReducer,
   // reservations: reservationsReducer,
-  admin: adminReducer
+  admin: adminReducer,
+  externalApis: externalApisReducer
 })
+
+function externalApisReducer(
+  state = {tides: null}, action) {
+  switch (action.type){
+    case 'ADD_TIDES':
+      return {...state, tides: action.payload}
+    default:
+      return state
+  }
+}
 
 function curUserReducer(
   state = {

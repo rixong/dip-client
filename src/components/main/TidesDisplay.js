@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 class TidesDisplay extends Component {
 
-  todaysTides = (day) => {
+  tidesByDay = (day) => {
     if (this.props.tides) {
       return this.props.tides.filter((tide) => tide.day === day)
-        .map(tide => {
+        .map((tide,idx) => {
           let depth = tide.v.toFixed(1);
-          return <div key={tide.t}> {tide.time}  {tide.type} tide ({depth}')  </div>
+          return <div key={idx}> {tide.time}  {tide.type} tide ({depth}')  </div>
         })
     }
   }
@@ -25,11 +25,11 @@ class TidesDisplay extends Component {
             <div className="ui two column row">
               <div className="ui eight wide column">
                 <h4 className="h4">Today's tides</h4>
-                {this.todaysTides('today')}
+                {this.tidesByDay('today')}
               </div>
               <div className="ui eight wide column">
                 <h4 className="h4">Tomorrow's tides</h4>
-                {this.todaysTides('tomorrow')}
+                {this.tidesByDay('tomorrow')}
               </div>
             </div>
           </div>
