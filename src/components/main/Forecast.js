@@ -27,7 +27,7 @@ class Forecast extends Component {
   }
 
   componentDidMount() {
-    this.getForecast()
+    // this.getForecast()
   }
 
   getForecast = () => {
