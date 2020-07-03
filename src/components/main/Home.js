@@ -57,7 +57,7 @@ class Home extends Component {
             >Find us on Google Maps</a> </li>
           </ul>
           <Forecast/>
-          <Tides/>
+          {this.props.tideData ? <Tides tideData={this.props.tideData} /> : null}
         </div>
         <div id="footer">
           <a href="https://weatherstack.com" target="_blank" rel="noopener noreferrer"><img src={weatherStackLogo} alt="Weatherstack logo" height="25px"></img></a>
@@ -71,7 +71,8 @@ class Home extends Component {
 const mapStateToProps = state => {
   return {
     curUser: state.curUser.user,
-    isLoggedIn: state.curUser.isLoggedIn
+    isLoggedIn: state.curUser.isLoggedIn,
+    tideData: state.externalApis.tides
   }
 };
 
