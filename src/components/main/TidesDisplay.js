@@ -13,12 +13,13 @@ class TidesDisplay extends Component {
   }
 
   render() {
-    if (this.props.loading) {
-      return <p>Loading tides...</p>
-    }
-    if (this.props.error) {
-      return <p>Tides currently unavailable</p>
-    } else {
+    // if (this.props.loading) {
+    //   return <p>Loading tides...</p>
+    // }
+    // if (this.props.error) {
+    //   return <p>Tides currently unavailable</p>
+    // } else {
+      if(this.props.tides){
       return (
         <div id='tide-display'>
           <div className="ui grid">

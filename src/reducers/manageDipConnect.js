@@ -12,10 +12,13 @@ function externalApisReducer(
   switch (action.type){
     case 'ADD_TIDES':
       return {...state, tides: action.payload}
+    case 'ADD_WEATHER':
+      return {...state, weather: action.payload}
     default:
       return state
   }
 }
+
 
 function curUserReducer(
   state = {

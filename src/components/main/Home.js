@@ -56,7 +56,7 @@ class Home extends Component {
               rel="noopener noreferrer"
             >Find us on Google Maps</a> </li>
           </ul>
-          <Forecast/>
+          {this.props.weatherData ? <Forecast weatherData={this.props.weatherData} /> : null}
           {this.props.tideData ? <Tides tideData={this.props.tideData} /> : null}
         </div>
         <div id="footer">
@@ -72,7 +72,8 @@ const mapStateToProps = state => {
   return {
     curUser: state.curUser.user,
     isLoggedIn: state.curUser.isLoggedIn,
-    tideData: state.externalApis.tides
+    tideData: state.externalApis.tides,
+    weatherData: state.externalApis.weather
   }
 };
 

@@ -141,3 +141,20 @@ export const addTides = () => {
     dispatch({type: 'ADD_TIDES', payload: response.data.predictions})
   }
 };
+
+export const addWeather = () => {
+// const weatherAccessKey = '955f4360db810b737228b3305fadd113';
+const weatherAccessKey = '5d68eeeaffdf83bc57c62f8cda5f0445';
+const coord = {
+  long: -68.8155,
+  lat: 44.3490
+}
+const weatherURL =
+`http://api.weatherstack.com/current?access_key=${weatherAccessKey}&query=${coord.lat},${coord.long}&units=f`
+
+  return async dispatch => {
+    const response = await axios.get(weatherURL)
+
+    dispatch({type:'ADD_WEATHER', payload: response.data.current})
+  }
+}

@@ -62,14 +62,14 @@ class Tides extends Component {
 
   render() {
 
-    if (this.state.loading) {
-      return <p>Loading tides...</p>
-    }
-    if (this.state.error) {
-      return <p>Tides currently unavailable</p>
-    } else {
+    // if (this.state.loading) {
+    //   return <p>Loading tides...</p>
+    // }
+    // if (this.state.error) {
+    //   return <p>Tides currently unavailable</p>
+    // } else {
       return <TidesDisplay tides={this.state.tides} />
-    }
+    // }
   }
 }
 

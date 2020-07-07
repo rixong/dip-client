@@ -10,7 +10,8 @@ import {
   fetchCurUser,
   deleteCurUser,
   deleteAll,
-  addTides
+  addTides,
+  addWeather
 } from './actions';
 
 // import {postCurUser} from './/apiCalls';
@@ -36,6 +37,7 @@ class App extends Component {
     if (localStorage.getItem('accessToken')) {
       this.props.fetchCurUser();
       this.props.addTides();
+      this.props.addWeather();
     }
   }
 
@@ -79,5 +81,6 @@ export default connect(mapStateToProps, {
   fetchCurUser,
   deleteCurUser,
   deleteAll,
-  addTides
+  addTides,
+  addWeather
 })(App);
