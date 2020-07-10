@@ -158,3 +158,5 @@ const weatherURL =
     dispatch({type:'ADD_WEATHER', payload: response.data.current})
   }
 }
+
+// https://api.weatherstack.com/current?access_key=5d68eeeaffdf83bc57c62f8cda5f0445&query=44.3490,-68.8155&units=f

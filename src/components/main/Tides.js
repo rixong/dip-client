@@ -50,15 +50,15 @@ class Tides extends Component {
     this.state.tides.push(tide)
   }
 
-  todaysTides = (day) => {
-    if (this.state.tides) {
-      return this.state.tides.filter((tide) => tide.day === day)
-        .map(tide => {
-          let depth = tide.v.toFixed(1);
-          return <div key={tide.t}> {tide.time}  {tide.type} tide ({depth}')  </div>
-        })
-    }
-  }
+  // todaysTides = (day) => {
+  //   if (this.state.tides) {
+  //     return this.state.tides.filter((tide) => tide.day === day)
+  //       .map(tide => {
+  //         let depth = tide.v.toFixed(1);
+  //         return <div key={tide.t}> {tide.time}  {tide.type} tide ({depth}')  </div>
+  //       })
+  //   }
+  // }
 
   render() {
 

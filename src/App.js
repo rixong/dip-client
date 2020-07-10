@@ -46,7 +46,7 @@ class App extends Component {
     return (
       <div className="container app">
         <div>
-          <Router>
+          <Router basename="/projects/dip-connect">
             <Navbar onLogoutClick={this.onLogoutClick} />
             <div className='main'>
               <Switch>

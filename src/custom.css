@@ -72,12 +72,6 @@ code {
   border-radius: 5px;
 }
 
-#navbar-photo-box {
-  /* padding-right:10px; */
-}
-
-#lobster {}
-
 #title {
 
   font-family: 'Playfair Display', serif;
@@ -87,7 +81,7 @@ code {
 .main {
   height: 900px;
   position: relative;
-  background-image: url(./assets/waterscape\ 1.jpg);
+  background-image: url(assets/waterscape\ 1.jpg);
   /* height: 500px; You must set a specified height */
   background-position: center;
   background-repeat: no-repeat;
