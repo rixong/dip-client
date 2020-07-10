@@ -137,26 +137,45 @@ export const addTides = () => {
   const nextDay = moment(Date.now()).add(1, 'd').format('YYYYMMDD').toString();
   return async dispatch => {
     const response = await axios.get(`${URL}?begin_date=${curDay}&end_date=${nextDay}&${otherParams}`)
-    
-    dispatch({type: 'ADD_TIDES', payload: response.data.predictions})
+
+    dispatch({ type: 'ADD_TIDES', payload: response.data.predictions })
   }
 };
 
+//Open Weather Map
+// Key: 398d134d4be3ba1ee6d6b8b92b7ad3d1
+// Base URL: https://api.openweathermap.org/data/2.5/weather?lat=44.3490&lon=-68.8155&units=imperial&appid=
+
 export const addWeather = () => {
-// const weatherAccessKey = '955f4360db810b737228b3305fadd113';
-const weatherAccessKey = '5d68eeeaffdf83bc57c62f8cda5f0445';
-const coord = {
-  long: -68.8155,
-  lat: 44.3490
-}
-const weatherURL =
-`http://api.weatherstack.com/current?access_key=${weatherAccessKey}&query=${coord.lat},${coord.long}&units=f`
+  const weatherAccessKey = '398d134d4be3ba1ee6d6b8b92b7ad3d1';
+  const coord = {
+    long: -68.8155,
+    lat: 44.3490
+  }
+  const weatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${coord.lat}&lon=${coord.long}&units=imperial&appid=${weatherAccessKey}`;
 
   return async dispatch => {
-    const response = await axios.get(weatherURL)
-
-    dispatch({type:'ADD_WEATHER', payload: response.data.current})
+    const response = await axios.get(weatherURL);
+    dispatch({ type: 'ADD_WEATHER', payload: response.data })
   }
+
 }
+
+// Weather Stack - no https!
+// export const addWeather = () => {
+// const weatherAccessKey = '5d68eeeaffdf83bc57c62f8cda5f0445';
+// const coord = {
+//   long: -68.8155,
+//   lat: 44.3490
+// }
+// const weatherURL =
+// `http://api.weatherstack.com/current?access_key=${weatherAccessKey}&query=${coord.lat},${coord.long}&units=f`
+
+//   return async dispatch => {
+//     const response = await axios.get(weatherURL)
+
+//     dispatch({type:'ADD_WEATHER', payload: response.data.current})
+//   }
+// }
 
 // https://api.weatherstack.com/current?access_key=5d68eeeaffdf83bc57c62f8cda5f0445&query=44.3490,-68.8155&units=f

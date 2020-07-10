@@ -186,17 +186,18 @@ li {
   padding-left: 60px;
 }
 
-/* #tide-display {
-  margin-top: 10px;
-} */
-
-#footer {
-  position: absolute;
-  bottom:10px;
+#weather-icon {
+  background-color: white;
 }
 
-#footer a {
-  padding-left: 90px;
+#footer {
+  text-align: left;
+  padding-left: 180px;
+
+}
+
+#footer img {
+  padding-left: 30px;
 }
 
 #schedule {
@@ -328,7 +329,7 @@ li {
 #admin-header {
   background-color: rgb(71, 143, 161);
   text-align: left;
-  color:whitesmoke;
+  color: whitesmoke;
 }
 
 #admin-table {

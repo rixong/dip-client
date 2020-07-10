@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import NOAALogo from '../../assets/noaa.jpg'
-import weatherStackLogo from '../../assets/weatherstack_logo_white.png'
+import weatherStackLogo from '../../assets/open-weather.png'
 import Forecast from './Forecast';
 import Tides from './Tides';
 
@@ -60,8 +60,8 @@ class Home extends Component {
           {this.props.tideData ? <Tides tideData={this.props.tideData} /> : null}
         </div>
         <div id="footer">
-          <a href="https://weatherstack.com" target="_blank" rel="noopener noreferrer"><img src={weatherStackLogo} alt="Weatherstack logo" height="25px"></img></a>
-          <a href="https://tidesandcurrents.noaa.gov/api/" target="_blank" rel="noopener noreferrer"><img src={NOAALogo} alt='NOAA logo' height="25px" ></img></a>
+          <a href="https://openweathermap.org/" target="_blank" rel="noopener noreferrer"><img src={weatherStackLogo} alt="Weather API logo" height="25px"></img></a>
+          <a href="https://tidesandcurrents.noaa.gov/api/" target="_blank" rel="noopener noreferrer"><img src={NOAALogo} alt='Tide logo' height="25px" ></img></a>
         </div>
       </div>
     )
