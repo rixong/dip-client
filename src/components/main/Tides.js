@@ -38,7 +38,7 @@ class Tides extends Component {
     const newTide = {};
     newTide.type = type;
     newTide.depth = tide.v;
-    newTide.time = moment(tide.t).add(15, 'm').format('h:mma');
+    newTide.time = moment(tide.t).add(15, 'm').format('h:mm a');
     tide.t.substring(8, 10) === curDay.substring(6, 8) ? newTide.day = 'today' : newTide.day = 'tomorrow';
     this.state.tides.push(newTide)
   }
