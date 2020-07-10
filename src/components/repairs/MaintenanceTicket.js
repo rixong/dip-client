@@ -22,7 +22,6 @@ class MaintenanceTicket extends Component {
   }
 
   onHandleChecked = (e) => {
-    console.log(e.target.checked);
     this.setState({
       priority: e.target.checked
     })

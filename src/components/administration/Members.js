@@ -26,7 +26,6 @@ class Members extends Component {
     const today = moment(new Date());
     const birthday = moment(bday)
     const age = today.diff(birthday, 'y')
-    console.log(bday);
     return age
   }
 

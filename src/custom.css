@@ -153,9 +153,9 @@ code {
 #home {
   position: relative;
   padding: 20px;
-  top: 150px;
+  top: 130px;
   width: 600px;
-  height: 450px;
+  height: 480px;
   border-radius: 5px;
 }
 
@@ -190,7 +190,13 @@ li {
   background-color: white;
 }
 
+.tide-list{
+  font-size: small;
+}
+
 #footer {
+  position: absolute;
+  bottom: 10px;
   text-align: left;
   padding-left: 180px;
 

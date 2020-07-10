@@ -16,18 +16,6 @@ import {
 
 class Home extends Component {
 
-  // componentDidMount() {
-  //   console.log('cdmount');
-
-  //   if (this.props.isLoggedIn) {
-  //     this.props.addCurrentAnnualReport();
-  //     this.props.addUsers();
-  //     this.props.addCabins();
-  //     this.props.addRepairTickets();
-  //     this.props.addReservations();
-  //   }
-  // }
-
   render() {
     if (this.props.isLoggedIn) {
       this.props.addCurrentAnnualReport();
@@ -50,6 +38,7 @@ class Home extends Component {
           <ul className="home">
             <li>Summer 2020 Reservations are happening now!</li>
             <li>Be safe this summer. Maintain social distancing.</li>
+            <li>Dumpster diving - load up your trash this week!</li>
             <li><a href="https://goo.gl/maps/zJDCazhBqoicc4Zi7"
               alt="Map to point"
               target="_blank"

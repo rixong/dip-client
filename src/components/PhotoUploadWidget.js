@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class PhotoUploadWidget extends Component {
 
   checkLoadResults = (resultEvent) => {
-    console.log('clicked save photo', resultEvent.event);
+    // console.log('clicked save photo', resultEvent.event);
     if (resultEvent.event === 'success') {
       // console.log(resultEvent.info.secure_url);
       this.props.handlePhotoUpload(resultEvent.info.public_id)

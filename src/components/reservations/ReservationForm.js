@@ -57,13 +57,13 @@ class ReservationForm extends Component {
         errorType: 'ui negative message' 
       })
     } else if (this.conflictCheck()) {
-      console.log('conflict');
+      // console.log('conflict');
       this.setState({
         error: 'Conflicts with another reservation.', 
         errorType: 'ui negative message'
       })
     } else {
-      console.log('No conflict found');
+      // console.log('No conflict found');
     
     postAddReservation(this.state.reservation)
       .then(res => res.json())
