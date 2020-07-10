@@ -12,13 +12,13 @@ class TidesDisplay extends Component {
   }
 
   componentDidMount() {
-    console.log('mounted', this.props.tides);
+    // console.log('mounted', this.props.tides);
     this.setState({tides: this.props.tides})
     
   }
 
   tidesByDay = (day) => {
-    console.log('tides by day.');
+    // console.log('tides by day.');
     
     // if (this.props.tides) {
       return this.state.tides.filter((tide) => tide.day === day)

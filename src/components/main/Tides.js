@@ -15,7 +15,7 @@ class Tides extends Component {
 
   componentDidMount() {
     if (this.props.tideData) {
-      console.log(this.props.tideData);
+      // console.log(this.props.tideData);
       
       this.props.tideData.forEach(entry => entry.v = parseFloat(entry.v));
       this.calculateMaxMinTides(this.props.tideData)
