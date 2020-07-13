@@ -28,7 +28,7 @@ class Forecast extends Component {
           wind_speed: parseInt(wind.speed),
           wind_dir: this.getCompassDirection(wind.deg),
           wind_gust: parseInt(wind.gust),
-          weather_icons: `http://openweathermap.org/img/wn/${weather[0].icon}@2x.png`
+          weather_icons: `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`
         },
       });
     }
