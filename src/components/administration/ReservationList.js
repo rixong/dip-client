@@ -77,7 +77,7 @@ class ReservationList extends Component {
           <td data-label="Approved">
             <div className="ui icon button">
               {res.pending ?
-                <i className="large black x icon" onClick={() => this.handleApproval(res.id)}></i>
+                <i className="large black bullseye icon" onClick={() => this.handleApproval(res.id)}></i>
                 :
                 <i className="large green checkmark icon"></i>
               }

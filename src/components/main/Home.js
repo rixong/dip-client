@@ -31,8 +31,11 @@ class Home extends Component {
         on the coast of Penobscot Bay, Maine.
         </div>
         <div className="ui divider"></div>
-        <button className="ui primary button" onClick={() => this.props.history.push('/login')}>Log in</button>
-        {/* <div id="home-title">Welcome {this.props.curUser.firstname} {this.props.curUser.lastname}</div> */}
+        {!this.props.isLoggedIn ?
+          <button className="ui primary button" onClick={() => this.props.history.push('/login')}>Login</button>
+          :
+          <div id="home-title">Welcome {this.props.curUser.firstname} {this.props.curUser.lastname}</div>
+        }
 
         <div id="updates">
           <h4>News:</h4>
