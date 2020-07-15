@@ -34,10 +34,10 @@ import UpdateProfile from './components/Profile';
 class App extends Component {
 
   componentDidMount() {
+    this.props.addTides();
+    this.props.addWeather();
     if (localStorage.getItem('accessToken')) {
       this.props.fetchCurUser();
-      this.props.addTides();
-      this.props.addWeather();
     }
   }
 
@@ -47,7 +47,6 @@ class App extends Component {
       <div className="container app">
         <div>
           <Router>
-          {/* <Router basename="/projects/dip-connect"> */}
             <Navbar onLogoutClick={this.onLogoutClick} />
             <div className='main'>
               <Switch>

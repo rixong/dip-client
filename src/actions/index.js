@@ -163,7 +163,7 @@ export const addWeather = () => {
 
 // Weather Stack - no https!
 // export const addWeather = () => {
-// const weatherAccessKey = '5d68eeeaffdf83bc57c62f8cda5f0445';
+// const weatherAccessKey = '';
 // const coord = {
 //   long: -68.8155,
 //   lat: 44.3490
