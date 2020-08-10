@@ -130,17 +130,24 @@ export const addCabins = () => async dispatch => {
   dispatch({ type: 'ADD_CABINS', payload: response.data })
 };
 
-export const addTides = () => {
-  const URL = 'https://tidesandcurrents.noaa.gov/api/datagetter';
-  const otherParams = 'station=8413320&product=predictions&datum=MLW&time_zone=lst_ldt&units=english&format=json'
-  const curDay = moment(Date.now()).format('YYYYMMDD').toString();
-  const nextDay = moment(Date.now()).add(1, 'd').format('YYYYMMDD').toString();
-  return async dispatch => {
-    const response = await axios.get(`${URL}?begin_date=${curDay}&end_date=${nextDay}&${otherParams}`)
+// export const addTides = () => {
+//   const URL = 'https://tidesandcurrents.noaa.gov/api/datagetter';
+//   const otherParams = 'station=8413320&product=predictions&datum=MLW&time_zone=lst_ldt&units=english&format=json'
+//   const curDay = moment(Date.now()).format('YYYYMMDD').toString();
+//   const nextDay = moment(Date.now()).add(1, 'd').format('YYYYMMDD').toString();
+//   return async dispatch => {
+//     const response = await axios.get(`${URL}?begin_date=${curDay}&end_date=${nextDay}&${otherParams}`)
 
-    dispatch({ type: 'ADD_TIDES', payload: response.data.predictions })
+//     dispatch({ type: 'ADD_TIDES', payload: response.data.predictions })
+//   }
+// };
+
+export const addTides = (tides) => {
+  return {
+    type: 'ADD_TIDES', 
+    payload: tides
   }
-};
+}
 
 //Open Weather Map
 // Key: 398d134d4be3ba1ee6d6b8b92b7ad3d1
@@ -160,22 +167,3 @@ export const addWeather = () => {
   }
 
 }
-
-// Weather Stack - no https!
-// export const addWeather = () => {
-// const weatherAccessKey = '';
-// const coord = {
-//   long: -68.8155,
-//   lat: 44.3490
-// }
-// const weatherURL =
-// `http://api.weatherstack.com/current?access_key=${weatherAccessKey}&query=${coord.lat},${coord.long}&units=f`
-
-//   return async dispatch => {
-//     const response = await axios.get(weatherURL)
-
-//     dispatch({type:'ADD_WEATHER', payload: response.data.current})
-//   }
-// }
-
-// https://api.weatherstack.com/current?access_key=5d68eeeaffdf83bc57c62f8cda5f0445&query=44.3490,-68.8155&units=f
