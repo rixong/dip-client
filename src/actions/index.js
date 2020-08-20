@@ -130,28 +130,17 @@ export const addCabins = () => async dispatch => {
   dispatch({ type: 'ADD_CABINS', payload: response.data })
 };
 
-// export const addTides = () => {
-//   const URL = 'https://tidesandcurrents.noaa.gov/api/datagetter';
-//   const otherParams = 'station=8413320&product=predictions&datum=MLW&time_zone=lst_ldt&units=english&format=json'
-//   const curDay = moment(Date.now()).format('YYYYMMDD').toString();
-//   const nextDay = moment(Date.now()).add(1, 'd').format('YYYYMMDD').toString();
-//   return async dispatch => {
-//     const response = await axios.get(`${URL}?begin_date=${curDay}&end_date=${nextDay}&${otherParams}`)
+export const addTides = () => {
+  const URL = 'https://api.tidesandcurrents.noaa.gov/api/prod/datagetter';
+  const otherParams = 'station=8413320&product=predictions&datum=MLW&time_zone=lst_ldt&units=english&format=json'
+  const curDay = moment(Date.now()).format('YYYYMMDD').toString();
+  const nextDay = moment(Date.now()).add(1, 'd').format('YYYYMMDD').toString();
+  return async dispatch => {
+    const response = await axios.get(`${URL}?begin_date=${curDay}&end_date=${nextDay}&${otherParams}`)
 
-//     dispatch({ type: 'ADD_TIDES', payload: response.data.predictions })
-//   }
-// };
-
-export const addTides = (tides) => {
-  return {
-    type: 'ADD_TIDES', 
-    payload: tides
+    dispatch({ type: 'ADD_TIDES', payload: response.data.predictions })
   }
-}
-
-//Open Weather Map
-// Key: 398d134d4be3ba1ee6d6b8b92b7ad3d1
-// Base URL: https://api.openweathermap.org/data/2.5/weather?lat=44.3490&lon=-68.8155&units=imperial&appid=
+};
 
 export const addWeather = () => {
   const weatherAccessKey = '398d134d4be3ba1ee6d6b8b92b7ad3d1';

@@ -33,10 +33,7 @@ import UpdateProfile from './components/Profile';
 class App extends Component {
 
   componentDidMount() {
-    // this.props.addTides();
-    fetch('https://api.tidesandcurrents.noaa.gov/api/prod/datagetter?begin_date=20200810&end_date=20200811&station=8413320&product=predictions&datum=MLW&time_zone=lst_ldt&units=english&format=json')
-    .then(res => res.json())
-    .then(json => this.props.addTides(json.predictions))
+    this.props.addTides();
     this.props.addWeather();
     if (localStorage.getItem('accessToken')) {
       this.props.fetchCurUser();
@@ -44,7 +41,6 @@ class App extends Component {
   }
 
   render() {
-    // console.log('From App render',this.props.curUser);
     return (
       <div className="container app">
         <div>
