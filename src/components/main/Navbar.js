@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { NavLink, Link } from 'react-router-dom';
 
 import LeftMenu from './LeftMenu';
 import RightMenu from './RightMenu';
@@ -12,7 +13,7 @@ class Navbar extends Component {
 
       <div className='ui grid' >
         <div className="ui three column row" id="navbar-container" >
-          
+
           {this.props.isLoggedIn ?
             <div className="five wide column" id="left-menu">
               <LeftMenu />
@@ -27,7 +28,7 @@ class Navbar extends Component {
                 <img src="lobster-icon.png" width="30px" alt="lobster" id="lobster"></img>
               </div>
               <div className="fifteen wide column">
-                <div className="title" id="title">Dog Island Point Connect</div>
+                <Link to='/'id="title">Dog Island Point Connect</Link>
               </div>
             </div>
           </div>

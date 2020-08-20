@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import {NavLink} from 'react-router-dom'
+import {NavLink} from 'react-router-dom';
 import {link, activelink} from './menuStyle';
 
 const LeftMenu = () => {

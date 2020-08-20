@@ -73,9 +73,9 @@ code {
 }
 
 #title {
-
   font-family: 'Playfair Display', serif;
   font-size: 3em;
+  color: black;
 }
 
 .main {
@@ -190,7 +190,7 @@ li {
   background-color: white;
 }
 
-.tide-list{
+.tide-list {
   font-size: small;
 }
 
